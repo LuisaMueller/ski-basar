@@ -1,11 +1,90 @@
-# lenne.Tech Monorepro
+# ski-basar
 
-This starter kit is used to create a [Monorepo](https://monorepo.tools/)
-using the [lt CLI](https://github.com/lenneTech/cli).
+This is a [lerna](https://lerna.js.org/) [Monorepro](https://monorepo.tools) for App ([Angular](https://angular.io)) and API ([NestJS](https://nestjs.com)).
+Build with [NgBaseStarter](https://github.com/lenneTech/ng-base-starter) and [Starter for Nest Server](https://github.com/lenneTech/nest-server-starter)
+via [CLI](https://github.com/lenneTech/cli).
 
-A monorepo from [Angular](https://angular.io/) (SPA) & [NestJS](https://nestjs.com/) (API) can be set up with it as follows:
+If you are not yet familiar with Angular or NestJS, we recommend you to have a look at the following sections of our
+academy [lenne.Learning](https://lennelearning.de):
+- [Angular](https://lennelearning.de/lernpfad/angular)
+- [NestJS](https://lennelearning.de/lernpfad/nestjs)
 
-```bash
-npm install -g @lenne.tech/cli
-lt angular create "My new Monorepro project"
+## Requirements
+
+- [Node.js incl. npm](https://nodejs.org):
+  the runtime environment for your server
+
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git):
+  the version control system for your source code
+
+- [MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
+  (or any other database compatible with [MikroORM](https://mikro-orm.io)):
+  the database for your objects
+
+Installation on MacOS:
 ```
+/bin/bash -c "$(curl - fsSL https: //raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@6.O
+brew services start mongodb
+brew install node
+npm install -g n
+```
+
+To check if all requirements are met, we can display the versions of the respective software
+(the version may differ from your versions in the following example):
+```
+mongod --version
+  db version v6.0.1
+
+node -v
+  v16.17.0
+
+npm -v
+  8.15.0
+```
+
+## Initialization of a local instance
+
+Clone this repository and install packages:
+```
+git clone REPOSITORY
+cd ski-basar
+npm run init
+```
+
+## Testing
+
+Check if the requirements are met by running the tests (in the root directory):
+```
+npm test
+```
+
+## Start
+
+Both the app and the API are started with the following command (in the root directory):
+```
+npm start
+```
+
+The following URLs are then accessible:
+
+- App: http://localhost:4200
+- Documentation of the API: http://localhost:3000
+- Playground for using the API: http://localhost:3000/graphql
+
+If a URL is not reachable, it may be due to an error in the source code or because another process is already
+occupying the corresponding port (3000 / 4200). In this case you can either stop the other process or set another
+port in the configuration of the app or server.
+
+## Architecture
+
+The architecture of the projects is based on the following structures:
+- Both the app and the API can be found with their respective dependencies in the `projects` directory
+- Both technologies are still compatible with their own CLI ([Angular CLI](angular cli) / [NestJS CLI](https://docs.nestjs.com/cli/overview))
+- The [lt CLI](https://github.com/lenneTech/cli) also offers a few benefits regarding the extensions [NgBaseStarter](https://github.com/lenneTech/ng-base-starter) and [Starter for Nest Server](https://github.com/lenneTech/nest-server-starter)
+- To organize the monorepro [lerna](https://lerna.js.org/) is used
+
+## History
+- Initialized via `lt angular create`
