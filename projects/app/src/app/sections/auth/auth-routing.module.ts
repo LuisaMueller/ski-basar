@@ -1,14 +1,14 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthComponent } from './auth.component';
+import { RouterModule, Routes } from '@angular/router';
 import {
   ForgotPasswordComponent,
   LoginComponent,
   RegisterComponent,
   SetPasswordComponent,
 } from '@lenne.tech/ng-base/base-prototype';
-import { Component } from '@angular/core';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
+import { LoginSmartphoneComponent } from '../../modules/shared/layouts/login-smartphone/login-smartphone.component';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   {
@@ -42,7 +42,12 @@ const routes: Routes = [
       {
         path: 'login-desktop',
         component: DesktopMainLoginLayoutComponent,
+        
       },
+      {
+        path: 'login-smartphone',
+        component: LoginSmartphoneComponent,
+      }, 
       {
         path: '',
         redirectTo: 'login',
