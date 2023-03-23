@@ -14,6 +14,7 @@ const routes: Routes = [
         component: MyProfileComponent,
         pathMatch: 'full',
       },
+
       {
         path: 'cms',
         loadChildren: () => import('./sections/cms/cms.module').then(m => m.CmsModule),
