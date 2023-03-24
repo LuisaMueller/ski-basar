@@ -8,6 +8,7 @@ import {
 } from '@lenne.tech/ng-base/base-prototype';
 import { DesktopGetNumberComponent } from 'src/app/modules/shared/layouts/desktop-get-number/desktop-get-number.component';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
+import { DesktopMainTabelLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-tabel-layout/desktop-main-tabel-layout.component';
 import { DesktopNumberLayoutComponent } from 'src/app/modules/shared/layouts/desktop-number-layout/desktop-number-layout.component';
 import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
 import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
@@ -71,6 +72,10 @@ const routes: Routes = [
       {
         path: 'number-layout',
         component: DesktopNumberLayoutComponent,
+      },
+      {
+        path: 'main-desktop',
+        component: DesktopMainTabelLayoutComponent,
       },
     ],
   },
