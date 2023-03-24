@@ -1,0 +1,104 @@
+@import '../../../../../assets/scss/utils';
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .logo {
+    width: 200px;
+    margin-top: 10 px;
+  }
+  form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      color: $primary;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input {
+      margin: 5px;
+      border: 1.5px solid $primary;
+      border-radius: 7px;
+      height: 50px;
+      width: 210px;
+    }
+    label {
+      color: grey;
+      font-size: 13px;
+    }
+    p {
+      color: grey;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+    span {
+      color: red;
+    }
+    button {
+      color: white;
+      background-color: $primary;
+      border: 1.5px solid $primary;
+      border-radius: 7px;
+      height: 35px;
+      width: 210px;
+      margin-top: 20px;
+    }
+  }
+
+  .mountains {
+    overflow: hidden;
+    .first-mountain {
+      position: absolute;
+      width: 33px;
+      height: 23px;
+      left: -11px;
+      top: 638px;
+      background-color: #d9d9d9;
+    }
+    .second-mountain {
+      position: absolute;
+      width: 77px;
+      height: 83px;
+      left: -19px;
+      top: 653.33px;
+      transform: rotate(-39.84deg);
+      background-color: #d9d9d9;
+    }
+    .third-mountain {
+      position: absolute;
+      position: absolute;
+      width: 126px;
+      height: 114px;
+      left: -58px;
+      top: 725.13px;
+      transform: rotate(-30.6deg);
+      background-color: #d9d9d9;
+    }
+
+    .fourth-mountain {
+      position: absolute;
+      width: 86px;
+      height: 31.38px;
+      left: 263.47px;
+      top: 782.41px;
+      transform: rotate(-23.61deg);
+      background-color: #d9d9d9;
+    }
+    .fifth-mountain {
+      position: absolute;
+      width: 65px;
+      height: 48px;
+      left: 332px;
+      top: 765.73px;
+      transform: rotate(-19.53deg);
+      background-color: #d9d9d9;
+    }
+  }
+}
