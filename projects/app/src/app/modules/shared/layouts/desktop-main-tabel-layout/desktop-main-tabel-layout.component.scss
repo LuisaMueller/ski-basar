@@ -4,6 +4,8 @@
   width: 100%;
   height: 100%;
   z-index: 99;
+  background-image: url('/assets/images/backgrounds-desktop-png.png');
+  background-size: cover;
 
   .navbar {
     border-bottom: 1px solid $primary;
@@ -52,14 +54,74 @@
     }
   }
   .section-1 {
-    background-color: #d9d9d9;
     width: 100%;
-    height: 15%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+
+    .nummerslider-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 30%;
+      .slidbutton-container {
+        .carousel-control-next {
+          .carousel-control-next-icon {
+            background-color: black;
+          }
+        }
+        .carousel-control-prev {
+          .carousel-control-prev-icon {
+            background-color: black;
+          }
+        }
+      }
+      .section-1-main-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        p {
+          font-size: 25px;
+          color: $primary;
+          margin-bottom: 14%;
+        }
+        form {
+          height: 20%;
+          input {
+            border-radius: 10px;
+            border: 1px solid $primary;
+          }
+        }
+      }
+    }
+    .comment-container {
+      height: 100%;
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        height: 60%;
+        width: 70%;
+        textarea {
+          border: 1px solid $primary;
+          border-radius: 10px;
+          resize: none;
+          height: 80%;
+          width: 100%;
+        }
+      }
+    }
   }
   .section-2 {
     width: 100%;
     height: 60%;
-    background-color: bisque;
+    background-color: bisque transparent;
   }
 
   .bottom-container {

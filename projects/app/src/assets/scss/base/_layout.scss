@@ -5,7 +5,8 @@ body {
   height: 100%;
   scroll-behavior: smooth;
   overscroll-behavior-y: none;
-  overflow: hidden;
+  background-image: url('/ski-basar/projects/app/src/assets/images/backgrounds-desktop-png.png');
+  background-size: cover;
 }
 
 :root {
