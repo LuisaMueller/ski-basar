@@ -122,6 +122,45 @@
     width: 100%;
     height: 60%;
     background-color: bisque transparent;
+    display: flex;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    .table {
+      .number {
+        width: 8%;
+      }
+      tr {
+        .data-td {
+          width: 14%;
+        }
+
+        .label-td {
+          width: 14%;
+        }
+        .size-td {
+          width: 10%;
+        }
+        .color-td {
+          width: 10%;
+        }
+
+        .other-td {
+          width: 20%;
+        }
+
+        .max-td {
+          width: 8%;
+        }
+        .min-td {
+          width: 8%;
+        }
+        .cash-td {
+          width: 8%;
+        }
+      }
+    }
   }
 
   .bottom-container {

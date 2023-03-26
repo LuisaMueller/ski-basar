@@ -30,7 +30,7 @@
         </button>
       </div>
       <div class="section-1-main-container">
-        <p class="text-center">Number</p>
+        <p class="text-center">1</p>
         <form action="">
           <input type="text" class="" placeholder="Nummer suche" />
         </form>
@@ -51,7 +51,97 @@
       </div>
     </div>
   </div>
-  <div class="section-2"></div>
+  <div class="section-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Nr</th>
+          <th scope="col" class="text-center">Art</th>
+          <th scope="col" class="text-center">Marke</th>
+          <th scope="col" class="text-center">Größe</th>
+          <th scope="col" class="text-center">Farbe</th>
+          <th scope="col" class="text-center">Sonstiges</th>
+          <th scope="col" class="text-center">Max-Preis</th>
+          <th scope="col" class="text-center">Min-Preis</th>
+          <th scope="col" class="text-center">Kasse</th>
+        </tr>
+      </thead>
+      <tbody class="table">
+        <tr>
+          <th scope="row" class="text-center number">160-A</th>
+          <td class="data-td">
+            <form action="">
+              <input type="text" list="data-art" id="art-col" class="form-control" />
+              <datalist id="data-art">
+                <option value="Chocolate"></option>
+                <option value="Coconut"></option>
+                <option value="Mint"></option>
+                <option value="Strawberry"></option>
+                <option value="Vanilla"></option>
+              </datalist>
+
+              <label for="art-col" class="visually-hidden">Art</label>
+            </form>
+          </td>
+          <td class="label-td">
+            <form action="">
+              <input type="text" list="data-label" id="label-col" class="form-control" />
+              <datalist id="data-label">
+                <option value="Chocolate"></option>
+                <option value="Coconut"></option>
+                <option value="Mint"></option>
+                <option value="Strawberry"></option>
+                <option value="Vanilla"></option>
+              </datalist>
+
+              <label for="label-col" class="visually-hidden">Marke</label>
+            </form>
+          </td>
+          <td class="size-td">
+            <form action="">
+              <input type="text" id="size-col" class="form-control" />
+              <label for="size-col" class="visually-hidden">Größe</label>
+            </form>
+          </td>
+          <td class="color-td">
+            <form action="">
+              <input type="text" id="color-col" class="form-control" />
+              <label for="color-col" class="visually-hidden">Farbe</label>
+            </form>
+          </td>
+          <td class="other-td">
+            <form action="">
+              <input type="text" id="other-col" class="form-control" />
+              <label for="other-col" class="visually-hidden">Sonstiges</label>
+            </form>
+          </td>
+          <td class="max-td">
+            <form action="">
+              <input type="text" id="max-col" class="form-control" />
+              <label for="max-col" class="visually-hidden">Max</label>
+            </form>
+          </td>
+          <td class="min-td">
+            <form action="">
+              <input type="text" id="min-col" class="form-control" />
+              <label for="min-col" class="visually-hidden">Min</label>
+            </form>
+          </td>
+          <td class="cash-td">
+            <form action="">
+              <input type="text" id="cash-col" class="form-control" />
+              <label for="cash-col" class="visually-hidden">Kasse</label>
+            </form>
+          </td>
+          <td>
+            <div class="icon-container">
+              <i class="bi bi-plus-circle-fill"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- <div class="bottom-container">
     <div class="block-1"></div>
