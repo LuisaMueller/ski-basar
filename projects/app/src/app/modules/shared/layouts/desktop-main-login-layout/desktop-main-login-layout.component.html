@@ -1,19 +1,18 @@
 <div class="body-login">
   <div class="login-form">
-    <form>
+    <form class="form-floating">
       <h3 class="text-center mt-4">Anmeldung</h3>
       <div class="form-floating mb-3 mt-4">
-        <input type="text" class="form-control" id="floatingInput" aria-describedby="emailHelp" />
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
         <label for="floatingInput">Vorname<span>*</span></label>
       </div>
-
       <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="floatingInputValue" aria-describedby="emailHelp" />
-        <label for="floatingInputValue">Nachname<span>*</span></label>
+        <input class="form-control" placeholder="Leave a comment here" id="floatingTextarea" />
+        <label for="floatingTextarea">Nachname<span>*</span></label>
       </div>
       <div class="form-floating mb-3 mt-3">
-        <input type="password" class="form-control" id="floatingPassword" />
-        <label for="floatingPassword">Password <span>*</span> </label>
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+        <label for="floatingPassword">Password <span>*</span></label>
       </div>
       <p class="text-muted"><span>*</span>Pflichtfeld</p>
       <button type="submit" class="btn btn-primary mt-3">Weiter</button>
