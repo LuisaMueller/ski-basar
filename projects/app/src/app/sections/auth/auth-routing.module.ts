@@ -9,7 +9,6 @@ import {
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
 import { LoginSmartphoneComponent } from '../../modules/shared/layouts/login-smartphone/login-smartphone.component';
 import { AuthComponent } from './auth.component';
-import { LoginUserComponent } from '../../modules/shared/layouts/login-user/login-user.component';
 
 const routes: Routes = [
   {
@@ -49,10 +48,6 @@ const routes: Routes = [
         path: 'login-smartphone',
         component: LoginSmartphoneComponent,
       }, 
-      {
-        path: 'login-user',
-        component: LoginUserComponent,
-      },
       {
         path: '',
         redirectTo: 'login',
