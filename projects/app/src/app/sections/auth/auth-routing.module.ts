@@ -6,12 +6,13 @@ import {
   RegisterComponent,
   SetPasswordComponent,
 } from '@lenne.tech/ng-base/base-prototype';
-import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
-import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
-import { AuthComponent } from './auth.component';
 import { DesktopGetNumberComponent } from 'src/app/modules/shared/layouts/desktop-get-number/desktop-get-number.component';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
+import { DesktopNumberLayoutComponent } from 'src/app/modules/shared/layouts/desktop-number-layout/desktop-number-layout.component';
+import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
+import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
 import { LoginSmartphoneComponent } from '../../modules/shared/layouts/login-smartphone/login-smartphone.component';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'login',
         pathMatch: 'full',
+      },
+      {
+        path: 'number-layout',
+        component: DesktopNumberLayoutComponent,
       },
     ],
   },
