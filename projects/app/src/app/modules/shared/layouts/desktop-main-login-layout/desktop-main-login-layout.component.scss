@@ -6,7 +6,7 @@
 
   .login-form {
     background-color: white;
-    height: 425px;
+    height: 450px;
     width: 350px;
     border: 2px solid $primary;
     border-radius: 2px;
@@ -20,17 +20,9 @@
       align-items: center;
       justify-content: center;
       column-gap: 5px;
-      div {
-        border: 2px solid $primary;
-        border-radius: 10px;
-      }
+
       input {
-        height: 47px;
         width: 250px;
-        font-size: 14px;
-      }
-      label {
-        font-size: 13px;
       }
       h3 {
         color: $primary;
