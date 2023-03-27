@@ -1,0 +1,20 @@
+.mountain-left {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  clip-path: polygon(0 0, 19% 0, 51% 41%, 39% 48%, 69% 100%, 0 100%);
+  background-color: #d9d9d9;
+  z-index: -1;
+  top: calc(100vh - 200px);
+}
+
+.mountain-right {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  clip-path: polygon(65% 77%, 100% 66%, 100% 100%, 0 100%, 59% 63%);
+  background-color: #d9d9d9;
+  right: 0;
+  z-index: -1;
+  top: calc(100vh - 200px);
+}
