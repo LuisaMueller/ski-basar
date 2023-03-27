@@ -7,6 +7,8 @@ import {
   RegisterComponent,
   SetPasswordComponent,
 } from '@lenne.tech/ng-base/base-prototype';
+import { Component } from '@angular/core';
+import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
       {
         path: 'passwort-setzen/:token',
         component: SetPasswordComponent,
+      },
+      {
+        path: 'login-desktop',
+        component: DesktopMainLoginLayoutComponent,
       },
       {
         path: '',
