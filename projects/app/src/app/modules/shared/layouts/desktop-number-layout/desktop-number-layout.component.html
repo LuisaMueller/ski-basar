@@ -1,1 +1,110 @@
-<p>desktop-number-layout works!</p>
+<div class="body-main-number">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class="img-container">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/images/Logo_klein-300x120.png" alt="Logo" class="d-inline-block align-text-top" />
+        </a>
+      </div>
+      <div class="collapse navbar-collapse nav-items-container" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Warenzettel ausfüllen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kundennummer anlegen</a>
+          </li>
+          <li class="nav-item">
+            <div class="profi"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section-title pt-3">
+    <h1 class="head">Manuell Kundennummer anlegen</h1>
+  </div>
+  <div class="section-main">
+    <div class="section-input">
+      <form action="">
+        <div class="form-floating mb-3">
+          <input type="firstName" class="form-control rounded-4 border-primary" id="firstName" placeholder="Max" />
+          <label for="firstName">Vorname <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="lastName" class="form-control rounded-4 border-primary" id="lastName" placeholder="Mustermann" />
+          <label for="lastName">Nachname <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="street" class="form-control rounded-4 border-primary" id="street" placeholder="Musterstraße 1" />
+          <label for="street">Straße, Hausnummer <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="postCode"
+            class="form-control rounded-4 border-primary"
+            id="postCode"
+            placeholder="12345 Musterstadt" />
+          <label for="postCode">PLZ, Ort <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="phoneNumber"
+            class="form-control rounded-4 border-primary"
+            id="phoneNumber"
+            placeholder="0123456789" />
+          <label for="phoneNumber">Telefonnummer <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control rounded-4 border-primary" id="email" placeholder="name@example.com" />
+          <label for="email">E-Mail <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control rounded-4 border-primary"
+            id="password"
+            placeholder="Passwort123" />
+          <label for="password">Passwort (nur für Helfer)</label>
+        </div>
+      </form>
+    </div>
+    <div class="section-accept">
+      <form action="">
+        <div class="data-area">
+          <h5 class="mt-1">Hinweise des Ski-Club Olpe 1976 e.V.</h5>
+          <ul>
+            <li>
+              Die Angebotsgebühr in Höhe von einem Euro sowie 10 % des Verkaufserlöses gehen an den Ski-Club Olpe 1976
+              e.V.
+            </li>
+            <li>
+              Der Ski-Club Olpe übernimmt keine Haftung für Verlust, Beschädigung oder Diebstahl der angebotenen
+              Artikel.
+            </li>
+            <li>
+              Die nicht verkauften Artikel müssen am 04.12.2022 zwischen 16:30 und 17:30 Uhr abgeholt werden. Nicht
+              abgeholte Artikel werden auf Kosten des Verkäufers entsorgt.
+            </li>
+          </ul>
+          <h5 class="mt-4">Datenschutzhinweis</h5>
+          <p>
+            Die erhobenen Daten werden ausschließlich für die Durchführung des Skibasars verwendet und spätestens nach
+            einer Woche gelöscht. Die allgemeine Datenschutzerklärung des Ski-Club Olpe kann unter folgender Adresse
+            abgerufen werden:
+            <a href="https://www.skiclub-olpe.de/wp/datenschutzerklaerung"
+              >Datenschutzerklärung des Skiclub Olpe 1976 e.V.</a
+            >
+          </p>
+          <div class="form-check m-3">
+            <input class="form-check-input border-primary" type="checkbox" value="" id="flexCheckAccept" />
+            <label class="form-check-label" for="flexCheckAccept">Ich akzeptiere die oben stehenden Hinweise.</label>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary w-100 py-3 rounded-4">Anmelden</button>
+      </form>
+    </div>
+  </div>
+</div>

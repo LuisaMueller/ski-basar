@@ -1,0 +1,102 @@
+@import '../../../../../assets/scss/utils';
+
+.body-main-number {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/backgrounds-desktop-png.png');
+  background-size: cover;
+  overflow: hidden;
+
+  .navbar {
+    border-bottom: 1px solid $primary;
+    .img-container {
+      img {
+        width: 135px;
+        height: 53px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    }
+    .nav-items-container {
+      ul {
+        padding-left: 0%;
+        margin-right: 0px;
+        @include media-breakpoint-up(md) {
+          padding-left: 50%;
+        }
+
+        @include media-breakpoint-up(lg) {
+          padding-left: 56%;
+        }
+        @include media-breakpoint-up(xl) {
+          padding-left: 59%;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          padding-left: 67%;
+        }
+
+        a {
+          color: $secondary;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+
+      .profi {
+        background-color: $secondary;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .section-title {
+    width: 100%;
+    height: 13%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      color: $primary;
+    }
+  }
+  .section-main {
+    width: 100%;
+    height: 87%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+
+    .section-input {
+      width: 30%;
+      height: 90%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .section-accept {
+      width: 30%;
+      height: 90%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      form {
+        .data-area {
+          width: 100%;
+          height: 38%;
+          overflow-y: scroll;
+          border: 1px solid $primary;
+          border-right: 2px solid white;
+          border-radius: 15px;
+        }
+        button {
+          margin-top: 39.3%;
+        }
+      }
+    }
+  }
+}
