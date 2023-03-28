@@ -6,10 +6,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./sections/main/main.module').then(m => m.MainModule),
-<<<<<<< HEAD
-=======
-    // canActivateChild: [AuthGuard],
->>>>>>> e8437d7 (added desktop login design)
   },
   {
     path: 'auth',
