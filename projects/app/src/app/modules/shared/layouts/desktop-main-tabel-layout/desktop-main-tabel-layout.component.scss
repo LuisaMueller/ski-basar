@@ -6,13 +6,14 @@
   z-index: 99;
   background-image: url('/assets/images/backgrounds-desktop-png.png');
   background-size: cover;
+  overflow: hidden;
 
   .navbar {
     border-bottom: 1px solid $primary;
     .img-container {
       img {
         width: 135px;
-        height: 53px;
+        height: 42px;
 
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
       }
@@ -84,9 +85,9 @@
         align-items: center;
         justify-content: center;
         p {
-          font-size: 28px;
+          font-size: 60px;
           color: $primary;
-          margin-bottom: 14%;
+          margin-bottom: 3%;
         }
         form {
           height: 20%;
@@ -129,10 +130,21 @@
 
     .table {
       height: 100%;
+
+      thead {
+        border-bottom-width: 0px;
+      }
+
       .number {
         width: 7%;
       }
       tr {
+        th {
+          border-bottom-width: 0px;
+        }
+        td {
+          border-bottom-width: 0px;
+        }
         .data-td {
           width: 14%;
         }
@@ -153,6 +165,16 @@
 
         .max-td {
           width: 8%;
+          input {
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            &[type='number'] {
+              -moz-appearance: textfield;
+            }
+          }
         }
         .min-td {
           width: 8%;
@@ -198,6 +220,12 @@
         gap: 5%;
         .btn {
           width: 50%;
+          height: 100%;
+          font-size: 9px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 700;
         }
       }
     }
