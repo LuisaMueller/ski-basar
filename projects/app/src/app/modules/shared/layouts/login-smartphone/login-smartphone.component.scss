@@ -3,6 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  img {
+    width: 200px;
+  }
+}
+
+.form-input {
+  padding-left: 8%;
+  padding-right: 8%;
 }
 .mountain-left {
   position: fixed;
