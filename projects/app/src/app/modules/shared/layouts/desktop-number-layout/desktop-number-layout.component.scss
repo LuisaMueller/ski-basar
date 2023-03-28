@@ -35,8 +35,10 @@
         @include media-breakpoint-up(xxl) {
           padding-left: 67%;
         }
-
-        a {
+        .active-2 {
+          color: $primary;
+        }
+        .not-active {
           color: $secondary;
 
           &:hover {
@@ -73,29 +75,33 @@
 
     .section-input {
       width: 30%;
-      height: 90%;
+      height: 80%;
       background-color: white;
       display: flex;
       flex-direction: column;
     }
     .section-accept {
       width: 30%;
-      height: 90%;
+      height: 80%;
       background-color: white;
       display: flex;
       flex-direction: column;
       form {
+        height: 80%;
         .data-area {
           width: 100%;
-          height: 38%;
+          height: 68%;
           overflow-y: scroll;
           border: 1px solid $primary;
-          border-right: 2px solid white;
           border-radius: 15px;
+          .data-text {
+            padding-left: 5%;
+            padding-right: 5%;
+          }
         }
-        button {
-          margin-top: 39.3%;
-        }
+      }
+      .btn {
+        margin-top: 6.5%;
       }
     }
   }
