@@ -6,6 +6,7 @@ import { DesktopMainLoginLayoutComponent } from './layouts/desktop-main-login-la
 import { LoginSmartphoneComponent } from './layouts/login-smartphone/login-smartphone.component';
 import { DesktopGetNumberComponent } from './layouts/desktop-get-number/desktop-get-number.component';
 import { LoginSmartphonePage2Component } from './layouts/login-smartphone-page2/login-smartphone-page2.component';
+import { LoginSmartphonePage3Component } from './layouts/login-smartphone-page3/login-smartphone-page3.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,14 @@ import { LoginSmartphonePage2Component } from './layouts/login-smartphone-page2/
     CommonModule,
     RouterModule,
   ],
-  declarations: [DesktopMainLoginLayoutComponent, LoginSmartphoneComponent, HeaderComponent, DesktopGetNumberComponent, LoginSmartphonePage2Component],
+  declarations: [
+    DesktopMainLoginLayoutComponent,
+    DesktopGetNumberComponent,
+    HeaderComponent,
+    LoginSmartphoneComponent,
+    LoginSmartphonePage2Component,
+    LoginSmartphonePage3Component,
+  ],
   exports: [HeaderComponent],
 })
 export class SharedModule {}
