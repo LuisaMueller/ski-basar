@@ -12,6 +12,7 @@ import { DesktopMainTabelLayoutComponent } from 'src/app/modules/shared/layouts/
 import { DesktopNumberLayoutComponent } from 'src/app/modules/shared/layouts/desktop-number-layout/desktop-number-layout.component';
 import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
 import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
+import { LoginSmartphonePage4Component } from '../../modules/shared/layouts/login-smartphone-page4/login-smartphone-page4.component';
 import { LoginSmartphoneComponent } from '../../modules/shared/layouts/login-smartphone/login-smartphone.component';
 import { AuthComponent } from './auth.component';
 
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'login-smartphone-3',
         component: LoginSmartphonePage3Component,
+      },
+      {
+        path: 'login-smartphone-4',
+        component: LoginSmartphonePage4Component,
       },
       {
         path: '',
