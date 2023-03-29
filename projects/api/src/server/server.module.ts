@@ -1,3 +1,4 @@
+import { GoodsListModule } from './modules/goods-list/goods-list.module';
 import { Any, CheckSecurityInterceptor, CoreAuthService, CoreModule, DateScalar, JSON } from '@lenne.tech/nest-server';
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -33,6 +34,7 @@ import { ServerController } from './server.controller';
 
     // Include FileModule for file handling
     FileModule,
+    GoodsListModule,
   ],
 
   // Include services and scalars
