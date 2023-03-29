@@ -1,0 +1,176 @@
+<div class="body-main">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container d-flex justify-content-between">
+      <div class="img-container">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/images/SkiClubOlpeLogo11-_2_.png" alt="Logo" class="d-inline-block align-text-top" />
+        </a>
+      </div>
+      <div class="nav-items-container" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Warenzettel ausfüllen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kundennummer anlegen</a>
+          </li>
+          <li class="nav-item">
+            <div class="profi"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="section-1">
+    <div class="nummerslider-container carousel slide">
+      <div class="slidbutton-container">
+        <button class="carousel-control-prev mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+      </div>
+      <div class="section-1-main-container">
+        <p class="text-center">160</p>
+        <form action="">
+          <input type="text" class="text-center" placeholder="Nummer suchen" />
+        </form>
+      </div>
+      <div class="slidbutton-container">
+        <button class="carousel-control-next mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Nächste Nummer</span>
+        </button>
+      </div>
+    </div>
+    <div class="comment-container">
+      <div class="form-floating">
+        <!-- <i type="text" class="form-control" id="floatingInput" aria-describedby="emailHelp" /> -->
+        <!-- <textarea id="floatingInput" class="comment-field form-control" placeholder="MOin "></textarea>
+        <label for="floatingInput" class="visually-hidden">Notizen</label> -->
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+        <label for="floatingTextarea2">Notiz zur Nummer:</label>
+      </div>
+    </div>
+  </div>
+  <div class="section-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Nr</th>
+          <th scope="col" class="text-center">Art</th>
+          <th scope="col" class="text-center">Marke</th>
+          <th scope="col" class="text-center">Größe</th>
+          <th scope="col" class="text-center">Farbe</th>
+          <th scope="col" class="text-center">Sonstiges</th>
+          <th scope="col" class="text-center">Max-Preis</th>
+          <th scope="col" class="text-center">Min-Preis</th>
+          <th scope="col" class="text-center">Kasse</th>
+        </tr>
+      </thead>
+      <tbody class="table align-middle">
+        <tr>
+          <th scope="row" class="text-center number">160-A</th>
+          <td class="data-td">
+            <form action="">
+              <input type="text" list="data-art" id="art-col" class="form-control" />
+              <datalist id="data-art">
+                <option value="Chocolate"></option>
+                <option value="Coconut"></option>
+                <option value="Mint"></option>
+                <option value="Strawberry"></option>
+                <option value="Vanilla"></option>
+              </datalist>
+
+              <label for="art-col" class="visually-hidden">Art</label>
+            </form>
+          </td>
+          <td class="label-td">
+            <form action="">
+              <input type="text" list="data-label" id="label-col" class="form-control" />
+              <datalist id="data-label">
+                <option value="Chocolate"></option>
+                <option value="Coconut"></option>
+                <option value="Mint"></option>
+                <option value="Strawberry"></option>
+                <option value="Vanilla"></option>
+              </datalist>
+
+              <label for="label-col" class="visually-hidden">Marke</label>
+            </form>
+          </td>
+          <td class="size-td">
+            <form action="">
+              <input type="text" id="size-col" class="form-control" />
+              <label for="size-col" class="visually-hidden">Größe</label>
+            </form>
+          </td>
+          <td class="color-td">
+            <form action="">
+              <input type="text" id="color-col" class="form-control" />
+              <label for="color-col" class="visually-hidden">Farbe</label>
+            </form>
+          </td>
+          <td class="other-td">
+            <form action="">
+              <input type="text" id="other-col" class="form-control" />
+              <label for="other-col" class="visually-hidden">Sonstiges</label>
+            </form>
+          </td>
+          <td class="max-td">
+            <form action="">
+              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" />
+              <label for="max-col" class="visually-hidden">Max</label>
+            </form>
+          </td>
+          <td class="min-td">
+            <form action="">
+              <input type="text" id="min-col" min="0" class="form-control" />
+              <label for="min-col" class="visually-hidden">Min</label>
+            </form>
+          </td>
+          <td class="cash-td">
+            <form action="">
+              <input type="text" id="cash-col" class="form-control" />
+              <label for="cash-col" class="visually-hidden">Kasse</label>
+            </form>
+          </td>
+          <td>
+            <div class="icon-container">
+              <i class="bi bi-plus-circle-fill fs-4"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="9" class="pt-5">
+            <div class="d-flex justify-content-end align-items-center">
+              <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
+              <div class="pay-field me-2"></div>
+              <div>
+                <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary me-2">Speichern</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <!-- <div class="section-3 container mt-5">
+    <div class="section-3-container pt-3">
+      <div class="pay-container">
+        <p>Zu zahlende Gebühr</p>
+        <div class="pay-field"></div>
+      </div>
+      <div class="btn-container">
+        <button type="button" class="btn btn-primary">Bearbeiten</button>
+        <button type="button" class="btn btn-primary">Speichern</button>
+      </div>
+    </div>
+  </div> -->
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>
