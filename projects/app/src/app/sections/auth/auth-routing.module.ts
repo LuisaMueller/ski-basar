@@ -11,7 +11,6 @@ import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/logi
 import {AuthComponent} from "./auth.component";
 import { DesktopGetNumberComponent } from 'src/app/modules/shared/layouts/desktop-get-number/desktop-get-number.component';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
-import { LoginSmartphoneComponent } from '../../modules/shared/layouts/login-smartphone/login-smartphone.component';
 
 const routes: Routes = [
   {
@@ -45,10 +44,6 @@ const routes: Routes = [
       {
         path: 'login-desktop',
         component: DesktopMainLoginLayoutComponent,
-      },
-      {
-        path: 'login-smartphone',
-        component: LoginSmartphoneComponent,
       },
       {
         path: 'getnumber-desktop',
