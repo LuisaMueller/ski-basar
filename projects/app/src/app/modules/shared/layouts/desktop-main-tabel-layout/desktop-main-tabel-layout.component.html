@@ -1,12 +1,12 @@
 <div class="body-main">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container d-flex justify-content-between">
       <div class="img-container">
         <a class="navbar-brand" href="#">
-          <img src="/assets/images/Logo_klein-300x120.png" alt="Logo" class="d-inline-block align-text-top" />
+          <img src="/assets/images/SkiClubOlpeLogo11-_2_.png" alt="Logo" class="d-inline-block align-text-top" />
         </a>
       </div>
-      <div class="collapse navbar-collapse nav-items-container" id="navbarSupportedContent">
+      <div class="nav-items-container" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Warenzettel ausfüllen</a>
@@ -24,7 +24,7 @@
   <div class="section-1">
     <div class="nummerslider-container carousel slide">
       <div class="slidbutton-container">
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <button class="carousel-control-prev mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
           <span class="visually-hidden">Previous</span>
         </button>
@@ -32,22 +32,23 @@
       <div class="section-1-main-container">
         <p class="text-center">160</p>
         <form action="">
-          <input type="number" class="text-center" placeholder="Nummer suche" />
+          <input type="text" class="text-center" placeholder="Nummer suchen" />
         </form>
       </div>
       <div class="slidbutton-container">
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <button class="carousel-control-next mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
           <span class="carousel-control-next-icon"></span>
           <span class="visually-hidden">Nächste Nummer</span>
         </button>
       </div>
     </div>
     <div class="comment-container">
-      <div class="form-floating mb-3 mt-4">
+      <div class="form-floating">
         <!-- <i type="text" class="form-control" id="floatingInput" aria-describedby="emailHelp" /> -->
-        <p class="mb-0">Notizen:</p>
-        <textarea id="floatingInput" class="comment-field"></textarea>
-        <label for="floatingInput" class="visually-hidden">Notizen</label>
+        <!-- <textarea id="floatingInput" class="comment-field form-control" placeholder="MOin "></textarea>
+        <label for="floatingInput" class="visually-hidden">Notizen</label> -->
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+        <label for="floatingTextarea2">Notiz zur Nummer:</label>
       </div>
     </div>
   </div>
@@ -66,7 +67,7 @@
           <th scope="col" class="text-center">Kasse</th>
         </tr>
       </thead>
-      <tbody class="table">
+      <tbody class="table align-middle">
         <tr>
           <th scope="row" class="text-center number">160-A</th>
           <td class="data-td">
@@ -123,7 +124,7 @@
           </td>
           <td class="min-td">
             <form action="">
-              <input type="number" id="min-col" min="0" class="form-control" />
+              <input type="text" id="min-col" min="0" class="form-control" />
               <label for="min-col" class="visually-hidden">Min</label>
             </form>
           </td>
@@ -135,14 +136,30 @@
           </td>
           <td>
             <div class="icon-container">
-              <i class="bi bi-plus-circle-fill"></i>
+              <i class="bi bi-plus-circle-fill fs-4"></i>
             </div>
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="9" class="pt-5">
+            <div class="d-flex justify-content-end align-items-center">
+              <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
+              <div class="pay-field me-2"></div>
+              <div>
+                <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary me-2">Speichern</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
-  <div class="section-3">
+  <!-- <div class="section-3 container mt-5">
     <div class="section-3-container pt-3">
       <div class="pay-container">
         <p>Zu zahlende Gebühr</p>
@@ -153,5 +170,7 @@
         <button type="button" class="btn btn-primary">Speichern</button>
       </div>
     </div>
-  </div>
+  </div> -->
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
 </div>
