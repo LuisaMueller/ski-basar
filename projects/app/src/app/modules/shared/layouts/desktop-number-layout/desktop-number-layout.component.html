@@ -1,12 +1,12 @@
 <div class="body-main-number">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container d-flex justify-content-between">
       <div class="img-container">
         <a class="navbar-brand" href="#">
           <img src="/assets/images/Logo_klein-300x120.png" alt="Logo" class="d-inline-block align-text-top" />
         </a>
       </div>
-      <div class="collapse navbar-collapse nav-items-container" id="navbarSupportedContent">
+      <div class="nav-items-container" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link not-active" aria-current="page" href="#">Warenzettel ausfüllen</a>
@@ -22,10 +22,10 @@
     </div>
   </nav>
 
-  <div class="section-title pt-3">
+  <div class="section-title pt-3 container">
     <h1 class="head">Manuell Kundennummer anlegen</h1>
   </div>
-  <div class="section-main">
+  <div class="section-main container">
     <div class="section-input">
       <form action="">
         <div class="form-floating mb-3">
@@ -56,11 +56,11 @@
             placeholder="0123456789" />
           <label for="phoneNumber">Telefonnummer <span class="text-danger">*</span></label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 ml-4">
           <input type="email" class="form-control rounded-4 border-primary" id="email" placeholder="name@example.com" />
           <label for="email">E-Mail <span class="text-danger">*</span></label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-2 ml-4">
           <input
             type="password"
             class="form-control rounded-4 border-primary"
@@ -68,6 +68,7 @@
             placeholder="Passwort123" />
           <label for="password">Passwort (nur für Helfer)</label>
         </div>
+        <p><span class="text-danger">*</span> Pflichtfeld</p>
       </form>
     </div>
     <div class="section-accept">
@@ -104,8 +105,11 @@
           <input class="form-check-input border-primary" type="checkbox" value="" id="flexCheckAccept" />
           <label class="form-check-label" for="flexCheckAccept">Ich akzeptiere die oben stehenden Hinweise.</label>
         </div>
+        <button type="button" class="btn btn-primary w-100 py-3 rounded-4">Anmelden</button>
       </form>
-      <button type="button" class="btn btn-primary w-100 py-3 rounded-4">Anmelden</button>
     </div>
   </div>
+
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
 </div>
