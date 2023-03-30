@@ -7,9 +7,10 @@ import { BaseComponentsModule } from '@lenne.tech/ng-base/base-components';
 import { BasePrototypeModule } from '@lenne.tech/ng-base/base-prototype';
 import { SharedModule } from '../../modules/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
-  declarations: [MainComponent, MyProfileComponent],
+  declarations: [MainComponent, MyProfileComponent, TableComponent],
   imports: [
     CommonModule,
     MainRoutingModule,

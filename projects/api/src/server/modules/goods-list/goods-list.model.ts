@@ -10,7 +10,7 @@ export type GoodsListDocument = GoodsList & Document;
 /**
  * GoodsList model
  */
-@Restricted(RoleEnum.ADMIN)
+// @Restricted(RoleEnum.ADMIN)
 @ObjectType({ description: 'GoodsList' })
 @MongooseSchema({ timestamps: true })
 export class GoodsList extends PersistenceModel {
@@ -19,23 +19,23 @@ export class GoodsList extends PersistenceModel {
   // ===================================================================================================================
 
   /**
-   * Type of GoodsList
+   * Classification of GoodsList
    */
-  @Restricted(RoleEnum.S_EVERYONE)
+  // @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
-    description: 'Type of GoodsList',
-    nullable: false,
+    description: 'Classification of GoodsList',
+    nullable: true,
   })
   @Prop()
-  type: string = undefined;
+  classification: string = undefined;
 
   /**
    * Brand of GoodsList
    */
-  @Restricted(RoleEnum.S_EVERYONE)
+  // @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Brand of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   brand: string = undefined;
@@ -43,10 +43,10 @@ export class GoodsList extends PersistenceModel {
   /**
    * Size of GoodsList
    */
-  @Restricted(RoleEnum.S_EVERYONE)
+  // @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Size of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   size: string = undefined;
@@ -57,7 +57,7 @@ export class GoodsList extends PersistenceModel {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Color of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   color: string = undefined;
@@ -68,7 +68,7 @@ export class GoodsList extends PersistenceModel {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Extra of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   extra: string = undefined;
@@ -79,7 +79,7 @@ export class GoodsList extends PersistenceModel {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'MaxPrize of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   maxPrize: number = undefined;
@@ -90,7 +90,7 @@ export class GoodsList extends PersistenceModel {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'MinPrize of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   minPrize: number = undefined;
@@ -101,7 +101,7 @@ export class GoodsList extends PersistenceModel {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Number of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   @Prop()
   number: string = undefined;
@@ -137,14 +137,14 @@ export class GoodsList extends PersistenceModel {
    */
   override securityCheck(user: User, force?: boolean) {
     // In force mode or for admins everything is allowed
-    if (force || user?.hasRole(RoleEnum.ADMIN)) {
+    if (force) {
       return this;
     }
 
     // Usually only the creator has access to the object
-    if (!equalIds(user, this.createdBy)) {
-      return undefined;
-    }
+    // if (!equalIds(user, this.createdBy)) {
+    //   return undefined;
+    // }
 
     // Check permissions for properties of this object and return the object afterwards
     return this;

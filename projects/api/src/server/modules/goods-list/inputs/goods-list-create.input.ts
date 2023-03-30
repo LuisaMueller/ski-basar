@@ -6,7 +6,7 @@ import { GoodsListInput } from './goods-list.input';
 /**
  * GoodsList create input
  */
-@Restricted(RoleEnum.ADMIN)
+// @Restricted(RoleEnum.ADMIN)
 @InputType({ description: 'Input data to create a new GoodsList' })
 export class GoodsListCreateInput extends GoodsListInput {
   // ===================================================================================================================
@@ -14,14 +14,14 @@ export class GoodsListCreateInput extends GoodsListInput {
   // ===================================================================================================================
 
   /**
-   * Type of GoodsList
+   * Classification of GoodsList
    */
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
-    description: 'Type of GoodsList',
-    nullable: false,
+    description: 'Classification of GoodsList',
+    nullable: true,
   })
-  override type: string = undefined;
+  override classification: string = undefined;
 
   /**
    * Brand of GoodsList
@@ -29,7 +29,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Brand of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override brand: string = undefined;
 
@@ -39,7 +39,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Size of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override size: string = undefined;
 
@@ -49,7 +49,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Color of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override color: string = undefined;
 
@@ -59,7 +59,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Extra of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override extra: string = undefined;
 
@@ -69,7 +69,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'MaxPrize of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override maxPrize: number = undefined;
 
@@ -79,7 +79,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'MinPrize of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override minPrize: number = undefined;
 
@@ -89,7 +89,7 @@ export class GoodsListCreateInput extends GoodsListInput {
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Number of GoodsList',
-    nullable: false,
+    nullable: true,
   })
   override number: string = undefined;
 }

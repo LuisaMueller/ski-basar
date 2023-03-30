@@ -5,7 +5,7 @@ import { IsOptional } from 'class-validator';
 /**
  * GoodsList input
  */
-@Restricted(RoleEnum.ADMIN)
+// @Restricted(RoleEnum.ADMIN)
 @InputType({ description: 'Input data to update an existing GoodsList' })
 export class GoodsListInput extends CoreInput {
   // ===================================================================================================================
@@ -13,15 +13,15 @@ export class GoodsListInput extends CoreInput {
   // ===================================================================================================================
 
   /**
-   * Type of GoodsList
+   * Classification of GoodsList
    */
   @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
-    description: 'Type of GoodsList',
+    description: 'Classification of GoodsList',
     nullable: true,
   })
   @IsOptional()
-  type?: string = undefined;
+  classification?: string = undefined;
 
   /**
    * Brand of GoodsList

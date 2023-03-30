@@ -11,7 +11,7 @@ import { GoodsListService } from './goods-list.service';
 /**
  * Resolver to process with GoodsList data
  */
-@Roles(RoleEnum.ADMIN)
+// @Roles(RoleEnum.ADMIN)
 @Resolver(() => GoodsList)
 export class GoodsListResolver {
   /**
@@ -44,25 +44,27 @@ export class GoodsListResolver {
   /**
    * Get GoodsLists (via filter)
    */
-  @Roles(RoleEnum.S_USER)
+  // @Roles(RoleEnum.S_USER)
   @Query(() => [GoodsList], { description: 'Find GoodsLists (via filter)' })
   async findGoodsLists(@GraphQLServiceOptions() serviceOptions: ServiceOptions, @Args() args?: FilterArgs) {
-    return await this.goodsListService.find(args, {
+    const test = await this.goodsListService.find(args, {
       ...serviceOptions,
       inputType: FilterArgs,
     });
+    return test;
   }
 
   /**
    * Get GoodsList via ID
    */
-  @Roles(RoleEnum.S_USER)
+  // @Roles(RoleEnum.S_USER)
   @Query(() => GoodsList, { description: 'Get GoodsList with specified ID' })
   async getGoodsList(
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
     @Args('id') id: string
   ): Promise<GoodsList> {
-    return await this.goodsListService.get(id, serviceOptions);
+    const test = await this.goodsListService.get(id, serviceOptions);
+    return test;
   }
 
   // ===========================================================================
@@ -72,16 +74,17 @@ export class GoodsListResolver {
   /**
    * Create new GoodsList
    */
-  @Roles(RoleEnum.S_USER)
+  // @Roles(RoleEnum.S_USER)
   @Mutation(() => GoodsList, { description: 'Create a new GoodsList' })
   async createGoodsList(
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
     @Args('input') input: GoodsListCreateInput
   ): Promise<GoodsList> {
-    return await this.goodsListService.create(input, {
+    const bla = await this.goodsListService.create(input, {
       ...serviceOptions,
       inputType: GoodsListCreateInput,
     });
+    return bla;
   }
 
   /**

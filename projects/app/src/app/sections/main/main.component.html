@@ -3,47 +3,4 @@
   <div class="flex-grow-1 w-100 content-container">
     <router-outlet></router-outlet>
   </div>
-  <div class="container">
-    <form (ngSubmit)="onSubmit()" [formGroup]="submitForm">
-      <div class="form-floating mb-3">
-        <input type="text" formControlName="type" class="form-control" id="type" placeholder="name@example.com" />
-        <label for="type">Typ</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" formControlName="brand" class="form-control" id="brand" placeholder="name@example.com" />
-        <label for="brand">Marke</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" formControlName="size" class="form-control" id="size" placeholder="name@example.com" />
-        <label for="size">Größe</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" formControlName="color" class="form-control" id="color" placeholder="name@example.com" />
-        <label for="color">Farbe</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" formControlName="extra" class="form-control" id="extra" placeholder="name@example.com" />
-        <label for="extra">Sonstiges</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="number"
-          formControlName="maxPrize"
-          class="form-control"
-          id="maxPrize"
-          placeholder="name@example.com" />
-        <label for="maxPrize">Max.-Preis</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="number"
-          formControlName="minPrize"
-          class="form-control"
-          id="minPrize"
-          placeholder="name@example.com" />
-        <label for="minPrize">Min.-Preis</label>
-      </div>
-      <button class="btn btn-primary" [disabled]="submitForm.a">+</button>
-    </form>
-  </div>
 </div>
