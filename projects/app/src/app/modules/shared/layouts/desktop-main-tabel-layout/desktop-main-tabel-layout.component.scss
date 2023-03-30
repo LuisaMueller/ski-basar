@@ -210,6 +210,10 @@
         }
         .icon-container {
           color: $primary;
+
+          button {
+            border-radius: 50%;
+          }
         }
       }
     }
@@ -243,6 +247,8 @@
         display: flex;
         justify-content: center;
         gap: 5%;
+        pointer-events: all;
+        cursor: pointer;
         .btn {
           width: 100%;
           display: flex;

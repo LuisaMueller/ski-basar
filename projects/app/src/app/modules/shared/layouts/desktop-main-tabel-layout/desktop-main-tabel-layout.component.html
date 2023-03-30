@@ -53,25 +53,25 @@
     </div>
   </div>
   <div class="section-2">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">Nr</th>
-          <th scope="col" class="text-center">Art</th>
-          <th scope="col" class="text-center">Marke</th>
-          <th scope="col" class="text-center">Größe</th>
-          <th scope="col" class="text-center">Farbe</th>
-          <th scope="col" class="text-center">Sonstiges</th>
-          <th scope="col" class="text-center">Max-Preis</th>
-          <th scope="col" class="text-center">Min-Preis</th>
-          <th scope="col" class="text-center">Kasse</th>
-        </tr>
-      </thead>
-      <tbody class="table align-middle">
-        <tr>
-          <th scope="row" class="text-center number">160-A</th>
-          <td class="data-td">
-            <form action="">
+    <form action="">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Nr</th>
+            <th scope="col" class="text-center">Art</th>
+            <th scope="col" class="text-center">Marke</th>
+            <th scope="col" class="text-center">Größe</th>
+            <th scope="col" class="text-center">Farbe</th>
+            <th scope="col" class="text-center">Sonstiges</th>
+            <th scope="col" class="text-center">Max-Preis</th>
+            <th scope="col" class="text-center">Min-Preis</th>
+            <th scope="col" class="text-center">Kasse</th>
+          </tr>
+        </thead>
+        <tbody class="table align-middle">
+          <tr *ngFor="let row of rows">
+            <th scope="row" class="text-center number">160-A</th>
+            <td class="data-td">
               <input type="text" list="data-art" id="art-col" class="form-control" />
               <datalist id="data-art">
                 <option value="Chocolate"></option>
@@ -82,10 +82,8 @@
               </datalist>
 
               <label for="art-col" class="visually-hidden">Art</label>
-            </form>
-          </td>
-          <td class="label-td">
-            <form action="">
+            </td>
+            <td class="label-td">
               <input type="text" list="data-label" id="label-col" class="form-control" />
               <datalist id="data-label">
                 <option value="Chocolate"></option>
@@ -96,81 +94,59 @@
               </datalist>
 
               <label for="label-col" class="visually-hidden">Marke</label>
-            </form>
-          </td>
-          <td class="size-td">
-            <form action="">
-              <input type="text" id="size-col" class="form-control" />
-              <label for="size-col" class="visually-hidden">Größe</label>
-            </form>
-          </td>
-          <td class="color-td">
-            <form action="">
-              <input type="text" id="color-col" class="form-control" />
+            </td>
+            <td class="size-td">
+              <div>
+                <input type="text" id="size-col" class="form-control" />
+                <label for="size-col" class="visually-hidden">Größe</label>
+              </div>
+            </td>
+            <td class="color-td">
+              <input type="text" id="color-col" class="form-control" [value]="row.color" />
               <label for="color-col" class="visually-hidden">Farbe</label>
-            </form>
-          </td>
-          <td class="other-td">
-            <form action="">
+            </td>
+            <td class="other-td">
               <input type="text" id="other-col" class="form-control" />
               <label for="other-col" class="visually-hidden">Sonstiges</label>
-            </form>
-          </td>
-          <td class="max-td">
-            <form action="">
+            </td>
+            <td class="max-td">
               <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" />
               <label for="max-col" class="visually-hidden">Max</label>
-            </form>
-          </td>
-          <td class="min-td">
-            <form action="">
+            </td>
+            <td class="min-td">
               <input type="text" id="min-col" min="0" class="form-control" />
               <label for="min-col" class="visually-hidden">Min</label>
-            </form>
-          </td>
-          <td class="cash-td">
-            <form action="">
+            </td>
+            <td class="cash-td">
               <input type="text" id="cash-col" class="form-control" />
               <label for="cash-col" class="visually-hidden">Kasse</label>
-            </form>
-          </td>
-          <td>
-            <div class="icon-container">
-              <i class="bi bi-plus-circle-fill fs-4"></i>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="9" class="pt-5">
-            <div class="d-flex justify-content-end align-items-center">
-              <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
-              <div class="pay-field me-2"></div>
-              <div>
-                <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
+            </td>
+            <td>
+              <div class="icon-container">
+                <button type="button" class="btn btn-primary align-middle text-center">+</button>
               </div>
-              <div>
-                <button type="button" class="btn btn-primary me-2">Speichern</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="9" class="pt-5">
+              <div class="d-flex justify-content-end align-items-center">
+                <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
+                <div class="pay-field me-2"></div>
+                <div>
+                  <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary me-2">Speichern</button>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
   </div>
-  <!-- <div class="section-3 container mt-5">
-    <div class="section-3-container pt-3">
-      <div class="pay-container">
-        <p>Zu zahlende Gebühr</p>
-        <div class="pay-field"></div>
-      </div>
-      <div class="btn-container">
-        <button type="button" class="btn btn-primary">Bearbeiten</button>
-        <button type="button" class="btn btn-primary">Speichern</button>
-      </div>
-    </div>
-  </div> -->
   <div class="mountain-left"></div>
   <div class="mountain-right"></div>
 </div>
