@@ -38,7 +38,10 @@
     }
     .nav-items-container {
       ul {
-        a {
+        .active-2 {
+          color: $primary;
+        }
+        .not-active {
           color: $secondary;
 
           &:hover {

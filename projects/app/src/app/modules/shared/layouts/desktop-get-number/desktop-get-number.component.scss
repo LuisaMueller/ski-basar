@@ -3,8 +3,27 @@
 .body-main-getNumber {
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/backgrounds-desktop-png.png');
-  background-size: cover;
+  .mountain-left {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
+    clip-path: polygon(0 0, 20% 26%, 35% 54%, 47% 46%, 85% 100%, 0 100%);
+    background-color: #d9d9d9;
+    z-index: -1;
+  }
+  .mountain-right {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
+    clip-path: polygon(71% 78%, 80% 53%, 100% 60%, 100% 100%, 0 100%, 13% 70%, 44% 86%);
+    background-color: #d9d9d9;
+    right: 0;
+    z-index: -1;
+  }
 
   .navbar {
     border-bottom: 1px solid $primary;
@@ -20,22 +39,10 @@
       ul {
         padding-left: 0%;
         margin-right: 0px;
-        @include media-breakpoint-up(md) {
-          padding-left: 50%;
+        .active-2 {
+          color: $primary;
         }
-
-        @include media-breakpoint-up(lg) {
-          padding-left: 56%;
-        }
-        @include media-breakpoint-up(xl) {
-          padding-left: 59%;
-        }
-
-        @include media-breakpoint-up(xxl) {
-          padding-left: 67%;
-        }
-
-        a {
+        .not-active {
           color: $secondary;
 
           &:hover {
