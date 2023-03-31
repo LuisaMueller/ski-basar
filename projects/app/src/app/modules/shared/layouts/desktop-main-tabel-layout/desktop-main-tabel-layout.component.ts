@@ -36,15 +36,24 @@ export class DesktopMainTabelLayoutComponent {
   // }
 
   getRow(index: number) {
-    if (index >= 8) {
-      index++;
-      console.log('Hier wäre ein I gewesen');
+    if (index <= 23) {
+      if (index >= 8) {
+        index++;
+      }
+      if (index >= 14) {
+        index++;
+      }
+      return String.fromCharCode(97 + index).toUpperCase();
+    } else {
+      index = index - 24;
+      if (index >= 8) {
+        index++;
+      }
+      if (index >= 14) {
+        index++;
+      }
+      return String.fromCharCode(97 + index).toUpperCase() + String.fromCharCode(97 + index).toUpperCase();
     }
-    if (index >= 14) {
-      index++;
-      console.log('Hier wäre ein O gewesen');
-    }
-    return String.fromCharCode(97 + index).toUpperCase();
   }
 
   // onSubmit() {
