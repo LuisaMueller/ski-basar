@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../modules/core/services/api.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -14,7 +14,7 @@ export class TableComponent implements OnInit {
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {}
+  constructor(private apiService: ApiService) {}
 
   async ngOnInit() {
     this.submitForm = new FormGroup({
@@ -26,7 +26,6 @@ export class TableComponent implements OnInit {
       maxPrize: new FormControl(null, Validators.required),
       minPrize: new FormControl(null, Validators.required),
     });
-    this.find();
   }
 
   find() {
@@ -51,6 +50,13 @@ export class TableComponent implements OnInit {
         console.log(error);
       }
     );
+    this.submitForm.reset();
+  }
+
+  add() {
+    const input = { ...this.submitForm.value, number: '170' };
+
+    this.goodList = [...this.goodList, input];
     this.submitForm.reset();
   }
 }

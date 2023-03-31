@@ -47,11 +47,10 @@ export class GoodsListResolver {
   // @Roles(RoleEnum.S_USER)
   @Query(() => [GoodsList], { description: 'Find GoodsLists (via filter)' })
   async findGoodsLists(@GraphQLServiceOptions() serviceOptions: ServiceOptions, @Args() args?: FilterArgs) {
-    const test = await this.goodsListService.find(args, {
+    return await this.goodsListService.find(args, {
       ...serviceOptions,
       inputType: FilterArgs,
     });
-    return test;
   }
 
   /**
@@ -63,8 +62,7 @@ export class GoodsListResolver {
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
     @Args('id') id: string
   ): Promise<GoodsList> {
-    const test = await this.goodsListService.get(id, serviceOptions);
-    return test;
+    return await this.goodsListService.get(id, serviceOptions);
   }
 
   // ===========================================================================
@@ -80,11 +78,10 @@ export class GoodsListResolver {
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
     @Args('input') input: GoodsListCreateInput
   ): Promise<GoodsList> {
-    const bla = await this.goodsListService.create(input, {
+    return await this.goodsListService.create(input, {
       ...serviceOptions,
       inputType: GoodsListCreateInput,
     });
-    return bla;
   }
 
   /**

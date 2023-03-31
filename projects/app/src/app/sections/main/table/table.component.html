@@ -1,79 +1,73 @@
-<div class="d-flex flex-column align-items-stretch h-100 w-100">
-  <app-header></app-header>
-  <div class="flex-grow-1 w-100 content-container">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="container">
-    <form (ngSubmit)="onSubmit()" [formGroup]="submitForm">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Nr.</th>
-            <th scope="col">Art</th>
-            <th scope="col">Marke</th>
-            <th scope="col">Größe</th>
-            <th scope="col">Farbe</th>
-            <th scope="col">Sonstiges</th>
-            <th scope="col">Max.-Preis</th>
-            <th scope="col">Min.-Preis</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let good of goodList; index as i">
-            <th scope="row">{{ good.number }}-{{ getRow(i) }}</th>
-            <td>{{ good.classification }}</td>
-            <td>{{ good.brand }}</td>
-            <td>{{ good.size }}</td>
-            <td>{{ good.color }}</td>
-            <td>{{ good.extra }}</td>
-            <td>{{ good.maxPrize }}</td>
-            <td>{{ good.minPrize }}</td>
-          </tr>
-        </tbody>
+<div class="container py-5">
+  <form (ngSubmit)="add()" [formGroup]="submitForm">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nr.</th>
+          <th scope="col">Art</th>
+          <th scope="col">Marke</th>
+          <th scope="col">Größe</th>
+          <th scope="col">Farbe</th>
+          <th scope="col">Sonstiges</th>
+          <th scope="col">Max.-Preis</th>
+          <th scope="col">Min.-Preis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let good of goodList; index as i">
+          <th scope="row">{{ good.number }}-{{ getRow(i) }}</th>
+          <td>{{ good.classification }}</td>
+          <td>{{ good.brand }}</td>
+          <td>{{ good.size }}</td>
+          <td>{{ good.color }}</td>
+          <td>{{ good.extra }}</td>
+          <td>{{ good.maxPrize }}</td>
+          <td>{{ good.minPrize }}</td>
+        </tr>
+      </tbody>
 
-        <tfoot>
-          <th>{{ goodList[0]?.number }}-{{ getRow(goodList.length) }}</th>
-          <th>
-            <input
-              type="text"
-              class="form-control"
-              list="classification-list"
-              id="classification"
-              formControlName="classification" />
-            <datalist id="classification-list">
-              <option [value]="type" *ngFor="let type of typeList"></option>
-            </datalist>
-          </th>
-          <th>
-            <input type="text" class="form-control" list="brand-list" id="brand" formControlName="brand" />
-            <datalist id="brand-list">
-              <option [value]="brand" *ngFor="let brand of brandList"></option>
-            </datalist>
-          </th>
-          <th>
-            <input type="text" class="form-control" list="size-list" id="size" formControlName="size" />
+      <tfoot>
+        <th>{{ goodList[0]?.number }}-{{ getRow(goodList.length) }}</th>
+        <th>
+          <input
+            type="text"
+            class="form-control"
+            list="classification-list"
+            id="classification"
+            formControlName="classification" />
+          <datalist id="classification-list">
+            <option [value]="type" *ngFor="let type of typeList"></option>
+          </datalist>
+        </th>
+        <th>
+          <input type="text" class="form-control" list="brand-list" id="brand" formControlName="brand" />
+          <datalist id="brand-list">
+            <option [value]="brand" *ngFor="let brand of brandList"></option>
+          </datalist>
+        </th>
+        <th>
+          <input type="text" class="form-control" list="size-list" id="size" formControlName="size" />
 
-            <datalist id="size-list">
-              <option [value]="size" *ngFor="let size of sizeList"></option>
-            </datalist>
-          </th>
-          <th>
-            <input type="text" class="form-control" id="color" formControlName="color" />
-          </th>
-          <th>
-            <input type="text" class="form-control" id="extra" formControlName="extra" />
-          </th>
-          <th>
-            <input type="number" class="form-control" id="maxPrize" formControlName="maxPrize" />
-          </th>
-          <th>
-            <input type="number" class="form-control" id="minPrize" formControlName="minPrize" />
-          </th>
-          <th>
-            <button class="btn btn-outline-primary" type="submit">+</button>
-          </th>
-        </tfoot>
-      </table>
-    </form>
-  </div>
+          <datalist id="size-list">
+            <option [value]="size" *ngFor="let size of sizeList"></option>
+          </datalist>
+        </th>
+        <th>
+          <input type="text" class="form-control" id="color" formControlName="color" />
+        </th>
+        <th>
+          <input type="text" class="form-control" id="extra" formControlName="extra" />
+        </th>
+        <th>
+          <input type="number" class="form-control" id="maxPrize" formControlName="maxPrize" />
+        </th>
+        <th>
+          <input type="number" class="form-control" id="minPrize" formControlName="minPrize" />
+        </th>
+        <th>
+          <button class="btn btn-outline-primary" type="submit">+</button>
+        </th>
+      </tfoot>
+    </table>
+  </form>
 </div>
