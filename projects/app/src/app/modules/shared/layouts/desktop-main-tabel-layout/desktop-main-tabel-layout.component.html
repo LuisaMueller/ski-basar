@@ -30,7 +30,7 @@
         </button>
       </div>
       <div class="section-1-main-container">
-        <p class="text-center">160</p>
+        <p class="text-center">{{ defaultNr }}</p>
         <form action="">
           <input type="text" class="text-center" placeholder="Nummer suchen" />
         </form>
@@ -53,8 +53,8 @@
     </div>
   </div>
   <div class="section-2">
-    <form action="">
-      <table class="table">
+    <form action="" (ngSubmit)="add()" [formGroup]="submitForm">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col" class="text-center">Nr</th>
@@ -69,61 +69,66 @@
           </tr>
         </thead>
         <tbody class="table align-middle">
-          <tr *ngFor="let row of rows">
-            <th scope="row" class="text-center number">160-A</th>
+          <tr *ngFor="let good of goodList; index as i">
+            <th scope="row">{{ good.number }}-{{ getRow(i) }}</th>
+            <td class="fw-semibold text-center">{{ good.data }}</td>
+            <td class="fw-semibold text-center">{{ good.label }}</td>
+            <td class="fw-semibold text-center">{{ good.size }}</td>
+            <td class="fw-semibold text-center">{{ good.color }}</td>
+            <td class="fw-semibold text-center">{{ good.other }}</td>
+            <td class="text-center fw-semibold">{{ good.max }}</td>
+            <td class="text-center fw-semibold">{{ good.min }}</td>
+            <td class="fw-semibold text-center">{{ good.cash }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>{{ goodList[0]?.number || defaultNr }}-{{ getRow(goodList.length) }}</th>
             <td class="data-td">
-              <input type="text" list="data-art" id="art-col" class="form-control" />
+              <input type="text" list="data-art" id="art-col" class="form-control" formControlName="data" />
               <datalist id="data-art">
-                <option value="Chocolate"></option>
-                <option value="Coconut"></option>
-                <option value="Mint"></option>
-                <option value="Strawberry"></option>
-                <option value="Vanilla"></option>
+                <option [value]="data" *ngFor="let data of dataList"></option>
               </datalist>
 
               <label for="art-col" class="visually-hidden">Art</label>
             </td>
             <td class="label-td">
-              <input type="text" list="data-label" id="label-col" class="form-control" />
+              <input type="text" list="data-label" id="label-col" class="form-control" formControlName="label" />
               <datalist id="data-label">
-                <option value="Chocolate"></option>
-                <option value="Coconut"></option>
-                <option value="Mint"></option>
-                <option value="Strawberry"></option>
-                <option value="Vanilla"></option>
+                <option [value]="label" *ngFor="let label of labelList"></option>
               </datalist>
 
               <label for="label-col" class="visually-hidden">Marke</label>
             </td>
             <td class="size-td">
-              <div>
-                <input type="text" id="size-col" class="form-control" />
-                <label for="size-col" class="visually-hidden">Größe</label>
-              </div>
+              <input type="text" id="size-col" list="size-col" class="form-control" formControlName="size" />
+              <label for="size-col" class="visually-hidden">Größe</label>
+              <datalist id="data-size">
+                <option [value]="size" *ngFor="let size of sizeList"></option>
+              </datalist>
             </td>
             <td class="color-td">
-              <input type="text" id="color-col" class="form-control" [value]="row.color" />
+              <input type="text" id="color-col" class="form-control" formControlName="color" />
               <label for="color-col" class="visually-hidden">Farbe</label>
             </td>
             <td class="other-td">
-              <input type="text" id="other-col" class="form-control" />
+              <input type="text" id="other-col" class="form-control" formControlName="label" formControlName="other" />
               <label for="other-col" class="visually-hidden">Sonstiges</label>
             </td>
             <td class="max-td">
-              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" />
+              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" formControlName="max" />
               <label for="max-col" class="visually-hidden">Max</label>
             </td>
             <td class="min-td">
-              <input type="text" id="min-col" min="0" class="form-control" />
+              <input type="text" id="min-col" min="0" class="form-control" formControlName="min" />
               <label for="min-col" class="visually-hidden">Min</label>
             </td>
             <td class="cash-td">
-              <input type="text" id="cash-col" class="form-control" />
+              <input type="text" id="cash-col" class="form-control" formControlName="cash" />
               <label for="cash-col" class="visually-hidden">Kasse</label>
             </td>
             <td>
-              <div class="icon-container">
-                <button type="button" class="btn btn-primary align-middle text-center">+</button>
+              <div class="icon-container bg-white">
+                <button type="submit" class="btn btn-primary align-middle text-center">+</button>
               </div>
             </td>
           </tr>
@@ -138,7 +143,7 @@
                   <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-primary me-2">Speichern</button>
+                  <button type="button" class="btn btn-primary me-2">Abschicken</button>
                 </div>
               </div>
             </td>

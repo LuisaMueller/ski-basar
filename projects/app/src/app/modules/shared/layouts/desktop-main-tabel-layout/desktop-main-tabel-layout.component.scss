@@ -174,7 +174,14 @@
       .number {
         width: 7%;
       }
+
       tr {
+        // &:nth-last-child(){
+        //   background-color: white transparent;
+        // }
+        input {
+          background-color: white;
+        }
         th {
           border-bottom-width: 0px;
         }
