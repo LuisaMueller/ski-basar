@@ -37,22 +37,42 @@ export class DesktopMainTabelLayoutComponent {
 
   getRow(index: number) {
     if (index <= 23) {
+      //run from A to Z
       if (index >= 8) {
+        //I has index 8 and should be skipped
         index++;
       }
       if (index >= 14) {
+        //O has index 14 and should be skipped
         index++;
       }
       return String.fromCharCode(97 + index).toUpperCase();
     } else {
-      index = index - 24;
-      if (index >= 8) {
-        index++;
+      if (index <= 47) {
+        //run from AA to AZ
+        index = index - 24;
+        if (index >= 8) {
+          //I has index 8 and should be skipped
+          index++;
+        }
+        if (index >= 14) {
+          //O has index 14 and should be skipped
+          index++;
+        }
+        return 'A' + String.fromCharCode(97 + index).toUpperCase(); //String.fromCharCode(97 + index).toUpperCase() + String.fromCharCode(97 + index).toUpperCase();
+      } else {
+        //run from BA to BZ and after that something like B{
+        index = index - 48;
+        if (index >= 8) {
+          //I has index 8 and should be skipped
+          index++;
+        }
+        if (index >= 14) {
+          //O has index 14 and should be skipped
+          index++;
+        }
+        return 'B' + String.fromCharCode(97 + index).toUpperCase();
       }
-      if (index >= 14) {
-        index++;
-      }
-      return String.fromCharCode(97 + index).toUpperCase() + String.fromCharCode(97 + index).toUpperCase();
     }
   }
 

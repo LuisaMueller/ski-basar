@@ -176,11 +176,8 @@
       }
 
       tr {
-        // &:nth-last-child(){
-        //   background-color: white transparent;
-        // }
         input {
-          background-color: white;
+          box-shadow: none;
         }
         th {
           border-bottom-width: 0px;
@@ -266,4 +263,7 @@
       }
     }
   }
+}
+input {
+  background-color: $white; // white !important;
 }
