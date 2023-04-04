@@ -179,6 +179,14 @@
         input {
           box-shadow: none;
         }
+        .icon-container-pencil-trash {
+          display: flex;
+          flex-direction: column;
+          button {
+            border-radius: 50%;
+            width: 42px;
+          }
+        }
         th {
           border-bottom-width: 0px;
         }
@@ -213,10 +221,9 @@
           width: 8%;
         }
         .icon-container {
-          color: $primary;
-
           button {
             border-radius: 50%;
+            width: 42px;
           }
         }
       }

@@ -1,0 +1,93 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">
+    Artikel mit Nr. <span class="fw-bold">{{ content.number }}</span> bearbeiten
+  </h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="saveEdit()" [formGroup]="editForm">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="classificationInput"
+        formControlName="classification"
+        placeholder="Art"
+        [value]="content.classification" />
+      <label for="classificationInput">Art</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="brandInput"
+        formControlName="brand"
+        placeholder="Marke"
+        [value]="content.brand" />
+      <label for="brandInput">Marke</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="sizeInput"
+        formControlName="size"
+        placeholder="Größe"
+        [value]="content.size" />
+      <label for="sizeInput">Größe</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="colorInput"
+        formControlName="color"
+        placeholder="Farbe"
+        [value]="content.color" />
+      <label for="colorInput">Farbe</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="otherInput"
+        formControlName="other"
+        placeholder="Sonstiges"
+        [value]="content.other" />
+      <label for="otherInput">Sonstiges</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="maxInput"
+        formControlName="max"
+        placeholder="Max-Preis"
+        [value]="content.max" />
+      <label for="maxInput">Max-Preis</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="minInput"
+        formControlName="min"
+        placeholder="Min-Preis"
+        [value]="content.min" />
+      <label for="minInput">Min-Preis</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control rounded-4 border-primary"
+        id="cashInput"
+        formControlName="cash"
+        placeholder="Kasse"
+        [value]="content.cash" />
+      <label for="cashInput">Kasse</label>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary align-middle text-center">Speichern</button>
+    </div>
+  </form>
+</div>

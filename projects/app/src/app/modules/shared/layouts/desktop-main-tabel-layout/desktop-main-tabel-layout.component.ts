@@ -1,25 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Good } from '../../../core/models/good.model';
+import { NgbdModalBasicComponent } from '../modal-basic/modal-basic.component';
 @Component({
   selector: 'app-desktop-main-tabel-layout',
   templateUrl: './desktop-main-tabel-layout.component.html',
   styleUrls: ['./desktop-main-tabel-layout.component.scss'],
 })
-export class DesktopMainTabelLayoutComponent {
-  goodList: any = [];
+export class DesktopMainTabelLayoutComponent implements OnInit {
+  goodList: Good[] = [];
   submitForm: FormGroup;
   defaultNr: number = 1;
-  dataList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
-  labelList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
+  classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
+  brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
 
-  constructor() {}
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
     this.submitForm = new FormGroup({
-      data: new FormControl(null, Validators.required),
-      label: new FormControl(null, Validators.required),
+      classification: new FormControl(null, Validators.required),
+      brand: new FormControl(null, Validators.required),
       size: new FormControl(null, Validators.required),
       color: new FormControl(null, Validators.required),
       other: new FormControl(null),
@@ -59,7 +61,7 @@ export class DesktopMainTabelLayoutComponent {
           //O has index 14 and should be skipped
           index++;
         }
-        return 'A' + String.fromCharCode(97 + index).toUpperCase(); //String.fromCharCode(97 + index).toUpperCase() + String.fromCharCode(97 + index).toUpperCase();
+        return 'A' + String.fromCharCode(97 + index).toUpperCase();
       } else {
         //run from BA to BZ and after that something like B{
         index = index - 48;
@@ -74,6 +76,24 @@ export class DesktopMainTabelLayoutComponent {
         return 'B' + String.fromCharCode(97 + index).toUpperCase();
       }
     }
+  }
+
+  editRow(good: Good, index: number) {
+    const modalRef = this.modalService.open(NgbdModalBasicComponent);
+    modalRef.componentInstance.content = good;
+    modalRef.result.then(result => {
+      this.goodList[index] = result;
+    });
+  }
+
+  deleteRow(index: number) {
+    if (confirm('Möchtest du diese Zeile wirklich löschen?\n\nOK = Löschen') == true) {
+      console.log('gelöscht');
+    } else {
+      //confirm is chancelled
+    }
+
+    return index;
   }
 
   // onSubmit() {
@@ -91,7 +111,7 @@ export class DesktopMainTabelLayoutComponent {
   // }
 
   add() {
-    const input = { ...this.submitForm.value, number: this.defaultNr };
+    const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.goodList.length) };
 
     this.goodList = [...this.goodList, input];
     this.submitForm.reset();

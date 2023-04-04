@@ -44,16 +44,13 @@
     </div>
     <div class="comment-container">
       <div class="form-floating">
-        <!-- <i type="text" class="form-control" id="floatingInput" aria-describedby="emailHelp" /> -->
-        <!-- <textarea id="floatingInput" class="comment-field form-control" placeholder="MOin "></textarea>
-        <label for="floatingInput" class="visually-hidden">Notizen</label> -->
         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
         <label for="floatingTextarea2">Notiz zur Nummer:</label>
       </div>
     </div>
   </div>
   <div class="section-2">
-    <form action="" (ngSubmit)="add()" [formGroup]="submitForm">
+    <form (ngSubmit)="add()" [formGroup]="submitForm">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -70,37 +67,47 @@
         </thead>
         <tbody class="table align-middle">
           <tr *ngFor="let good of goodList; index as i">
-            <th scope="row">{{ good.number }}-{{ getRow(i) }}</th>
-            <td class="fw-semibold text-center">{{ good.data }}</td>
-            <td class="fw-semibold text-center">{{ good.label }}</td>
+            <th scope="row">{{ good.number }}</th>
+            <td class="fw-semibold text-center">{{ good.classification }}</td>
+            <td class="fw-semibold text-center">{{ good.brand }}</td>
             <td class="fw-semibold text-center">{{ good.size }}</td>
             <td class="fw-semibold text-center">{{ good.color }}</td>
             <td class="fw-semibold text-center">{{ good.other }}</td>
-            <td class="text-center fw-semibold">{{ good.max }}</td>
-            <td class="text-center fw-semibold">{{ good.min }}</td>
+            <td class="fw-semibold text-center">{{ good.max }}</td>
+            <td class="fw-semibold text-center">{{ good.min }}</td>
             <td class="fw-semibold text-center">{{ good.cash }}</td>
-            <td></td>
+            <td>
+              <div class="icon-container-pencil-trash bg-white">
+                <button type="button" (click)="editRow(good, i)" class="btn btn-primary align-middle text-center">
+                  <i class="bi bi-pencil"></i>
+                </button>
+
+                <button type="button" (click)="deleteRow(i)" class="btn btn-danger align-middle text-center mt-2">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
           </tr>
           <tr>
-            <th>{{ goodList[0]?.number || defaultNr }}-{{ getRow(goodList.length) }}</th>
-            <td class="data-td">
-              <input type="text" list="data-art" id="art-col" class="form-control" formControlName="data" />
-              <datalist id="data-art">
-                <option [value]="data" *ngFor="let data of dataList"></option>
+            <th>{{ defaultNr }}-{{ getRow(goodList.length) }}</th>
+            <td class="classification-td">
+              <input type="text" id="classification-col" class="form-control" formControlName="classification" />
+              <datalist id="classification-col">
+                <option [value]="classification" *ngFor="let classification of classificationList"></option>
               </datalist>
 
-              <label for="art-col" class="visually-hidden">Art</label>
+              <label for="classification-col" class="visually-hidden">Art</label>
             </td>
-            <td class="label-td">
-              <input type="text" list="data-label" id="label-col" class="form-control" formControlName="label" />
-              <datalist id="data-label">
-                <option [value]="label" *ngFor="let label of labelList"></option>
+            <td class="brand-td">
+              <input type="text" id="brand-col" class="form-control" formControlName="brand" />
+              <datalist id="brand-col">
+                <option [value]="brand" *ngFor="let brand of brandList"></option>
               </datalist>
 
-              <label for="label-col" class="visually-hidden">Marke</label>
+              <label for="brand-col" class="visually-hidden">Marke</label>
             </td>
             <td class="size-td">
-              <input type="text" id="size-col" list="size-col" class="form-control" formControlName="size" />
+              <input type="text" id="size-col" class="form-control" formControlName="size" />
               <label for="size-col" class="visually-hidden">Größe</label>
               <datalist id="data-size">
                 <option [value]="size" *ngFor="let size of sizeList"></option>
@@ -129,7 +136,7 @@
             <td>
               <div class="icon-container bg-white">
                 <button type="submit" class="btn btn-primary align-middle text-center">
-                  <i class="bi bi-check"></i>
+                  <i class="bi bi-check-lg"></i>
                 </button>
               </div>
             </td>
@@ -141,9 +148,7 @@
               <div class="d-flex justify-content-end align-items-center">
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
                 <div class="pay-field me-2"></div>
-                <div>
-                  <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
-                </div>
+
                 <div>
                   <button type="button" class="btn btn-primary me-2">Abschicken</button>
                 </div>
