@@ -99,8 +99,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.result.then(result => {
       this.goodList[index] = result;
       this.archivedGoods[index] = result;
-      console.log('Liste: ', this.goodList);
-      console.log('Archiv: ', this.archivedGoods);
     });
   }
 
@@ -114,8 +112,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
           this.goodList.splice(deleteIndex, 1);
         }
       }
-      console.log('Liste: ', this.goodList);
-      console.log('Archiv: ', this.archivedGoods);
     });
   }
 
@@ -137,9 +133,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
-
-    console.log('Liste: ', this.goodList);
-    console.log('Archiv: ', this.archivedGoods);
     this.submitForm.reset();
   }
 }

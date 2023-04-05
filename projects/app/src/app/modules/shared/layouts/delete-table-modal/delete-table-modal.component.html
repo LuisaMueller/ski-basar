@@ -3,20 +3,17 @@
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
-  <form (ngSubmit)="saveDelete()">
-    <p>
-      Bist Du sicher, dass der Artikel mit der Nr. <span class="fw-bold">{{ content.number }}</span> gelöscht werden
-      soll?
-    </p>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-light align-middle text-center"
-        aria-label="Close"
-        (click)="activeModal.dismiss('Cross click')">
-        Abbrechen
-      </button>
-      <button type="submit" class="btn btn-primary align-middle text-center">Löschen</button>
-    </div>
-  </form>
+  <p>
+    Bist Du sicher, dass der Artikel mit der Nr. <span class="fw-bold">{{ content.number }}</span> gelöscht werden soll?
+  </p>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light align-middle text-center"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')">
+      Abbrechen
+    </button>
+    <button type="button" (click)="saveDelete()" class="btn btn-primary align-middle text-center">Löschen</button>
+  </div>
 </div>
