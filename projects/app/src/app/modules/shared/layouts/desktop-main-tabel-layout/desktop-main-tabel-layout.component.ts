@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
-import { NgbdModalBasicComponent } from '../modal-basic/modal-basic.component';
+import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 @Component({
   selector: 'app-desktop-main-tabel-layout',
   templateUrl: './desktop-main-tabel-layout.component.html',
@@ -79,7 +79,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   }
 
   editRow(good: Good, index: number) {
-    const modalRef = this.modalService.open(NgbdModalBasicComponent);
+    const modalRef = this.modalService.open(UpdateTableModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.content = good;
     modalRef.result.then(result => {
       this.goodList[index] = result;

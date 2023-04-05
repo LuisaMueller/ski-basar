@@ -137,32 +137,6 @@
         border-bottom-width: 0px;
       }
       tfoot {
-        // .pay-container {
-        //   display: flex;
-        //   justify-content: center;
-        //   gap: 2%;
-        //   p {
-        //     color: $primary;
-        //   }
-        //   .pay-field {
-        //     width: 30%;
-        //     border: 1px solid $primary;
-        //     border-radius: 10px;
-        //   }
-        // }
-        // .btn-container {
-        //   display: flex;
-        //   justify-content: center;
-        //   gap: 5%;
-        //   .btn {
-        //     width: 100%;
-        //     display: flex;
-        //     justify-content: center;
-        //     align-items: center;
-        //     font-weight: 700;
-        //   }
-        // }
-
         .pay-field {
           width: 100px;
           height: 38px;
@@ -272,5 +246,5 @@
   }
 }
 input {
-  background-color: $white; // white !important;
+  background-color: $white;
 }

@@ -10,7 +10,7 @@ import { LoginSmartphonePage2Component } from './layouts/login-smartphone-page2/
 import { LoginSmartphonePage3Component } from './layouts/login-smartphone-page3/login-smartphone-page3.component';
 import { LoginSmartphonePage4Component } from './layouts/login-smartphone-page4/login-smartphone-page4.component';
 import { LoginSmartphoneComponent } from './layouts/login-smartphone/login-smartphone.component';
-import { NgbdModalBasicComponent } from './layouts/modal-basic/modal-basic.component';
+import { UpdateTableModalComponent } from './layouts/update-table-modal/update-table-modal.component';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { NgbdModalBasicComponent } from './layouts/modal-basic/modal-basic.compo
     LoginSmartphonePage3Component,
     DesktopMainTabelLayoutComponent,
     LoginSmartphonePage4Component,
-    NgbdModalBasicComponent,
+    UpdateTableModalComponent,
   ],
 
   exports: [HeaderComponent],

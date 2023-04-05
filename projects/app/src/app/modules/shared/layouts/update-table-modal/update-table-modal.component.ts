@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
 
 @Component({
   selector: 'app-modal-basic',
 
-  templateUrl: './modal-basic.component.html',
-  styleUrls: ['./modal-basic.component.scss'],
+  templateUrl: './update-table-modal.component.html',
+  styleUrls: ['./update-table-modal.component.scss'],
 })
-export class NgbdModalBasicComponent implements OnInit {
+export class UpdateTableModalComponent implements OnInit {
   @Input() content: Good;
   closeResult = '';
   editForm: FormGroup;
@@ -31,15 +31,5 @@ export class NgbdModalBasicComponent implements OnInit {
   saveEdit() {
     this.content = { number: this.content.number, ...this.editForm.value };
     this.activeModal.close(this.content);
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgbdModalBasicComponent } from './modal-basic.component';
+import { UpdateTableModalComponent } from './update-table-modal.component';
 
 describe('ModalBasicComponent', () => {
-  let component: NgbdModalBasicComponent;
-  let fixture: ComponentFixture<NgbdModalBasicComponent>;
+  let component: UpdateTableModalComponent;
+  let fixture: ComponentFixture<UpdateTableModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NgbdModalBasicComponent],
+      declarations: [UpdateTableModalComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NgbdModalBasicComponent);
+    fixture = TestBed.createComponent(UpdateTableModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
