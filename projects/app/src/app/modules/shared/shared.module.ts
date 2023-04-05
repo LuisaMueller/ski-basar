@@ -11,6 +11,7 @@ import { LoginSmartphonePage3Component } from './layouts/login-smartphone-page3/
 import { LoginSmartphonePage4Component } from './layouts/login-smartphone-page4/login-smartphone-page4.component';
 import { LoginSmartphoneComponent } from './layouts/login-smartphone/login-smartphone.component';
 import { UpdateTableModalComponent } from './layouts/update-table-modal/update-table-modal.component';
+import { DeleteTableModalComponent } from './layouts/delete-table-modal/delete-table-modal.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { UpdateTableModalComponent } from './layouts/update-table-modal/update-t
     DesktopMainTabelLayoutComponent,
     LoginSmartphonePage4Component,
     UpdateTableModalComponent,
+    DeleteTableModalComponent,
   ],
 
   exports: [HeaderComponent],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
+import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 @Component({
   selector: 'app-desktop-main-tabel-layout',
@@ -86,14 +87,17 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     });
   }
 
-  deleteRow(index: number) {
-    if (confirm('Möchtest du diese Zeile wirklich löschen?\n\nOK = Löschen') == true) {
-      console.log('gelöscht');
-    } else {
-      //confirm is chancelled
-    }
-
-    return index;
+  deleteRow(good: Good, index: number) {
+    const modalRef = this.modalService.open(DeleteTableModalComponent);
+    modalRef.componentInstance.content = good;
+    modalRef.result.then(result => {
+      if (result === 'delete') {
+        const deleteIndex = this.goodList.indexOf(good);
+        if (index > -1) {
+          this.goodList.splice(deleteIndex, 1);
+        }
+      }
+    });
   }
 
   // onSubmit() {
