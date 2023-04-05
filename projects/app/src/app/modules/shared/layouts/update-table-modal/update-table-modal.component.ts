@@ -4,16 +4,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
 
 @Component({
-  selector: 'app-modal-basic',
+  selector: 'app-update-table-modal',
 
   templateUrl: './update-table-modal.component.html',
   styleUrls: ['./update-table-modal.component.scss'],
 })
 export class UpdateTableModalComponent implements OnInit {
   @Input() content: Good;
-  closeResult = '';
   editForm: FormGroup;
-  goodList2: Good[] = [];
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
