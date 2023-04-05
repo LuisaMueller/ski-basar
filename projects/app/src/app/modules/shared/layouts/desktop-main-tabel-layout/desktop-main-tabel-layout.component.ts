@@ -11,7 +11,58 @@ import { UpdateTableModalComponent } from '../update-table-modal/update-table-mo
 })
 export class DesktopMainTabelLayoutComponent implements OnInit {
   goodList: Good[] = [];
+  archivedGoods: Good[] = [];
   submitForm: FormGroup;
+  charArray: string[] = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+    'AA',
+    'AB',
+    'AC',
+    'AD',
+    'AE',
+    'AF',
+    'AG',
+    'AH',
+    'AJ',
+    'AK',
+    'AL',
+    'AM',
+    'AN',
+    'AP',
+    'AQ',
+    'AR',
+    'AS',
+    'AT',
+    'AU',
+    'AV',
+    'AW',
+    'AX',
+    'AY',
+    'AZ',
+  ];
   defaultNr: number = 1;
   classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
@@ -39,44 +90,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   // }
 
   getRow(index: number) {
-    if (index <= 23) {
-      //run from A to Z
-      if (index >= 8) {
-        //I has index 8 and should be skipped
-        index++;
-      }
-      if (index >= 14) {
-        //O has index 14 and should be skipped
-        index++;
-      }
-      return String.fromCharCode(97 + index).toUpperCase();
-    } else {
-      if (index <= 47) {
-        //run from AA to AZ
-        index = index - 24;
-        if (index >= 8) {
-          //I has index 8 and should be skipped
-          index++;
-        }
-        if (index >= 14) {
-          //O has index 14 and should be skipped
-          index++;
-        }
-        return 'A' + String.fromCharCode(97 + index).toUpperCase();
-      } else {
-        //run from BA to BZ and after that something like B{
-        index = index - 48;
-        if (index >= 8) {
-          //I has index 8 and should be skipped
-          index++;
-        }
-        if (index >= 14) {
-          //O has index 14 and should be skipped
-          index++;
-        }
-        return 'B' + String.fromCharCode(97 + index).toUpperCase();
-      }
-    }
+    return this.charArray[index];
   }
 
   editRow(good: Good, index: number) {
@@ -84,6 +98,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.componentInstance.content = good;
     modalRef.result.then(result => {
       this.goodList[index] = result;
+      this.archivedGoods[index] = result;
+      console.log('Liste: ', this.goodList);
+      console.log('Archiv: ', this.archivedGoods);
     });
   }
 
@@ -97,6 +114,8 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
           this.goodList.splice(deleteIndex, 1);
         }
       }
+      console.log('Liste: ', this.goodList);
+      console.log('Archiv: ', this.archivedGoods);
     });
   }
 
@@ -115,9 +134,12 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   // }
 
   add() {
-    const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.goodList.length) };
-
+    const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
+    this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
+
+    console.log('Liste: ', this.goodList);
+    console.log('Archiv: ', this.archivedGoods);
     this.submitForm.reset();
   }
 }

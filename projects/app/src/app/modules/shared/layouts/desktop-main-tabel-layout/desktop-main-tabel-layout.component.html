@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="section-2">
-    <form (ngSubmit)="add()" [formGroup]="submitForm">
+    <form (ngSubmit)="add()" [formGroup]="submitForm" class="w-100">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -63,6 +63,7 @@
             <th scope="col" class="text-center">Max-Preis</th>
             <th scope="col" class="text-center">Min-Preis</th>
             <th scope="col" class="text-center">Kasse</th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="table align-middle">
@@ -88,8 +89,8 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <th>{{ defaultNr }}-{{ getRow(goodList.length) }}</th>
+          <tr *ngIf="archivedGoods.length !== charArray.length">
+            <th>{{ defaultNr }}-{{ getRow(archivedGoods.length) }}</th>
             <td class="classification-td">
               <input type="text" id="classification-col" class="form-control" formControlName="classification" />
               <datalist id="classification-col">
@@ -135,7 +136,10 @@
             </td>
             <td>
               <div class="icon-container bg-white">
-                <button type="submit" class="btn btn-primary align-middle text-center">
+                <button
+                  type="submit"
+                  [disabled]="archivedGoods.length === charArray.length"
+                  class="btn btn-primary align-middle text-center">
                   <i class="bi bi-check-lg"></i>
                 </button>
               </div>
