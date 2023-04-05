@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
@@ -68,9 +70,17 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private route: ActivatedRoute,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   ngOnInit() {
+    this.route.params.subscribe((value: any) => {
+      this.defaultNr = +value.id;
+    });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
       brand: new FormControl(null, Validators.required),
@@ -134,5 +144,17 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
     this.submitForm.reset();
+    console.log(document.body.scrollHeight);
+
+    this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
+  }
+
+  navPrevNext(goodListNr: number) {
+    this.router.navigate(['auth/main-desktop/' + goodListNr]);
+  }
+
+  navTo(event: any) {
+    this.router.navigate(['auth/main-desktop/' + event.target.value]);
+    event.target.value = '';
   }
 }

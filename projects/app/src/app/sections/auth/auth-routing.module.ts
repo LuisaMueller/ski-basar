@@ -79,7 +79,7 @@ const routes: Routes = [
         component: DesktopNumberLayoutComponent,
       },
       {
-        path: 'main-desktop',
+        path: 'main-desktop/:id',
         component: DesktopMainTabelLayoutComponent,
       },
     ],

@@ -15,31 +15,37 @@
             <a class="nav-link not-active" href="#">Kundennummer anlegen</a>
           </li>
           <li class="nav-item">
-            <div class="profi"></div>
+            <div class="profil"></div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="section-1">
-    <div class="nummerslider-container carousel slide">
-      <div class="slidebutton-container">
-        <button class="carousel-control-prev mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
+    <div class="numberslider-container">
+      <div class="numberarrow-container">
+        <div>
+          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr - 1)">
+            <i class="bi bi-caret-left-fill"></i>
+          </button>
+        </div>
+        <div>
+          <p class="text-center">{{ defaultNr }}</p>
+        </div>
+        <div>
+          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr + 1)">
+            <i class="bi bi-caret-right-fill"></i>
+          </button>
+        </div>
       </div>
-      <div class="section-1-main-container">
-        <p class="text-center">{{ defaultNr }}</p>
+      <div class="search-number-container">
         <form action="">
-          <input type="text" class="text-center" placeholder="Nummer suchen" />
+          <input
+            type="text"
+            class="form-control text-center"
+            placeholder="Nummer suchen"
+            (keydown.enter)="navTo($event)" />
         </form>
-      </div>
-      <div class="slidebutton-container">
-        <button class="carousel-control-next mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-          <span class="visually-hidden">Nächste Nummer</span>
-        </button>
       </div>
     </div>
     <div class="comment-container">
@@ -49,19 +55,21 @@
       </div>
     </div>
   </div>
-  <div class="section-2">
+  <div class="section-2 mt-4">
     <form (ngSubmit)="add()" [formGroup]="submitForm" class="w-100">
       <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col" class="text-center">Nr</th>
-            <th scope="col" class="text-center">Art</th>
-            <th scope="col" class="text-center">Marke</th>
-            <th scope="col" class="text-center">Größe</th>
-            <th scope="col" class="text-center">Farbe</th>
+            <th scope="col" class="text-center">Art <span class="text-danger">*</span></th>
+            <th scope="col" class="text-center">Marke <span class="text-danger">*</span></th>
+            <th scope="col" class="text-center">Größe <span class="text-danger">*</span></th>
+            <th scope="col" class="text-center">Farbe <span class="text-danger">*</span></th>
             <th scope="col" class="text-center">Sonstiges</th>
-            <th scope="col" class="text-center">Max-Preis</th>
-            <th scope="col" class="text-center">Min-Preis</th>
+            <th scope="col" class="text-center">Preis <span class="text-danger">*</span></th>
+            <!--is namend as "max", but has the label "Preis"-->
+            <th scope="col" class="text-center">VB</th>
+            <!--is namend as "min", but has the label "VB"-->
             <th scope="col" class="text-center">Kasse</th>
             <th></th>
           </tr>
@@ -78,7 +86,7 @@
             <td class="fw-semibold text-center">{{ good.min }}</td>
             <td class="fw-semibold text-center">{{ good.cash }}</td>
             <td>
-              <div class="icon-container-pencil-trash bg-white">
+              <div class="icon-container-pencil-trash">
                 <button type="button" (click)="editRow(good, i)" class="btn btn-primary align-middle text-center">
                   <i class="bi bi-pencil"></i>
                 </button>
@@ -92,30 +100,60 @@
           <tr *ngIf="archivedGoods.length !== charArray.length">
             <th>{{ defaultNr }}-{{ getRow(archivedGoods.length) }}</th>
             <td class="classification-td">
-              <input type="text" id="classification-col" class="form-control" formControlName="classification" />
+              <input
+                type="text"
+                id="classification-col"
+                class="form-control"
+                formControlName="classification"
+                [ngClass]="{
+                  'is-invalid': !submitForm.get('classification')?.valid && submitForm.get('classification')?.touched,
+                  'is-valid': submitForm.get('classification')?.valid && submitForm.get('classification')?.touched
+                }" />
+              <label for="classification-col" class="visually-hidden">Art</label>
               <datalist id="classification-col">
                 <option [value]="classification" *ngFor="let classification of classificationList"></option>
               </datalist>
-
-              <label for="classification-col" class="visually-hidden">Art</label>
             </td>
             <td class="brand-td">
-              <input type="text" id="brand-col" class="form-control" formControlName="brand" />
+              <input
+                type="text"
+                id="brand-col"
+                class="form-control"
+                formControlName="brand"
+                [ngClass]="{
+                  'is-invalid': !submitForm.get('brand')?.valid && submitForm.get('brand')?.touched,
+                  'is-valid': submitForm.get('brand')?.valid && submitForm.get('brand')?.touched
+                }" />
+              <label for="brand-col" class="visually-hidden">Marke</label>
               <datalist id="brand-col">
                 <option [value]="brand" *ngFor="let brand of brandList"></option>
               </datalist>
-
-              <label for="brand-col" class="visually-hidden">Marke</label>
             </td>
             <td class="size-td">
-              <input type="text" id="size-col" class="form-control" formControlName="size" />
+              <input
+                type="text"
+                id="size-col"
+                class="form-control"
+                formControlName="size"
+                [ngClass]="{
+                  'is-invalid': !submitForm.get('size')?.valid && submitForm.get('size')?.touched,
+                  'is-valid': submitForm.get('size')?.valid && submitForm.get('size')?.touched
+                }" />
               <label for="size-col" class="visually-hidden">Größe</label>
               <datalist id="data-size">
                 <option [value]="size" *ngFor="let size of sizeList"></option>
               </datalist>
             </td>
             <td class="color-td">
-              <input type="text" id="color-col" class="form-control" formControlName="color" />
+              <input
+                type="text"
+                id="color-col"
+                class="form-control"
+                formControlName="color"
+                [ngClass]="{
+                  'border-danger': !submitForm.get('color')?.valid && submitForm.get('color')?.touched,
+                  'border-success': submitForm.get('color')?.valid && submitForm.get('color')?.touched
+                }" />
               <label for="color-col" class="visually-hidden">Farbe</label>
             </td>
             <td class="other-td">
@@ -123,22 +161,32 @@
               <label for="other-col" class="visually-hidden">Sonstiges</label>
             </td>
             <td class="max-td">
-              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" formControlName="max" />
-              <label for="max-col" class="visually-hidden">Max</label>
+              <input
+                type="text"
+                id="max-col"
+                min="0"
+                inputmode="numeric"
+                class="form-control"
+                formControlName="max"
+                [ngClass]="{
+                  'border-danger': !submitForm.get('max')?.valid && submitForm.get('max')?.touched,
+                  'border-success': submitForm.get('max')?.valid && submitForm.get('max')?.touched
+                }" />
+              <label for="max-col" class="visually-hidden">Preis</label>
             </td>
             <td class="min-td">
               <input type="text" id="min-col" min="0" class="form-control" formControlName="min" />
-              <label for="min-col" class="visually-hidden">Min</label>
+              <label for="min-col" class="visually-hidden">VB</label>
             </td>
             <td class="cash-td">
               <input type="text" id="cash-col" class="form-control" formControlName="cash" />
               <label for="cash-col" class="visually-hidden">Kasse</label>
             </td>
             <td>
-              <div class="icon-container bg-white">
+              <div class="icon-container">
                 <button
                   type="submit"
-                  [disabled]="archivedGoods.length === charArray.length"
+                  [disabled]="archivedGoods.length === charArray.length || !submitForm.valid"
                   class="btn btn-primary align-middle text-center">
                   <i class="bi bi-check-lg"></i>
                 </button>
@@ -146,7 +194,7 @@
             </td>
           </tr>
         </tbody>
-        <tfoot>
+        <tfoot id="footer">
           <tr>
             <td colspan="9" class="pt-5">
               <div class="d-flex justify-content-end align-items-center">
@@ -154,7 +202,7 @@
                 <div class="pay-field me-2"></div>
 
                 <div>
-                  <button type="button" class="btn btn-primary me-2">Abschicken</button>
+                  <button type="button" class="submitButton btn btn-primary me-2">Abschicken</button>
                 </div>
               </div>
             </td>
