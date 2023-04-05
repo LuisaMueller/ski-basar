@@ -23,19 +23,19 @@
   </nav>
   <div class="section-1">
     <div class="nummerslider-container carousel slide">
-      <div class="slidbutton-container">
+      <div class="slidebutton-container">
         <button class="carousel-control-prev mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
           <span class="visually-hidden">Previous</span>
         </button>
       </div>
       <div class="section-1-main-container">
-        <p class="text-center">160</p>
+        <p class="text-center">{{ defaultNr }}</p>
         <form action="">
           <input type="text" class="text-center" placeholder="Nummer suchen" />
         </form>
       </div>
-      <div class="slidbutton-container">
+      <div class="slidebutton-container">
         <button class="carousel-control-next mb-3" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
           <span class="carousel-control-next-icon"></span>
           <span class="visually-hidden">Nächste Nummer</span>
@@ -44,133 +44,121 @@
     </div>
     <div class="comment-container">
       <div class="form-floating">
-        <!-- <i type="text" class="form-control" id="floatingInput" aria-describedby="emailHelp" /> -->
-        <!-- <textarea id="floatingInput" class="comment-field form-control" placeholder="MOin "></textarea>
-        <label for="floatingInput" class="visually-hidden">Notizen</label> -->
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
-        <label for="floatingTextarea2">Notiz zur Nummer:</label>
+        <textarea class="form-control" placeholder="Leave a comment here" id="noteField"></textarea>
+        <label for="noteField">Notiz zur Nummer:</label>
       </div>
     </div>
   </div>
   <div class="section-2">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">Nr</th>
-          <th scope="col" class="text-center">Art</th>
-          <th scope="col" class="text-center">Marke</th>
-          <th scope="col" class="text-center">Größe</th>
-          <th scope="col" class="text-center">Farbe</th>
-          <th scope="col" class="text-center">Sonstiges</th>
-          <th scope="col" class="text-center">Max-Preis</th>
-          <th scope="col" class="text-center">Min-Preis</th>
-          <th scope="col" class="text-center">Kasse</th>
-        </tr>
-      </thead>
-      <tbody class="table align-middle">
-        <tr>
-          <th scope="row" class="text-center number">160-A</th>
-          <td class="data-td">
-            <form action="">
-              <input type="text" list="data-art" id="art-col" class="form-control" />
-              <datalist id="data-art">
-                <option value="Chocolate"></option>
-                <option value="Coconut"></option>
-                <option value="Mint"></option>
-                <option value="Strawberry"></option>
-                <option value="Vanilla"></option>
+    <form (ngSubmit)="add()" [formGroup]="submitForm">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Nr</th>
+            <th scope="col" class="text-center">Art</th>
+            <th scope="col" class="text-center">Marke</th>
+            <th scope="col" class="text-center">Größe</th>
+            <th scope="col" class="text-center">Farbe</th>
+            <th scope="col" class="text-center">Sonstiges</th>
+            <th scope="col" class="text-center">Max-Preis</th>
+            <th scope="col" class="text-center">Min-Preis</th>
+            <th scope="col" class="text-center">Kasse</th>
+          </tr>
+        </thead>
+        <tbody class="table align-middle">
+          <tr *ngFor="let good of goodList; index as i">
+            <th scope="row">{{ good.number }}</th>
+            <td class="fw-semibold text-center">{{ good.classification }}</td>
+            <td class="fw-semibold text-center">{{ good.brand }}</td>
+            <td class="fw-semibold text-center">{{ good.size }}</td>
+            <td class="fw-semibold text-center">{{ good.color }}</td>
+            <td class="fw-semibold text-center">{{ good.other }}</td>
+            <td class="fw-semibold text-center">{{ good.max }}</td>
+            <td class="fw-semibold text-center">{{ good.min }}</td>
+            <td class="fw-semibold text-center">{{ good.cash }}</td>
+            <td>
+              <div class="icon-container-pencil-trash bg-white">
+                <button type="button" (click)="editRow(good, i)" class="btn btn-primary align-middle text-center">
+                  <i class="bi bi-pencil"></i>
+                </button>
+
+                <button type="button" (click)="deleteRow(i)" class="btn btn-danger align-middle text-center mt-2">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>{{ defaultNr }}-{{ getRow(goodList.length) }}</th>
+            <td class="classification-td">
+              <input type="text" id="classification-col" class="form-control" formControlName="classification" />
+              <datalist id="classification-col">
+                <option [value]="classification" *ngFor="let classification of classificationList"></option>
               </datalist>
 
-              <label for="art-col" class="visually-hidden">Art</label>
-            </form>
-          </td>
-          <td class="label-td">
-            <form action="">
-              <input type="text" list="data-label" id="label-col" class="form-control" />
-              <datalist id="data-label">
-                <option value="Chocolate"></option>
-                <option value="Coconut"></option>
-                <option value="Mint"></option>
-                <option value="Strawberry"></option>
-                <option value="Vanilla"></option>
+              <label for="classification-col" class="visually-hidden">Art</label>
+            </td>
+            <td class="brand-td">
+              <input type="text" id="brand-col" class="form-control" formControlName="brand" />
+              <datalist id="brand-col">
+                <option [value]="brand" *ngFor="let brand of brandList"></option>
               </datalist>
 
-              <label for="label-col" class="visually-hidden">Marke</label>
-            </form>
-          </td>
-          <td class="size-td">
-            <form action="">
-              <input type="text" id="size-col" class="form-control" />
+              <label for="brand-col" class="visually-hidden">Marke</label>
+            </td>
+            <td class="size-td">
+              <input type="text" id="size-col" class="form-control" formControlName="size" />
               <label for="size-col" class="visually-hidden">Größe</label>
-            </form>
-          </td>
-          <td class="color-td">
-            <form action="">
-              <input type="text" id="color-col" class="form-control" />
+              <datalist id="data-size">
+                <option [value]="size" *ngFor="let size of sizeList"></option>
+              </datalist>
+            </td>
+            <td class="color-td">
+              <input type="text" id="color-col" class="form-control" formControlName="color" />
               <label for="color-col" class="visually-hidden">Farbe</label>
-            </form>
-          </td>
-          <td class="other-td">
-            <form action="">
-              <input type="text" id="other-col" class="form-control" />
+            </td>
+            <td class="other-td">
+              <input type="text" id="other-col" class="form-control" formControlName="label" formControlName="other" />
               <label for="other-col" class="visually-hidden">Sonstiges</label>
-            </form>
-          </td>
-          <td class="max-td">
-            <form action="">
-              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" />
+            </td>
+            <td class="max-td">
+              <input type="text" id="max-col" min="0" inputmode="numeric" class="form-control" formControlName="max" />
               <label for="max-col" class="visually-hidden">Max</label>
-            </form>
-          </td>
-          <td class="min-td">
-            <form action="">
-              <input type="text" id="min-col" min="0" class="form-control" />
+            </td>
+            <td class="min-td">
+              <input type="text" id="min-col" min="0" class="form-control" formControlName="min" />
               <label for="min-col" class="visually-hidden">Min</label>
-            </form>
-          </td>
-          <td class="cash-td">
-            <form action="">
-              <input type="text" id="cash-col" class="form-control" />
+            </td>
+            <td class="cash-td">
+              <input type="text" id="cash-col" class="form-control" formControlName="cash" />
               <label for="cash-col" class="visually-hidden">Kasse</label>
-            </form>
-          </td>
-          <td>
-            <div class="icon-container">
-              <i class="bi bi-plus-circle-fill fs-4"></i>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="9" class="pt-5">
-            <div class="d-flex justify-content-end align-items-center">
-              <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
-              <div class="pay-field me-2"></div>
-              <div>
-                <button type="button" class="btn btn-primary me-2">Bearbeiten</button>
+            </td>
+            <td>
+              <div class="icon-container bg-white">
+                <button type="submit" class="btn btn-primary align-middle text-center">
+                  <i class="bi bi-check-lg"></i>
+                </button>
               </div>
-              <div>
-                <button type="button" class="btn btn-primary me-2">Speichern</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="9" class="pt-5">
+              <div class="d-flex justify-content-end align-items-center">
+                <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
+                <div class="pay-field me-2"></div>
+
+                <div>
+                  <button type="button" class="btn btn-primary me-2">Abschicken</button>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
   </div>
-  <!-- <div class="section-3 container mt-5">
-    <div class="section-3-container pt-3">
-      <div class="pay-container">
-        <p>Zu zahlende Gebühr</p>
-        <div class="pay-field"></div>
-      </div>
-      <div class="btn-container">
-        <button type="button" class="btn btn-primary">Bearbeiten</button>
-        <button type="button" class="btn btn-primary">Speichern</button>
-      </div>
-    </div>
-  </div> -->
   <div class="mountain-left"></div>
   <div class="mountain-right"></div>
 </div>
