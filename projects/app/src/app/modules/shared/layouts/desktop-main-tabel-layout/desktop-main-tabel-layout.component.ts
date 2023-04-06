@@ -66,6 +66,8 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     'AZ',
   ];
   defaultNr: number = 1;
+  fee: number = 0;
+  deletionHint: string = '';
   classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
@@ -87,9 +89,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       size: new FormControl(null, Validators.required),
       color: new FormControl(null, Validators.required),
       other: new FormControl(null),
-      max: new FormControl(null, [Validators.required, Validators.min(1)]),
-      min: new FormControl(null),
-      cash: new FormControl(null),
+      max: new FormControl(null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$'),
+      ]),
+      min: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
+      cash: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
     });
   }
   // find() {
@@ -121,6 +127,10 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
         if (index > -1) {
           this.goodList.splice(deleteIndex, 1);
         }
+        //TODO: der betrachtet immer nur eine Ziffer vor dem Komma!!!!!
+        if (this.deletionHint === '') {
+          this.deletionHint = good.number;
+        } else this.deletionHint = this.deletionHint + ', ' + good.number;
       }
     });
   }
@@ -143,9 +153,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
-    this.submitForm.reset();
-    console.log(document.body.scrollHeight);
+    console.log(input.max);
+    console.log('war oder falsch: ' + (input.max > '4,99'));
 
+    if (input.max > '4,99') {
+      this.fee = this.fee + 1;
+    }
+    this.submitForm.reset();
     this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
   }
 

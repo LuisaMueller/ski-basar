@@ -13,7 +13,13 @@
         id="classificationInput"
         formControlName="classification"
         placeholder="Art"
-        [value]="content.classification" />
+        [value]="content.classification"
+        [ngClass]="{
+          'border-danger': !editForm.get('classification')?.valid,
+          'is-invalid': !editForm.get('classification')?.valid && editForm.get('classification')?.touched,
+          'is-valid': editForm.get('classification')?.valid && editForm.get('classification')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
       <label for="classificationInput">Art</label>
     </div>
     <div class="form-floating mb-3">
@@ -23,7 +29,13 @@
         id="brandInput"
         formControlName="brand"
         placeholder="Marke"
-        [value]="content.brand" />
+        [value]="content.brand"
+        [ngClass]="{
+          'border-danger': !editForm.get('brand')?.valid,
+          'is-invalid': !editForm.get('brand')?.valid && editForm.get('brand')?.touched,
+          'is-valid': editForm.get('brand')?.valid && editForm.get('brand')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
       <label for="brandInput">Marke</label>
     </div>
     <div class="form-floating mb-3">
@@ -33,7 +45,13 @@
         id="sizeInput"
         formControlName="size"
         placeholder="Größe"
-        [value]="content.size" />
+        [value]="content.size"
+        [ngClass]="{
+          'border-danger': !editForm.get('size')?.valid,
+          'is-invalid': !editForm.get('size')?.valid && editForm.get('size')?.touched,
+          'is-valid': editForm.get('size')?.valid && editForm.get('size')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
       <label for="sizeInput">Größe</label>
     </div>
     <div class="form-floating mb-3">
@@ -43,7 +61,13 @@
         id="colorInput"
         formControlName="color"
         placeholder="Farbe"
-        [value]="content.color" />
+        [value]="content.color"
+        [ngClass]="{
+          'border-danger': !editForm.get('color')?.valid,
+          'is-invalid': !editForm.get('color')?.valid && editForm.get('color')?.touched,
+          'is-valid': editForm.get('color')?.valid && editForm.get('color')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
       <label for="colorInput">Farbe</label>
     </div>
     <div class="form-floating mb-3">
@@ -53,7 +77,11 @@
         id="otherInput"
         formControlName="other"
         placeholder="Sonstiges"
-        [value]="content.other" />
+        [value]="content.other"
+        [ngClass]="{
+          'is-invalid': !editForm.get('other')?.valid && editForm.get('other')?.touched,
+          'is-valid': editForm.get('other')?.valid && editForm.get('other')?.touched
+        }" />
       <label for="otherInput">Sonstiges</label>
     </div>
     <div class="form-floating mb-3">
@@ -61,9 +89,16 @@
         type="text"
         class="form-control rounded-4 border-primary"
         id="maxInput"
-        formControlName="max"
         placeholder="Max-Preis"
-        [value]="content.max" />
+        [value]="content.max"
+        formControlName="max"
+        [ngClass]="{
+          'border-danger': !editForm.get('max')?.valid,
+          'is-invalid': !editForm.get('max')?.valid && editForm.get('max')?.touched,
+          'is-valid': editForm.get('max')?.valid && editForm.get('max')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
+
       <label for="maxInput">Max-Preis</label>
     </div>
     <div class="form-floating mb-3">
@@ -73,7 +108,12 @@
         id="minInput"
         formControlName="min"
         placeholder="Min-Preis"
-        [value]="content.min" />
+        [value]="content.min"
+        [ngClass]="{
+          'is-invalid': !editForm.get('min')?.valid && editForm.get('min')?.touched,
+          'is-valid': editForm.get('min')?.valid && editForm.get('min')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
       <label for="minInput">Min-Preis</label>
     </div>
     <div class="form-floating mb-3">
@@ -83,11 +123,18 @@
         id="cashInput"
         formControlName="cash"
         placeholder="Kasse"
-        [value]="content.cash" />
+        [value]="content.cash"
+        [ngClass]="{
+          'is-invalid': !editForm.get('cash')?.valid && editForm.get('cash')?.touched,
+          'is-valid': editForm.get('cash')?.valid && editForm.get('cash')?.touched
+        }" />
+      <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
       <label for="cashInput">Kasse</label>
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary align-middle text-center">Speichern</button>
+      <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary align-middle text-center">
+        Speichern
+      </button>
     </div>
   </form>
 </div>
