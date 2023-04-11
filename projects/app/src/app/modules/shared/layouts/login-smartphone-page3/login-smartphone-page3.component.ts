@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '@lenne.tech/ng-base/shared';
@@ -9,7 +9,7 @@ import { Customer } from '../../../core/models/customer.model';
   templateUrl: './login-smartphone-page3.component.html',
   styleUrls: ['./login-smartphone-page3.component.scss'],
 })
-export class LoginSmartphonePage3Component {
+export class LoginSmartphonePage3Component implements OnInit {
   customer: Customer;
   changeForm: FormGroup;
   constructor(private storageService: StorageService, private router: Router) {}
