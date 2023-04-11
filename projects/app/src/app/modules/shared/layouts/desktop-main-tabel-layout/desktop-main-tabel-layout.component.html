@@ -246,7 +246,7 @@
           <tr>
             <td colspan="9">
               <div class="d-flex justify-content-end align-items-center">
-                <p class="me-2 mb-0 text-primary">Gelöschte Artikel:</p>
+                <p class="me-2 mb-0 text-primary" [hidden]="deletionHint === ''">Gelöschte Artikel:</p>
                 {{ deletionHint }}
               </div>
             </td>

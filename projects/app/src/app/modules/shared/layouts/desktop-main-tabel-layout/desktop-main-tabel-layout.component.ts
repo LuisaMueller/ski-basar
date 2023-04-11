@@ -127,7 +127,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
         if (index > -1) {
           this.goodList.splice(deleteIndex, 1);
         }
-        //TODO: der betrachtet immer nur eine Ziffer vor dem Komma!!!!!
         if (this.deletionHint === '') {
           this.deletionHint = good.number;
         } else this.deletionHint = this.deletionHint + ', ' + good.number;
@@ -153,10 +152,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
-    console.log(input.max);
-    console.log('war oder falsch: ' + (input.max > '4,99'));
 
-    if (input.max > '4,99') {
+    var regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:.[0-9]{1,2})?$');
+    if (regex.test(input.max)) {
       this.fee = this.fee + 1;
     }
     this.submitForm.reset();
