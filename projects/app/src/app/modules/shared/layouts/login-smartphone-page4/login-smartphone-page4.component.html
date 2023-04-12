@@ -3,9 +3,9 @@
     <img src="\assets\images\SkiClubOlpeLogo11-_2_.png" alt="Logo Skiclub Olpe" />
   </div>
 
-  <h1 class="text-primary text-center pb-3 pt-3 headline">42</h1>
+  <h1 class="text-primary text-center pb-3 pt-3 headline">{{ customer.number }}</h1>
 
-  <form action="" class="form-input">
+  <div class="form-input">
     <div>
       <h5 class="mb-5 nextstep">Bitte zeigen Sie diese Seite gleich an der Annahme vor!</h5>
       <h5>Weitere Schritte im Überblick:</h5>
@@ -22,12 +22,12 @@
         <li>Sie erhalten nach erfolgreicher Annahme eine E-Mail mit der Bestätigung.</li>
         <li>Wir versuchen die Artikel für Sie auf dem Ski-Basar zu verkaufen.</li>
         <li>
-          Alle nicht verkauften Artikel und/oder der Verkaufserlös werden am Sonntag zwischen 16:30 und 17:30 Uhr von
-          Ihnen hier abgeholt.
+          Alle nicht verkauften Artikel und/oder der Verkaufserlös werden am Sonntag zwischen {{ starttime }} und
+          {{ endtime }} Uhr von Ihnen hier abgeholt.
         </li>
       </ol>
     </div>
-  </form>
+  </div>
 </div>
 <div class="mountain-left"></div>
 <div class="mountain-right"></div>

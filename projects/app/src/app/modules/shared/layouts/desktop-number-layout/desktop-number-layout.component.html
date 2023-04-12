@@ -25,19 +25,49 @@
   <div class="section-title pt-3 container">
     <h1 class="head">Manuell Kundennummer anlegen</h1>
   </div>
-  <div class="section-main container">
-    <div class="section-input">
-      <form action="">
+  <div class="section-main container mt-5">
+    <form (ngSubmit)="navToGetNumber()" [formGroup]="customerForm" class="form-input">
+      <div class="section-input">
         <div class="form-floating mb-3">
-          <input type="firstName" class="form-control rounded-4 border-primary" id="firstName" placeholder="Max" />
+          <input
+            type="firstName"
+            class="form-control rounded-4 border-primary"
+            id="firstName"
+            placeholder="Max"
+            formControlName="firstname"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('firstname')?.valid && customerForm.get('firstname')?.touched,
+              'is-valid': customerForm.get('firstname')?.valid && customerForm.get('firstname')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="firstName">Vorname <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3">
-          <input type="lastName" class="form-control rounded-4 border-primary" id="lastName" placeholder="Mustermann" />
+          <input
+            type="lastName"
+            class="form-control rounded-4 border-primary"
+            id="lastName"
+            placeholder="Mustermann"
+            formControlName="lastname"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('lastname')?.valid && customerForm.get('lastname')?.touched,
+              'is-valid': customerForm.get('lastname')?.valid && customerForm.get('lastname')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="lastName">Nachname <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3">
-          <input type="street" class="form-control rounded-4 border-primary" id="street" placeholder="Musterstraße 1" />
+          <input
+            type="street"
+            class="form-control rounded-4 border-primary"
+            id="street"
+            placeholder="Musterstraße 1"
+            formControlName="street"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('street')?.valid && customerForm.get('street')?.touched,
+              'is-valid': customerForm.get('street')?.valid && customerForm.get('street')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="street">Straße, Hausnummer <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3">
@@ -45,7 +75,13 @@
             type="postCode"
             class="form-control rounded-4 border-primary"
             id="postCode"
-            placeholder="12345 Musterstadt" />
+            placeholder="12345 Musterstadt"
+            formControlName="postcode"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('postcode')?.valid && customerForm.get('postcode')?.touched,
+              'is-valid': customerForm.get('postcode')?.valid && customerForm.get('postcode')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="postCode">PLZ, Ort <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3">
@@ -53,11 +89,27 @@
             type="phoneNumber"
             class="form-control rounded-4 border-primary"
             id="phoneNumber"
-            placeholder="0123456789" />
+            placeholder="0123456789"
+            formControlName="phonenumber"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('phonenumber')?.valid && customerForm.get('phonenumber')?.touched,
+              'is-valid': customerForm.get('phonenumber')?.valid && customerForm.get('phonenumber')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="phoneNumber">Telefonnummer <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-3 ml-4">
-          <input type="email" class="form-control rounded-4 border-primary" id="email" placeholder="name@example.com" />
+          <input
+            type="email"
+            class="form-control rounded-4 border-primary"
+            id="email"
+            placeholder="name@example.com"
+            formControlName="mail"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('mail')?.valid && customerForm.get('mail')?.touched,
+              'is-valid': customerForm.get('mail')?.valid && customerForm.get('mail')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="email">E-Mail <span class="text-danger">*</span></label>
         </div>
         <div class="form-floating mb-2 ml-4">
@@ -65,14 +117,18 @@
             type="password"
             class="form-control rounded-4 border-primary"
             id="password"
-            placeholder="Passwort123" />
+            placeholder="Passwort123"
+            formControlName="password"
+            [ngClass]="{
+              'is-invalid': !customerForm.get('password')?.valid && customerForm.get('password')?.touched,
+              'is-valid': customerForm.get('password')?.valid && customerForm.get('password')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="password">Passwort (nur für Helfer)</label>
         </div>
         <p><span class="text-danger">*</span> Pflichtfeld</p>
-      </form>
-    </div>
-    <div class="section-accept">
-      <form action="">
+      </div>
+      <div class="section-accept">
         <div class="data-area">
           <h5 class="mt-1 text-center">Hinweise des Ski-Club Olpe 1976 e.V.</h5>
           <ul>
@@ -102,12 +158,19 @@
           </div>
         </div>
         <div class="form-check m-3">
-          <input class="form-check-input border-primary" type="checkbox" value="" id="flexCheckAccept" />
+          <input
+            class="form-check-input border-primary"
+            type="checkbox"
+            value=""
+            id="flexCheckAccept"
+            formControlName="accept" />
           <label class="form-check-label" for="flexCheckAccept">Ich akzeptiere die oben stehenden Hinweise.</label>
         </div>
-        <button type="button" class="btn btn-primary w-100 py-3 rounded-4">Anmelden</button>
-      </form>
-    </div>
+        <button type="submit" class="btn btn-primary w-100 py-3 rounded-4" [disabled]="!customerForm.valid">
+          Anmelden
+        </button>
+      </div>
+    </form>
   </div>
 
   <div class="mountain-left"></div>

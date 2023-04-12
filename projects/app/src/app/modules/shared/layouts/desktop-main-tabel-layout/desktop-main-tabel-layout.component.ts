@@ -158,6 +158,8 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       this.fee = this.fee + 1;
     }
     this.submitForm.reset();
+    console.log(document.body.scrollHeight);
+
     this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
   }
 
