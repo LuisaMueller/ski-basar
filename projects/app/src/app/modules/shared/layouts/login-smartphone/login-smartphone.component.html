@@ -12,10 +12,10 @@
         class="form-control rounded-4 border-primary"
         id="firstName"
         placeholder="Max"
-        formControlName="firstname"
+        formControlName="firstName"
         [ngClass]="{
-          'is-invalid': !dataForm.get('firstname')?.valid && dataForm.get('firstname')?.touched,
-          'is-valid': dataForm.get('firstname')?.valid && dataForm.get('firstname')?.touched
+          'is-invalid': !dataForm.get('firstName')?.valid && dataForm.get('firstName')?.touched,
+          'is-valid': dataForm.get('firstName')?.valid && dataForm.get('firstName')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
       <label for="firstName">Vorname <span class="text-danger">*</span></label>
@@ -26,10 +26,10 @@
         class="form-control rounded-4 border-primary"
         id="lastName"
         placeholder="Mustermann"
-        formControlName="lastname"
+        formControlName="lastName"
         [ngClass]="{
-          'is-invalid': !dataForm.get('lastname')?.valid && dataForm.get('lastname')?.touched,
-          'is-valid': dataForm.get('lastname')?.valid && dataForm.get('lastname')?.touched
+          'is-invalid': !dataForm.get('lastName')?.valid && dataForm.get('lastName')?.touched,
+          'is-valid': dataForm.get('lastName')?.valid && dataForm.get('lastName')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
       <label for="lastName">Nachname <span class="text-danger">*</span></label>
@@ -82,10 +82,10 @@
         class="form-control rounded-4 border-primary"
         id="email"
         placeholder="name@example.com"
-        formControlName="mail"
+        formControlName="email"
         [ngClass]="{
-          'is-invalid': !dataForm.get('mail')?.valid && dataForm.get('mail')?.touched,
-          'is-valid': dataForm.get('mail')?.valid && dataForm.get('mail')?.touched
+          'is-invalid': !dataForm.get('email')?.valid && dataForm.get('email')?.touched,
+          'is-valid': dataForm.get('email')?.valid && dataForm.get('email')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
       <label for="email">E-Mail <span class="text-danger">*</span></label>

@@ -27,10 +27,10 @@
         class="form-control rounded-4 border-primary"
         id="email"
         placeholder="name@example.com"
-        formControlName="mail"
+        formControlName="email"
         [ngClass]="{
-          'is-invalid': !changeForm.get('mail')?.valid && changeForm.get('mail')?.touched,
-          'is-valid': changeForm.get('mail')?.valid && changeForm.get('mail')?.touched
+          'is-invalid': !changeForm.get('email')?.valid && changeForm.get('email')?.touched,
+          'is-valid': changeForm.get('email')?.valid && changeForm.get('email')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
       <label for="email">E-Mail </label>
