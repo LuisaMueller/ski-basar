@@ -153,7 +153,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
 
-    var regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:.[0-9]{1,2})?$');
+    const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:.[0-9]{1,2})?$');
     if (regex.test(input.max)) {
       this.fee = this.fee + 1;
     }
