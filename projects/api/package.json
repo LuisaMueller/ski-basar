@@ -58,7 +58,7 @@
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
     "start": "npm run migrate:up && npm run start:local",
-    "start:local": "NODE_ENV=local nodemon --host=0.0.0.0",
+    "start:local": "nodemon --host=0.0.0.0",
     "start:debug": "nodemon --config nodemon-debug.json",
     "start:dev": "nodemon",
     "start:nodemon": "ts-node -r tsconfig-paths/register src/main.ts",
