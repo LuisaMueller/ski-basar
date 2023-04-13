@@ -56,4 +56,11 @@ export class ApiService extends GraphQLPlusService {
       type: GraphQLRequestType.MUTATION,
     });
   }
+  getCustomer() {
+    return this.graphQl('getCustomer', {
+      arguments: { id: '6436b5d8a93ceb7573faa970' },
+      fields: ['firstName', 'lastName'],
+      type: GraphQLRequestType.QUERY,
+    });
+  }
 }
