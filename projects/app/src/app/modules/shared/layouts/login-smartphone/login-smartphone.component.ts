@@ -11,6 +11,7 @@ import { StorageService } from '@lenne.tech/ng-base/shared';
 export class LoginSmartphoneComponent implements OnInit {
   defaultNr = 1;
   dataForm: FormGroup;
+  isCollapsed: boolean = true;
   constructor(private storageService: StorageService, private router: Router) {}
   ngOnInit() {
     this.dataForm = new FormGroup({

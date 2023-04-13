@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { DeleteTableModalComponent } from './layouts/delete-table-modal/delete-table-modal.component';
 import { DesktopGetNumberComponent } from './layouts/desktop-get-number/desktop-get-number.component';
@@ -21,6 +22,7 @@ import { UpdateTableModalComponent } from './layouts/update-table-modal/update-t
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbCollapseModule,
   ],
   declarations: [
     DesktopMainLoginLayoutComponent,
