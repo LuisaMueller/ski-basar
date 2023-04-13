@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">Auszahlung</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <p>
+    Verkaufswert: <span class="fw-bold">{{ payoutValue.toString().replace('.', ',') }}</span>
+  </p>
+  <p>
+    -10% Provision: <span class="fw-bold">{{ (payoutValue * 0.1).toString().replace('.', ',') }}</span>
+  </p>
+  <p class="text-danger">
+    Auszahlung: <span class="fw-bold">{{ (payoutValue * 0.9).toString().replace('.', ',') }}</span>
+  </p>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary align-middle text-center" (click)="sendSalesDocument()">
+      Verkaufsbeleg abschicken
+    </button>
+  </div>
+</div>

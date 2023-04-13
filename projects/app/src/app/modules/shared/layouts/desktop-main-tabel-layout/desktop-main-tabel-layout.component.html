@@ -251,6 +251,23 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td colspan="9" class="pt-5">
+              <div class="d-flex justify-content-end align-items-center">
+                <button type="button" class="submitButton btn border-primary me-2" (click)="calculatePayoutAmount()">
+                  Auszahlung
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-end align-items-center">
+                <p class="me-2 mb-0 text-primary" [hidden]="payoutHint === ''">Hinweis:</p>
+                {{ payoutHint }}
+              </div>
+            </td>
+          </tr>
         </tfoot>
       </table>
     </form>
