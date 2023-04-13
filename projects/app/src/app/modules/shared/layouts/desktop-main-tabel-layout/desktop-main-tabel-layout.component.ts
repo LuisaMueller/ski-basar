@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
+import { CalculatePayoutAmountModalComponent } from '../calculate-payout-amount-modal/calculate-payout-amount-modal.component';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 @Component({
@@ -68,6 +69,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   defaultNr: number = 1;
   fee: number = 0;
   deletionHint: string = '';
+  payoutAmount: number = 0;
+  lastCash: number = 0;
+  payoutHint: string = '';
   classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
@@ -115,6 +119,8 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.result.then(result => {
       this.goodList[index] = result;
       this.archivedGoods[index] = result;
+      //hier stimmt die Berechnung noch nicht, daher TODO für morgen:
+      this.payoutAmount = this.payoutAmount + parseFloat(result.cash.replace(',', '.'));
     });
   }
 
@@ -158,7 +164,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       this.fee = this.fee + 1;
     }
     this.submitForm.reset();
-    console.log(document.body.scrollHeight);
 
     this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
   }
@@ -170,5 +175,15 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   navTo(event: any) {
     this.router.navigate(['auth/main-desktop/' + event.target.value]);
     event.target.value = '';
+  }
+
+  calculatePayoutAmount() {
+    const modalRef = this.modalService.open(CalculatePayoutAmountModalComponent, { backdrop: 'static' });
+    modalRef.componentInstance.payoutValue = this.payoutAmount;
+    modalRef.result.then(result => {
+      if (result === 0.000001) {
+        this.payoutHint = 'Der Beleg wurde erfolgreich verschickt.';
+      }
+    });
   }
 }
