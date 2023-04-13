@@ -1,41 +1,31 @@
 <div class="body-login">
+  <img src="/assets/images/SkiClubOlpeLogo11-ohneSchrift.png" alt="Logo" class="background-image" />
   <div class="login-form">
     <form class="form-floating">
-      <h3 class="text-center mt-4">Anmeldung</h3>
+      <h3 class="text-center mt-5">Anmeldung</h3>
       <div class="form-floating mb-3 mt-4">
         <input
           type="email"
           class="form-control border-primary border-2 border"
           id="floatingInput"
-          placeholder="name@example.com" />
-        <label for="floatingInput">Vorname <span>*</span></label>
-      </div>
-      <div class="form-floating mb-3 mt-3">
-        <input
-          class="form-control border-primary border-2 border"
-          placeholder="Leave a comment here"
-          id="floatingTextarea" />
-        <label for="floatingTextarea">Nachname <span>*</span></label>
+          placeholder="name@example.com"
+          formControlName="email" />
+        <label for="floatingInput">E-Mail <span class="text-danger">*</span></label>
       </div>
       <div class="form-floating mb-3 mt-3">
         <input
           type="password"
           class="form-control border-primary border-2 border"
           id="floatingPassword"
-          placeholder="Password" />
-        <label for="floatingPassword">Passwort <span>*</span></label>
+          placeholder="Password"
+          formControlName="password" />
+        <label for="floatingPassword">Passwort <span class="text-danger">*</span></label>
       </div>
-      <p class="text-muted"><span>*</span>Pflichtfeld</p>
-      <button type="submit" class="btn btn-primary mt-1">Weiter</button>
+      <p class="text-muted"><span class="text-danger">*</span>Pflichtfeld</p>
+      <button type="submit" class="btn btn-primary mt-3">Weiter</button>
     </form>
   </div>
 
-  <div class="row background-field">
-    <div class="col-6 secondary-color"></div>
-    <div class="col-6 primary-color"></div>
-  </div>
-  <div class="row background-field">
-    <div class="col-5 secondary-color"></div>
-    <div class="col-7 primary-color"></div>
-  </div>
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
 </div>
