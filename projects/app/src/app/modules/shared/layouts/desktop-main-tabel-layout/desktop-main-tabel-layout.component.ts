@@ -116,12 +116,14 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   editRow(good: Good, index: number) {
     const modalRef = this.modalService.open(UpdateTableModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.content = good;
-    modalRef.result.then(result => {
-      this.goodList[index] = result;
-      this.archivedGoods[index] = result;
-      //hier stimmt die Berechnung noch nicht, daher TODO für morgen:
-      this.payoutAmount = this.payoutAmount + parseFloat(result.cash.replace(',', '.'));
-    });
+    modalRef.result
+      .then(result => {
+        this.goodList[index] = result;
+        this.archivedGoods[index] = result;
+        //hier stimmt die Berechnung noch nicht, daher TODO für morgen:
+        this.payoutAmount = this.payoutAmount + parseFloat(result.cash.replace(',', '.'));
+      })
+      .catch(error => {});
   }
 
   deleteRow(good: Good, index: number) {
@@ -180,10 +182,12 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   calculatePayoutAmount() {
     const modalRef = this.modalService.open(CalculatePayoutAmountModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.payoutValue = this.payoutAmount;
-    modalRef.result.then(result => {
-      if (result === 0.000001) {
-        this.payoutHint = 'Der Beleg wurde erfolgreich verschickt.';
-      }
-    });
+    modalRef.result
+      .then(result => {
+        if (result === 0.000001) {
+          this.payoutHint = 'Der Beleg wurde erfolgreich verschickt.';
+        }
+      })
+      .catch(error => {});
   }
 }
