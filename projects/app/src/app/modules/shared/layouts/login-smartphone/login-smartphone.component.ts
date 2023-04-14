@@ -15,19 +15,26 @@ export class LoginSmartphoneComponent implements OnInit {
   constructor(private storageService: StorageService, private router: Router) {}
   ngOnInit() {
     this.dataForm = new FormGroup({
-      firstname: new FormControl(null, Validators.required),
-      lastname: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
       street: new FormControl(null, Validators.required),
       postcode: new FormControl(null, Validators.required),
       phonenumber: new FormControl(null, Validators.required),
-      mail: new FormControl(null, Validators.required),
+      email: new FormControl(null, Validators.required),
       password: new FormControl(null),
     });
   }
 
   add() {
     const input = { ...this.dataForm.value };
-    this.storageService.save({ customer: input });
+    let clone = (({ password, ...x }) => x)(input);
+    if (input.password === '1234') {
+      clone.isHelper = true;
+    } else {
+      clone.isHelper = false;
+    }
+
+    this.storageService.save({ customer: clone });
     this.router.navigate(['auth/login-smartphone-2/']);
   }
 }

@@ -30,13 +30,16 @@
           </button>
         </div>
         <div>
-          <p class="text-center">{{ defaultNr }}</p>
+          <p class="text-center number-label">{{ defaultNr }}</p>
         </div>
         <div>
           <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr + 1)">
             <i class="bi bi-caret-right-fill"></i>
           </button>
         </div>
+      </div>
+      <div class="name-label-container">
+        <p class="text-center name-label">{{ customerName }}</p>
       </div>
       <div class="search-number-container">
         <form action="">

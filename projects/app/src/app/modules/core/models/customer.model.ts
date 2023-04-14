@@ -1,10 +1,11 @@
 export class Customer {
   number: number;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   street: string;
   postcode: string;
   phonenumber: string;
-  mail: string;
+  email: string;
   password?: string;
+  isHelper: boolean;
 }

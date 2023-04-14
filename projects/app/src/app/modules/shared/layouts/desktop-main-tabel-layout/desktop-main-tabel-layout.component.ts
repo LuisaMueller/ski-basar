@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
+import { ApiService } from '../../../core/services/api.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 @Component({
@@ -68,6 +69,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   defaultNr: number = 1;
   fee: number = 0;
   deletionHint: string = '';
+  customerName: string = '';
   classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
@@ -76,12 +78,17 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
+    private apiService: ApiService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((value: any) => {
       this.defaultNr = +value.id;
+      this.apiService.findList(this.defaultNr).subscribe(value1 => {
+        console.log(value1);
+        this.goodList = value1;
+      });
     });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
