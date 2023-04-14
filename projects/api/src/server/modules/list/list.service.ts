@@ -44,6 +44,10 @@ export class ListService extends CrudService<List, ListCreateInput, ListInput> {
    * Overwrites create method from CrudService
    */
   override async create(input: ListCreateInput, serviceOptions?: ServiceOptions): Promise<List> {
+    //Create number
+    const all = await this.mainDbModel.find();
+    input.number = all.length + 1;
+
     // Get new List
     const createdList = await super.create(input, serviceOptions);
 

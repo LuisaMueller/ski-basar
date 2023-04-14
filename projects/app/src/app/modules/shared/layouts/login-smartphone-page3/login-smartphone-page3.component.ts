@@ -27,9 +27,14 @@ export class LoginSmartphonePage3Component implements OnInit {
     const input = { ...this.customer, ...this.changeForm.value };
 
     this.apiService.createCustomer(input).subscribe(value => {
-      console.log(value);
-      // this.storageService.save({ customer: input });
-      // this.router.navigate(['auth/login-smartphone-4/']);
+      console.log('customer', value);
+      //Warenzettel erstellen
+      this.apiService.createList({ note: '', fee: '' }).subscribe(value => {
+        console.log('number', value.number);
+        //Nummer zurückgeben
+        this.storageService.save({ customer: { ...input, number: value.number } });
+        this.router.navigate(['auth/login-smartphone-4/']);
+      });
     });
   }
 }

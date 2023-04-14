@@ -22,6 +22,8 @@ export class LoginSmartphonePage2Component implements OnInit {
   }
 
   accept() {
-    this.router.navigate(['auth/login-smartphone-3/']);
+    if (this.acceptForm.value.accept) {
+      this.router.navigate(['auth/login-smartphone-3/']);
+    }
   }
 }

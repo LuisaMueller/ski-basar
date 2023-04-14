@@ -85,6 +85,10 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((value: any) => {
       this.defaultNr = +value.id;
+      this.apiService.findList(this.defaultNr).subscribe(value1 => {
+        console.log(value1);
+        this.goodList = value1;
+      });
     });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
@@ -168,16 +172,10 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
 
   navPrevNext(goodListNr: number) {
     this.router.navigate(['auth/main-desktop/' + goodListNr]);
-    this.apiService.getCustomer().subscribe(value => {
-      this.customerName = value.firstName + ' ' + value.lastName;
-    });
   }
 
   navTo(event: any) {
     this.router.navigate(['auth/main-desktop/' + event.target.value]);
     event.target.value = '';
-    this.apiService.getCustomer().subscribe(value => {
-      this.customerName = value.firstName + ' ' + value.lastName;
-    });
   }
 }

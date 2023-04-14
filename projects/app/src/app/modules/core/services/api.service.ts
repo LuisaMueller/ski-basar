@@ -8,7 +8,7 @@ export class ApiService extends GraphQLPlusService {
   createList(input: any) {
     return this.graphQl('createList', {
       arguments: { input },
-      fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'],
+      fields: ['id', 'number'],
       type: GraphQLRequestType.MUTATION,
     });
   }
@@ -21,20 +21,25 @@ export class ApiService extends GraphQLPlusService {
     });
   }
 
-  findLists() {
+  findList(number: number) {
     const filter: FindArgs = {
       filter: {
         singleFilter: {
-          field: 'id',
+          field: 'number',
           operator: ComparisonOperatorEnum.EQ,
-          not: true,
-          value: '',
+          value: number,
         },
       },
     };
     return this.graphQl('findLists', {
       arguments: filter,
-      fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'],
+      fields: [
+        'id',
+        'number',
+        { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        'note',
+        'fee',
+      ],
       type: GraphQLRequestType.QUERY,
     });
   }

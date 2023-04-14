@@ -1,11 +1,11 @@
-import { CoreInput, Restricted, RoleEnum } from '@lenne.tech/nest-server';
+import { CoreInput } from '@lenne.tech/nest-server';
 import { Field, InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
 
 /**
  * List input
  */
-@Restricted(RoleEnum.ADMIN)
+
 @InputType({ description: 'Input data to update an existing TableItem' })
 export class TableItemInput extends CoreInput {
   // ===================================================================================================================
@@ -15,7 +15,6 @@ export class TableItemInput extends CoreInput {
   /**
    * Number of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Number of TableItem',
     nullable: true,
@@ -26,7 +25,6 @@ export class TableItemInput extends CoreInput {
   /**
    * classification of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Classification of TableItem',
     nullable: true,
@@ -37,7 +35,6 @@ export class TableItemInput extends CoreInput {
   /**
    * brand of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Brand of TableItem',
     nullable: true,
@@ -48,7 +45,6 @@ export class TableItemInput extends CoreInput {
   /**
    * size of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Size of TableItem',
     nullable: true,
@@ -59,7 +55,6 @@ export class TableItemInput extends CoreInput {
   /**
    * color of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Color of TableItem',
     nullable: true,
@@ -70,7 +65,6 @@ export class TableItemInput extends CoreInput {
   /**
    * other of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Other of TableItem',
     nullable: true,
@@ -81,7 +75,6 @@ export class TableItemInput extends CoreInput {
   /**
    * prize of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Prize of TableItem',
     nullable: true,
@@ -92,7 +85,6 @@ export class TableItemInput extends CoreInput {
   /**
    * vb of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'VB of TableItem',
     nullable: true,
@@ -103,7 +95,6 @@ export class TableItemInput extends CoreInput {
   /**
    * cash of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Cash of TableItem',
     nullable: true,

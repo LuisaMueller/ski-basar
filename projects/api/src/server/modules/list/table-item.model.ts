@@ -1,4 +1,4 @@
-import { equalIds, mapClasses, Restricted, RoleEnum } from '@lenne.tech/nest-server';
+import { mapClasses } from '@lenne.tech/nest-server';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Schema as MongooseSchema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
@@ -10,7 +10,7 @@ export type TableItemDocument = TableItem & Document;
 /**
  * TableItem model
  */
-@Restricted(RoleEnum.ADMIN)
+
 @ObjectType({ description: 'TableItem' })
 @MongooseSchema({ timestamps: true })
 export class TableItem extends PersistenceModel {
@@ -21,7 +21,6 @@ export class TableItem extends PersistenceModel {
   /**
    * Number of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Number of TableItem',
     nullable: true,
@@ -32,7 +31,6 @@ export class TableItem extends PersistenceModel {
   /**
    * classification of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Classification of TableItem',
     nullable: true,
@@ -43,7 +41,6 @@ export class TableItem extends PersistenceModel {
   /**
    * brand of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Brand of TableItem',
     nullable: true,
@@ -54,7 +51,6 @@ export class TableItem extends PersistenceModel {
   /**
    * size of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Size of TableItem',
     nullable: true,
@@ -65,7 +61,6 @@ export class TableItem extends PersistenceModel {
   /**
    * color of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Color of TableItem',
     nullable: true,
@@ -76,7 +71,6 @@ export class TableItem extends PersistenceModel {
   /**
    * other of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Other of TableItem',
     nullable: true,
@@ -87,7 +81,6 @@ export class TableItem extends PersistenceModel {
   /**
    * prize of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Prize of TableItem',
     nullable: true,
@@ -98,7 +91,6 @@ export class TableItem extends PersistenceModel {
   /**
    * vb of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'VB of TableItem',
     nullable: true,
@@ -109,7 +101,6 @@ export class TableItem extends PersistenceModel {
   /**
    * cash of TableItem
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Cash of TableItem',
     nullable: true,
@@ -147,16 +138,6 @@ export class TableItem extends PersistenceModel {
    * Return undefined if the whole object should not be returned or throw an exception to stop the whole request
    */
   override securityCheck(user: User, force?: boolean) {
-    // In force mode or for admins everything is allowed
-    if (force || user?.hasRole(RoleEnum.ADMIN)) {
-      return this;
-    }
-
-    // Usually only the creator has access to the object
-    if (!equalIds(user, this.createdBy)) {
-      return undefined;
-    }
-
     // Check permissions for properties of this object and return the object afterwards
     return this;
   }

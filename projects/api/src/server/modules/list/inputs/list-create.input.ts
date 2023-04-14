@@ -1,4 +1,3 @@
-import { Restricted, RoleEnum } from '@lenne.tech/nest-server';
 import { Field, InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
 import { ListInput } from './list.input';
@@ -7,7 +6,7 @@ import { TableItemInput } from './table-item.input';
 /**
  * List create input
  */
-@Restricted(RoleEnum.ADMIN)
+
 @InputType({ description: 'Input data to create a new List' })
 export class ListCreateInput extends ListInput {
   // ===================================================================================================================
@@ -17,7 +16,6 @@ export class ListCreateInput extends ListInput {
   /**
    * Number of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'Number of List',
     nullable: true,
@@ -28,7 +26,6 @@ export class ListCreateInput extends ListInput {
   /**
    * TableItems of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => [TableItemInput], {
     description: 'TableItems of List',
     nullable: true,
@@ -49,7 +46,6 @@ export class ListCreateInput extends ListInput {
   /**
    * EditorId of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'EditorId of List',
     nullable: true,
@@ -60,7 +56,6 @@ export class ListCreateInput extends ListInput {
   /**
    * Note of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Note of List',
     nullable: true,
@@ -71,7 +66,6 @@ export class ListCreateInput extends ListInput {
   /**
    * Fee of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Fee of List',
     nullable: true,

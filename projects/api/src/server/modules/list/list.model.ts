@@ -1,4 +1,4 @@
-import { equalIds, mapClasses, Restricted, RoleEnum } from '@lenne.tech/nest-server';
+import { mapClasses } from '@lenne.tech/nest-server';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Schema as MongooseSchema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema } from 'mongoose';
@@ -11,7 +11,7 @@ export type ListDocument = List & Document;
 /**
  * List model
  */
-@Restricted(RoleEnum.ADMIN)
+
 @ObjectType({ description: 'List' })
 @MongooseSchema({ timestamps: true })
 export class List extends PersistenceModel {
@@ -22,7 +22,6 @@ export class List extends PersistenceModel {
   /**
    * Number of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => Number, {
     description: 'Number of List',
     nullable: true,
@@ -33,7 +32,6 @@ export class List extends PersistenceModel {
   /**
    * TableItems of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => [TableItem], {
     description: 'TableItems of List',
     nullable: true,
@@ -44,7 +42,6 @@ export class List extends PersistenceModel {
   /**
    * Editor of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => User, {
     description: 'Editor of List',
     nullable: true,
@@ -55,7 +52,6 @@ export class List extends PersistenceModel {
   /**
    * Note of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Note of List',
     nullable: true,
@@ -66,7 +62,6 @@ export class List extends PersistenceModel {
   /**
    * Fee of List
    */
-  @Restricted(RoleEnum.S_EVERYONE)
   @Field(() => String, {
     description: 'Fee of List',
     nullable: true,
@@ -104,16 +99,6 @@ export class List extends PersistenceModel {
    * Return undefined if the whole object should not be returned or throw an exception to stop the whole request
    */
   override securityCheck(user: User, force?: boolean) {
-    // In force mode or for admins everything is allowed
-    if (force || user?.hasRole(RoleEnum.ADMIN)) {
-      return this;
-    }
-
-    // Usually only the creator has access to the object
-    if (!equalIds(user, this.createdBy)) {
-      return undefined;
-    }
-
     // Check permissions for properties of this object and return the object afterwards
     return this;
   }

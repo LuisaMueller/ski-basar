@@ -4,14 +4,14 @@ import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { ListCreateInput } from './inputs/list-create.input';
 import { ListInput } from './inputs/list.input';
-import { FindAndCountListsResult } from './outputs/find-and-count-lists-result.output';
 import { List } from './list.model';
 import { ListService } from './list.service';
+import { FindAndCountListsResult } from './outputs/find-and-count-lists-result.output';
 
 /**
  * Resolver to process with List data
  */
-@Roles(RoleEnum.ADMIN)
+
 @Resolver(() => List)
 export class ListResolver {
   /**
@@ -41,7 +41,6 @@ export class ListResolver {
   /**
    * Get Lists (via filter)
    */
-  @Roles(RoleEnum.S_USER)
   @Query(() => [List], { description: 'Find Lists (via filter)' })
   async findLists(@GraphQLServiceOptions() serviceOptions: ServiceOptions, @Args() args?: FilterArgs) {
     return await this.listService.find(args, {
@@ -66,7 +65,6 @@ export class ListResolver {
   /**
    * Create new List
    */
-  @Roles(RoleEnum.S_USER)
   @Mutation(() => List, { description: 'Create a new List' })
   async createList(
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
