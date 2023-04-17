@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComparisonOperatorEnum, FindArgs, GraphQLPlusService, GraphQLRequestType } from '@lenne.tech/ng-base/shared';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,20 @@ export class ApiService extends GraphQLPlusService {
         'fee',
       ],
       type: GraphQLRequestType.QUERY,
+    });
+  }
+
+  updateList(id: string, input: any): Observable<any> {
+    return this.graphQl('updateList', {
+      arguments: { id, input },
+      fields: [
+        'id',
+        'number',
+        { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        'note',
+        'fee',
+      ],
+      type: GraphQLRequestType.MUTATION,
     });
   }
 

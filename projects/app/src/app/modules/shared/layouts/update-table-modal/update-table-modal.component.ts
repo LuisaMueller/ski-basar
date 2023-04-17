@@ -21,12 +21,12 @@ export class UpdateTableModalComponent implements OnInit {
       size: new FormControl(this.content.size, Validators.required),
       color: new FormControl(this.content.color, Validators.required),
       other: new FormControl(this.content.other),
-      max: new FormControl(this.content.max, [
+      prize: new FormControl(this.content.prize, [
         Validators.required,
         Validators.min(1),
         Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$'),
       ]),
-      min: new FormControl(this.content.min, Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')),
+      vb: new FormControl(this.content.vb, Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')),
       cash: new FormControl(this.content.cash, Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')),
     });
   }

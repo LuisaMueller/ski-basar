@@ -52,10 +52,21 @@
       </div>
     </div>
     <div class="comment-container">
-      <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="noteField"></textarea>
-        <label for="noteField">Notiz zur Nummer:</label>
-      </div>
+      <form (ngSubmit)="saveNote()" [formGroup]="noteForm">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="noteField"
+            name="noteField"
+            formControlName="note"></textarea>
+          <label for="noteField">Notiz zur Nummer:</label>
+
+          <button class="btn btn-primary align-middle text-center mt-2 note-button" type="submit">
+            Notiz speichern
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="section-2 mt-4">
@@ -70,9 +81,7 @@
             <th scope="col" class="text-center">Farbe<span class="text-danger">*</span></th>
             <th scope="col" class="text-center">Sonstiges</th>
             <th scope="col" class="text-center">Preis[€]<span class="text-danger">*</span></th>
-            <!--is namend as "max", but has the label "Preis"-->
             <th scope="col" class="text-center">VB[€]</th>
-            <!--is namend as "min", but has the label "VB"-->
             <th scope="col" class="text-center">Kasse[€]</th>
             <th></th>
           </tr>
@@ -85,8 +94,8 @@
             <td class="fw-semibold text-center">{{ good.size }}</td>
             <td class="fw-semibold text-center">{{ good.color }}</td>
             <td class="fw-semibold text-center">{{ good.other }}</td>
-            <td class="fw-semibold text-center">{{ good.max }}</td>
-            <td class="fw-semibold text-center">{{ good.min }}</td>
+            <td class="fw-semibold text-center">{{ good.prize }}</td>
+            <td class="fw-semibold text-center">{{ good.vb }}</td>
             <td class="fw-semibold text-center">{{ good.cash }}</td>
             <td>
               <div class="icon-container-pencil-trash">
@@ -180,34 +189,34 @@
                 }" />
               <label for="other-col" class="visually-hidden">Sonstiges</label>
             </td>
-            <td class="max-td">
+            <td class="prize-td">
               <input
                 type="text"
-                id="max-col"
+                id="prize-col"
                 min="0"
                 class="form-control"
-                formControlName="max"
+                formControlName="prize"
                 [ngClass]="{
-                  'border-danger': !submitForm.get('max')?.valid,
-                  'is-invalid': !submitForm.get('max')?.valid && submitForm.get('max')?.touched,
-                  'is-valid': submitForm.get('max')?.valid && submitForm.get('max')?.touched
+                  'border-danger': !submitForm.get('prize')?.valid,
+                  'is-invalid': !submitForm.get('prize')?.valid && submitForm.get('prize')?.touched,
+                  'is-valid': submitForm.get('prize')?.valid && submitForm.get('prize')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf.<br />2 Nachkommastellen)</div>
-              <label for="max-col" class="visually-hidden">Preis</label>
+              <label for="prize-col" class="visually-hidden">Preis</label>
             </td>
-            <td class="min-td">
+            <td class="vb-td">
               <input
                 type="text"
-                id="min-col"
+                id="vb-col"
                 min="0"
                 class="form-control"
-                formControlName="min"
+                formControlName="vb"
                 [ngClass]="{
-                  'is-invalid': !submitForm.get('min')?.valid && submitForm.get('min')?.touched,
-                  'is-valid': submitForm.get('min')?.valid && submitForm.get('min')?.touched
+                  'is-invalid': !submitForm.get('vb')?.valid && submitForm.get('vb')?.touched,
+                  'is-valid': submitForm.get('vb')?.valid && submitForm.get('vb')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf.<br />2 Nachkommastellen)</div>
-              <label for="min-col" class="visually-hidden">VB</label>
+              <label for="vb-col" class="visually-hidden">VB</label>
             </td>
             <td class="cash-td">
               <input

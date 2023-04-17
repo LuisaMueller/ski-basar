@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
+import { GoodsList } from '../../../core/models/goods-list.model';
 import { ApiService } from '../../../core/services/api.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
@@ -13,9 +14,11 @@ import { UpdateTableModalComponent } from '../update-table-modal/update-table-mo
   styleUrls: ['./desktop-main-tabel-layout.component.scss'],
 })
 export class DesktopMainTabelLayoutComponent implements OnInit {
-  goodList: Good[] = [];
+  goodList: Good[] | any = [];
+  goodsList: GoodsList;
   archivedGoods: Good[] = [];
   submitForm: FormGroup;
+  noteForm: FormGroup;
   charArray: string[] = [
     'A',
     'B',
@@ -86,8 +89,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     this.route.params.subscribe((value: any) => {
       this.defaultNr = +value.id;
       this.apiService.findList(this.defaultNr).subscribe(value1 => {
-        console.log(value1);
-        this.goodList = value1;
+        this.goodsList = value1[0];
+        console.log(this.goodsList);
+
+        this.goodList = this.goodsList.tableItems;
+        this.noteForm.patchValue({
+          note: this.goodsList.note,
+        });
       });
     });
     this.submitForm = new FormGroup({
@@ -96,13 +104,16 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       size: new FormControl(null, Validators.required),
       color: new FormControl(null, Validators.required),
       other: new FormControl(null),
-      max: new FormControl(null, [
+      prize: new FormControl(null, [
         Validators.required,
         Validators.min(1),
         Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$'),
       ]),
-      min: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
+      vb: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
       cash: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
+    });
+    this.noteForm = new FormGroup({
+      note: new FormControl(null),
     });
   }
   // find() {
@@ -111,6 +122,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   //     this.goodList = value;
   //   });
   // }
+
+  saveNote() {
+    const input = { ...this.noteForm.value };
+    this.apiService.updateList(this.goodsList.id, { note: input.note }).subscribe(value => {
+      this.goodsList = value;
+    });
+  }
 
   getRow(index: number) {
     return this.charArray[index];
@@ -122,6 +140,18 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.result.then(result => {
       this.goodList[index] = result;
       this.archivedGoods[index] = result;
+      console.log('goodList ', this.goodList[index]);
+      this.apiService
+        .updateList(this.goodsList.id, {
+          tableItems: this.goodList,
+        })
+        .subscribe(value => {
+          console.log('value im edit: ', value);
+          console.log('goodsList vorher im edit: ', this.goodsList);
+
+          this.goodsList = value;
+          console.log('goodsList nachher im edit: ', this.goodsList);
+        });
     });
   }
 
@@ -159,13 +189,21 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
     this.archivedGoods = [...this.archivedGoods, input];
     this.goodList = [...this.goodList, input];
+    console.log(this.goodList);
+
+    this.apiService
+      .updateList(this.goodsList.id, {
+        tableItems: this.goodList,
+      })
+      .subscribe(value => {
+        this.goodsList = value;
+      });
 
     const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:.[0-9]{1,2})?$');
-    if (regex.test(input.max)) {
+    if (regex.test(input.prize)) {
       this.fee = this.fee + 1;
     }
     this.submitForm.reset();
-    console.log(document.body.scrollHeight);
 
     this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
   }

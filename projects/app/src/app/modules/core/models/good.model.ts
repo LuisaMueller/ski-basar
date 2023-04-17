@@ -5,7 +5,7 @@ export class Good {
   size: string;
   color: string;
   other?: string;
-  max: string;
-  min?: string;
+  prize: string;
+  vb?: string;
   cash?: string;
 }
