@@ -17,7 +17,7 @@ export class ApiService extends GraphQLPlusService {
   getList() {
     return this.graphQl('getList', {
       arguments: { id: '6423f4d8903547fbe47ab6b5' },
-      fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'],
+      fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'], //fehlt hier noch archivedTableItems und customer?
       type: GraphQLRequestType.QUERY,
     });
   }
@@ -38,9 +38,31 @@ export class ApiService extends GraphQLPlusService {
         'id',
         'number',
         { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        //FIXME: Kai fragen warum die archivedTableItems nur max. 4 Subitems returnen können
+        //--> brauchen wir überhaupt alle 9 zurück? Evtl. reichen ja sogar 4, der Rest ist ja trotzdem in der Datenbank?!
+        { archivedTableItems: ['number'] },
         'note',
         'fee',
+        { customer: ['firstName', 'lastName'] },
       ],
+      type: GraphQLRequestType.QUERY,
+    });
+  }
+
+  findAllLists() {
+    const filter: FindArgs = {
+      filter: {
+        singleFilter: {
+          field: 'id',
+          operator: ComparisonOperatorEnum.EQ,
+          not: true,
+          value: '',
+        },
+      },
+    };
+    return this.graphQl('findLists', {
+      arguments: filter,
+      fields: ['id', 'number'],
       type: GraphQLRequestType.QUERY,
     });
   }
@@ -52,35 +74,37 @@ export class ApiService extends GraphQLPlusService {
         'id',
         'number',
         { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        //FIXME: Kai fragen warum die archivedTableItems nur max. 4 Subitems returnen können
+        //--> brauchen wir überhaupt alle 9 zurück? Evtl. reichen ja sogar 4, der Rest ist ja trotzdem in der Datenbank?!
+        { archivedTableItems: ['number'] },
         'note',
         'fee',
+        { customer: ['firstName', 'lastName'] },
       ],
       type: GraphQLRequestType.MUTATION,
     });
   }
 
-  onListCreated() {
-    console.log('subscription frontend');
-    return this.graphQl('ListCreated', {
-      fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'],
-      type: GraphQLRequestType.SUBSCRIPTION,
-    });
-  }
+  // onListCreated() {
+  //   console.log('subscription frontend');
+  //   return this.graphQl('ListCreated', {
+  //     fields: ['id', 'number', 'tableItems', 'editor', 'note', 'fee'],
+  //     type: GraphQLRequestType.SUBSCRIPTION,
+  //   });
+  // }
 
-  createCustomer(input: any) {
-    console.log(input);
-
-    return this.graphQl('createCustomer', {
-      arguments: { input },
-      fields: ['id'],
-      type: GraphQLRequestType.MUTATION,
-    });
-  }
-  getCustomer() {
-    return this.graphQl('getCustomer', {
-      arguments: { id: '6436b5d8a93ceb7573faa970' },
-      fields: ['firstName', 'lastName'],
-      type: GraphQLRequestType.QUERY,
-    });
-  }
+  // createCustomer(input: any) {
+  //   return this.graphQl('createCustomer', {
+  //     arguments: { input },
+  //     fields: ['id'],
+  //     type: GraphQLRequestType.MUTATION,
+  //   });
+  // }
+  // getCustomer() {
+  //   return this.graphQl('getCustomer', {
+  //     arguments: { id: '6436b5d8a93ceb7573faa970' },
+  //     fields: ['firstName', 'lastName'],
+  //     type: GraphQLRequestType.QUERY,
+  //   });
+  // }
 }

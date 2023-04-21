@@ -1,4 +1,4 @@
-<div class="body-main">
+<div class="body-main" *ngIf="goodsList">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container d-flex justify-content-between">
       <div class="img-container">
@@ -25,21 +25,27 @@
     <div class="numberslider-container">
       <div class="numberarrow-container">
         <div>
-          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr - 1)">
+          <button
+            class="btn btn-primary align-middle text-center"
+            type="button"
+            (click)="navPrevNext(goodsList.number - 1)">
             <i class="bi bi-caret-left-fill"></i>
           </button>
         </div>
         <div>
-          <p class="text-center number-label">{{ defaultNr }}</p>
+          <p class="text-center number-label">{{ goodsList.number }}</p>
         </div>
         <div>
-          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr + 1)">
+          <button
+            class="btn btn-primary align-middle text-center"
+            type="button"
+            (click)="navPrevNext(goodsList.number + 1)">
             <i class="bi bi-caret-right-fill"></i>
           </button>
         </div>
       </div>
       <div class="name-label-container">
-        <p class="text-center name-label">{{ customerName }}</p>
+        <p class="text-center name-label">{{ goodsList.customer!.firstName + ' ' + goodsList.customer!.lastName }}</p>
       </div>
       <div class="search-number-container">
         <form action="">
@@ -87,7 +93,7 @@
           </tr>
         </thead>
         <tbody class="table">
-          <tr class="align-middle" *ngFor="let good of goodList; index as i">
+          <tr class="align-middle" *ngFor="let good of goodsList?.tableItems; index as i">
             <th scope="row">{{ good.number }}</th>
             <td class="fw-semibold text-center">{{ good.classification }}</td>
             <td class="fw-semibold text-center">{{ good.brand }}</td>
@@ -109,8 +115,10 @@
               </div>
             </td>
           </tr>
-          <tr *ngIf="archivedGoods.length !== charArray.length" class="input-row">
-            <th>{{ defaultNr }}-{{ getRow(archivedGoods.length) }}</th>
+          <tr
+            *ngIf="goodsList?.archivedTableItems && goodsList?.archivedTableItems?.length !== charArray.length"
+            class="input-row">
+            <th>{{ goodsList.number }}-{{ getRow(goodsList.archivedTableItems.length) }}</th>
             <td class="classification-td">
               <input
                 type="text"
@@ -235,7 +243,7 @@
               <div class="icon-container">
                 <button
                   type="submit"
-                  [disabled]="archivedGoods.length === charArray.length || !submitForm.valid"
+                  [disabled]="goodsList.archivedTableItems.length === charArray.length || !submitForm.valid"
                   class="btn btn-primary align-middle text-center">
                   <i class="bi bi-check-lg"></i>
                 </button>
@@ -248,7 +256,7 @@
             <td colspan="9" class="pt-5">
               <div class="d-flex justify-content-end align-items-center">
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
-                <div class="pay-field me-2 text-center p-1">{{ fee }} €</div>
+                <div class="pay-field me-2 text-center p-1">{{ goodsList.fee }} €</div>
                 <div>
                   <button type="button" class="submitButton btn btn-primary me-2">Abschicken</button>
                 </div>
@@ -266,6 +274,44 @@
         </tfoot>
       </table>
     </form>
+  </div>
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>
+<div *ngIf="!goodsList">
+  <div class="alternative-site">
+    <h1 class="text-primary mb-5">{{ loadOrErrorText }}</h1>
+    <!-- history.back() -->
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary m-5"
+        [hidden]="loadOrErrorText === 'Seite lädt' || +loadOrErrorNumber - 1 < 1"
+        (click)="navPrevNext(+loadOrErrorNumber - 1)">
+        Zu Nummer<br />
+        <span class="fw-semibold display-6">{{ +loadOrErrorNumber - 1 }}</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary m-5"
+        [hidden]="loadOrErrorText === 'Seite lädt'"
+        (click)="navPrevNext(+loadOrErrorNumber + 1)">
+        Zu Nummer<br />
+        <span class="fw-semibold display-6">{{ +loadOrErrorNumber + 1 }}</span>
+      </button>
+    </div>
+    <h4 class="text-primary my-5" [hidden]="loadOrErrorText === 'Seite lädt'">{{ existingNumbersText }}</h4>
+    <!-- <h6 class="text-primary" [hidden]="loadOrErrorText === 'Seite lädt'">{{ numberHint }}</h6> -->
+    <div class="m-3">
+      <button
+        *ngFor="let existingNumber of existingNumbersList"
+        type="button"
+        class="btn btn-primary m-1 other-numbers-button"
+        [hidden]="loadOrErrorText === 'Seite lädt'"
+        (click)="navPrevNext(+existingNumber)">
+        {{ existingNumber }}
+      </button>
+    </div>
   </div>
   <div class="mountain-left"></div>
   <div class="mountain-right"></div>

@@ -2,7 +2,7 @@
   <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">
     Artikel mit Nr. <span class="fw-bold">{{ content.number }}</span> bearbeiten
   </h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
   <form (ngSubmit)="saveEdit()" [formGroup]="editForm">

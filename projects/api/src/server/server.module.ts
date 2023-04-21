@@ -1,5 +1,3 @@
-import { CustomerModule } from './modules/customer/customer.module';
-import { ListModule } from './modules/list/list.module';
 import { Any, CheckSecurityInterceptor, CoreAuthService, CoreModule, DateScalar, JSON } from '@lenne.tech/nest-server';
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -8,6 +6,7 @@ import envConfig from '../config.env';
 import { CronJobs } from './common/services/cron-jobs.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { FileModule } from './modules/file/file.module';
+import { ListModule } from './modules/list/list.module';
 import { MetaModule } from './modules/meta/meta.module';
 import { ServerController } from './server.controller';
 
@@ -36,7 +35,6 @@ import { ServerController } from './server.controller';
     // Include FileModule for file handling
     FileModule,
     ListModule,
-    CustomerModule,
   ],
 
   // Include services and scalars

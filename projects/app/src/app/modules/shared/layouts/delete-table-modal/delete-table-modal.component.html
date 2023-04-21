@@ -1,19 +1,71 @@
 <div class="modal-header">
   <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">Achtung</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
-  <p>
-    Bist Du sicher, dass der Artikel mit der Nr. <span class="fw-bold">{{ content.number }}</span> gelöscht werden soll?
-  </p>
-  <div class="modal-footer">
-    <button
+  <form (ngSubmit)="saveDelete()" [formGroup]="deleteForm">
+    <p>
+      Soll der Artikel mit der Nr. <span class="fw-bold">{{ content.number }}</span> gelöscht werden?
+    </p>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="flexRadioDefault1"
+        name="delete"
+        formControlName="delete"
+        value="no"
+        (change)="isCollapsed = true"
+        checked />
+      <label class="form-check-label" for="flexRadioDefault1"> Nein </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="delete"
+        id="flexRadioDefault2"
+        value="yes"
+        formControlName="delete"
+        (change)="isCollapsed = false" />
+      <label class="form-check-label" for="flexRadioDefault2"> Ja </label>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <div class="form-check ms-5">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="flexRadioDefault3"
+          name="reason"
+          formControlName="reason"
+          value="editingError"
+          checked />
+        <label class="form-check-label" for="flexRadioDefault3">
+          Grund: eigener Bearbeitungsfehler<br />(Zeile sollte nicht erstellt werden, etc.)
+        </label>
+      </div>
+      <div class="form-check ms-5">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="flexRadioDefault4"
+          name="reason"
+          formControlName="reason"
+          value="customerError" />
+        <label class="form-check-label" for="flexRadioDefault4">
+          Grund: Kunde möchte diesen Artikel doch nicht mehr verkaufen
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!-- <button
       type="button"
       class="btn btn-light align-middle text-center"
       aria-label="Close"
-      (click)="activeModal.dismiss('Cross click')">
+      (click)="activeModal.dismiss()">
       Abbrechen
-    </button>
-    <button type="button" (click)="saveDelete()" class="btn btn-primary align-middle text-center">Löschen</button>
-  </div>
+    </button> -->
+      <button type="submit" class="btn btn-primary align-middle text-center">Auswahl bestätigen</button>
+    </div>
+  </form>
 </div>

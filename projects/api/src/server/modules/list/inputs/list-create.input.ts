@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
+import { CustomerInput } from './customer.input';
 import { ListInput } from './list.input';
 import { TableItemInput } from './table-item.input';
 
@@ -33,15 +34,15 @@ export class ListCreateInput extends ListInput {
   @IsOptional()
   override tableItems?: TableItemInput[] = undefined;
 
-  // /**
-  //  * CreatedById of List
-  //  */
-  // @Restricted(RoleEnum.S_EVERYONE)
-  // @Field(() => String, {
-  //   description: 'CreatedById of List',
-  //   nullable: false,
-  // })
-  // override createdBy: string = undefined;
+  /**
+   * ArchivedTableItems of List
+   */
+  @Field(() => [TableItemInput], {
+    description: 'ArchivedTableItems of List',
+    nullable: true,
+  })
+  @IsOptional()
+  override archivedTableItems?: TableItemInput[] = undefined;
 
   /**
    * EditorId of List
@@ -66,10 +67,20 @@ export class ListCreateInput extends ListInput {
   /**
    * Fee of List
    */
-  @Field(() => String, {
+  @Field(() => Number, {
     description: 'Fee of List',
     nullable: true,
   })
   @IsOptional()
-  override fee?: string = undefined;
+  override fee?: number = undefined;
+
+  /**
+   * Customer of List
+   */
+  @Field(() => CustomerInput, {
+    description: 'Customer of List',
+    nullable: false,
+  })
+  @IsOptional()
+  override customer?: CustomerInput = undefined;
 }

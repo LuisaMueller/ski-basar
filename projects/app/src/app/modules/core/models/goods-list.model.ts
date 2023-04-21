@@ -1,18 +1,13 @@
+import { Customer } from './customer.model';
 import { Good } from './good.model';
 
 export class GoodsList {
   id: string;
-  number: string;
-  tableItems?: Good[];
+  number: number;
+  tableItems: Good[];
+  archivedTableItems: Good[];
   editor?: string;
   note?: string;
-  fee?: string;
-  firstName: string;
-  lastName: string;
-  street: string;
-  postcode: string;
-  phonenumber: string;
-  email: string;
-  password?: string;
-  isHelper: boolean;
+  fee?: number;
+  customer: Customer;
 }

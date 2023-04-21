@@ -4,6 +4,7 @@ import { Schema as MongooseSchema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import { Document, Schema } from 'mongoose';
 import { PersistenceModel } from '../../common/models/persistence.model';
 import { User } from '../user/user.model';
+import { Customer } from './customer.model';
 import { TableItem } from './table-item.model';
 
 export type ListDocument = List & Document;
@@ -40,6 +41,16 @@ export class List extends PersistenceModel {
   tableItems: TableItem[] = undefined;
 
   /**
+   * ArchivedTableItems of List
+   */
+  @Field(() => [TableItem], {
+    description: 'ArchivedTableItems of List',
+    nullable: true,
+  })
+  @Prop()
+  archivedTableItems: TableItem[] = undefined;
+
+  /**
    * Editor of List
    */
   @Field(() => User, {
@@ -62,12 +73,22 @@ export class List extends PersistenceModel {
   /**
    * Fee of List
    */
-  @Field(() => String, {
+  @Field(() => Number, {
     description: 'Fee of List',
     nullable: true,
   })
   @Prop()
-  fee: string = undefined;
+  fee: number = undefined;
+
+  /**
+   * Customer of List
+   */
+  @Field(() => Customer, {
+    description: 'Customer of List',
+    nullable: false,
+  })
+  @Prop()
+  customer: Customer = undefined;
 
   // ===================================================================================================================
   // Methods

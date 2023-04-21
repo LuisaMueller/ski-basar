@@ -1,6 +1,7 @@
 import { CoreInput } from '@lenne.tech/nest-server';
 import { Field, InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
+import { CustomerInput } from './customer.input';
 import { TableItemInput } from './table-item.input';
 
 /**
@@ -33,16 +34,15 @@ export class ListInput extends CoreInput {
   @IsOptional()
   tableItems?: TableItemInput[] = undefined;
 
-  // /**
-  //  * CreatedById of List
-  //  */
-  // @Restricted(RoleEnum.S_EVERYONE)
-  // @Field(() => String, {
-  //   description: 'CreatedById of List',
-  //   nullable: true,
-  // })
-  // @IsOptional()
-  // createdBy?: string = undefined;
+  /**
+   * ArchivedTableItems of List
+   */
+  @Field(() => [TableItemInput], {
+    description: 'ArchivedTableItems of List',
+    nullable: true,
+  })
+  @IsOptional()
+  archivedTableItems?: TableItemInput[] = undefined;
 
   /**
    * EditorId of List
@@ -67,10 +67,20 @@ export class ListInput extends CoreInput {
   /**
    * Fee of List
    */
-  @Field(() => String, {
+  @Field(() => Number, {
     description: 'Fee of List',
     nullable: true,
   })
   @IsOptional()
-  fee?: string = undefined;
+  fee?: number = undefined;
+
+  /**
+   * Customer of List
+   */
+  @Field(() => CustomerInput, {
+    description: 'Customer of List',
+    nullable: true,
+  })
+  @IsOptional()
+  customer?: CustomerInput = undefined;
 }

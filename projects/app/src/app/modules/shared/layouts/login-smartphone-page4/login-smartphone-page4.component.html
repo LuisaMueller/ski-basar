@@ -22,8 +22,10 @@
         <li>Sie erhalten nach erfolgreicher Annahme eine E-Mail mit der Bestätigung.</li>
         <li>Wir versuchen die Artikel für Sie auf dem Ski-Basar zu verkaufen.</li>
         <li>
-          Alle nicht verkauften Artikel und/oder der Verkaufserlös werden am Sonntag zwischen {{ starttime }} und
-          {{ endtime }} Uhr von Ihnen hier abgeholt.
+          Alle nicht verkauften Artikel und/oder der Verkaufserlös werden am Sonntag
+          <span class="fw-semibold">{{ changeableVariablesService.pickUpDate }}</span> zwischen
+          <span class="fw-semibold">{{ changeableVariablesService.startTime }}</span> und
+          <span class="fw-semibold">{{ changeableVariablesService.endTime }} Uhr</span> von Ihnen hier abgeholt.
         </li>
       </ol>
     </div>

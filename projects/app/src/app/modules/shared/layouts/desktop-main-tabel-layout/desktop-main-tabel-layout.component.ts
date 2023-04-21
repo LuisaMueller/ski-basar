@@ -14,9 +14,8 @@ import { UpdateTableModalComponent } from '../update-table-modal/update-table-mo
   styleUrls: ['./desktop-main-tabel-layout.component.scss'],
 })
 export class DesktopMainTabelLayoutComponent implements OnInit {
-  goodList: Good[] | any = [];
   goodsList: GoodsList;
-  archivedGoods: Good[] = [];
+  existingNumbersList: string[] = [];
   submitForm: FormGroup;
   noteForm: FormGroup;
   charArray: string[] = [
@@ -69,10 +68,10 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     'AY',
     'AZ',
   ];
-  defaultNr: number = 1;
-  fee: number = 0;
   deletionHint: string = '';
-  customerName: string = '';
+  loadOrErrorText: string = 'Seite lädt';
+  loadOrErrorNumber: number;
+  existingNumbersText: string = 'Hinweis: Bisher wurde noch keine Nummer vergeben.';
   classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
   brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
   sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
@@ -87,16 +86,36 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((value: any) => {
-      this.defaultNr = +value.id;
-      this.apiService.findList(this.defaultNr).subscribe(value1 => {
-        this.goodsList = value1[0];
-        console.log(this.goodsList);
+      this.apiService.findList(+value.id).subscribe(
+        value1 => {
+          this.goodsList = value1[0];
+          if (!this.goodsList) {
+            this.loadOrErrorNumber = value.id;
+            this.loadOrErrorText = 'Nummer ' + value.id + ' ist nicht vorhanden';
 
-        this.goodList = this.goodsList.tableItems;
-        this.noteForm.patchValue({
-          note: this.goodsList.note,
-        });
-      });
+            this.apiService.findAllLists().subscribe(value3 => {
+              if (this.existingNumbersList.length !== value3.length) {
+                if (value3.length === 0) {
+                  this.existingNumbersText = 'Hinweis: Bisher wurde noch keine Nummer vergeben.';
+                } else this.existingNumbersText = 'Alle existenten Nummern:';
+
+                for (let i = 0; i < value3.length; i++) {
+                  this.existingNumbersList.push(value3[i].number);
+                }
+              }
+            });
+          } else {
+            this.noteForm.patchValue({
+              note: this.goodsList.note,
+            });
+          }
+        },
+        error => {
+          console.log('sind im error');
+          this.loadOrErrorNumber = value.id;
+          this.loadOrErrorText = 'Nummer ' + value.id + ' nicht vorhanden';
+        }
+      );
     });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
@@ -135,22 +154,32 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   }
 
   editRow(good: Good, index: number) {
+    let prizeBeforeChange = good.prize;
     const modalRef = this.modalService.open(UpdateTableModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.content = good;
-    modalRef.result.then(result => {
-      this.goodList[index] = result;
-      this.archivedGoods[index] = result;
-      console.log('goodList ', this.goodList[index]);
+    modalRef.result.then((result: Good) => {
+      let updatedTableItems = this.goodsList.tableItems.slice();
+      updatedTableItems[index] = result;
+      let updatedArchivedTableItems = this.goodsList.archivedTableItems.slice();
+      updatedArchivedTableItems[index] = result;
+
+      let updatedFee = this.goodsList.fee!;
+      const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
+      if (!regex.test(prizeBeforeChange) && regex.test(result.prize)) {
+        updatedFee = updatedFee + 1;
+      }
+      if (regex.test(prizeBeforeChange) && !regex.test(result.prize)) {
+        updatedFee = updatedFee - 1;
+      }
+
       this.apiService
         .updateList(this.goodsList.id, {
-          tableItems: this.goodList,
+          tableItems: updatedTableItems,
+          archivedTableItems: updatedArchivedTableItems,
+          fee: updatedFee,
         })
         .subscribe(value => {
-          console.log('value im edit: ', value);
-          console.log('goodsList vorher im edit: ', this.goodsList);
-
           this.goodsList = value;
-          console.log('goodsList nachher im edit: ', this.goodsList);
         });
     });
   }
@@ -159,11 +188,23 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     const modalRef = this.modalService.open(DeleteTableModalComponent);
     modalRef.componentInstance.content = good;
     modalRef.result.then(result => {
-      if (result === 'delete') {
-        const deleteIndex = this.goodList.indexOf(good);
-        if (index > -1) {
-          this.goodList.splice(deleteIndex, 1);
+      if (result.delete === 'yes') {
+        let updatedTableItems = this.goodsList.tableItems.slice();
+        updatedTableItems.splice(index, 1);
+        let updatedFee = this.goodsList.fee!;
+        if (result.reason === 'editingError') {
+          updatedFee = updatedFee - 1;
         }
+
+        this.apiService
+          .updateList(this.goodsList.id, {
+            tableItems: updatedTableItems,
+            fee: updatedFee,
+          })
+          .subscribe(value => {
+            this.goodsList = value;
+          });
+        //deletionhint:
         if (this.deletionHint === '') {
           this.deletionHint = good.number;
         } else this.deletionHint = this.deletionHint + ', ' + good.number;
@@ -186,23 +227,31 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   // }
 
   add() {
-    const input = { ...this.submitForm.value, number: this.defaultNr + '-' + this.getRow(this.archivedGoods.length) };
-    this.archivedGoods = [...this.archivedGoods, input];
-    this.goodList = [...this.goodList, input];
-    console.log(this.goodList);
+    const input = {
+      ...this.submitForm.value,
+      number: this.goodsList.number + '-' + this.getRow(this.goodsList.archivedTableItems!.length),
+    };
+    let updatedTableItems = this.goodsList.tableItems.slice();
+    updatedTableItems = [...this.goodsList.tableItems, input];
+    let updatedArchivedTableItems = this.goodsList.archivedTableItems.slice();
+    updatedArchivedTableItems = [...this.goodsList.archivedTableItems, input];
+
+    let updatedFee = this.goodsList.fee!;
+    const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
+    if (regex.test(input.prize)) {
+      updatedFee = updatedFee + 1;
+    }
 
     this.apiService
       .updateList(this.goodsList.id, {
-        tableItems: this.goodList,
+        tableItems: updatedTableItems,
+        archivedTableItems: updatedArchivedTableItems,
+        fee: updatedFee,
       })
       .subscribe(value => {
         this.goodsList = value;
       });
 
-    const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:.[0-9]{1,2})?$');
-    if (regex.test(input.prize)) {
-      this.fee = this.fee + 1;
-    }
     this.submitForm.reset();
 
     this.document.getElementById('footer')!.scrollIntoView({ block: 'start' });
