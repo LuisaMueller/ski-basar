@@ -3,12 +3,16 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as pdfMake from 'pdfmake/build/pdfmake';
 import { Good } from '../../../core/models/good.model';
 import { GoodsList } from '../../../core/models/goods-list.model';
 import { ApiService } from '../../../core/services/api.service';
 import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
+const pdfMakeX = require('pdfmake/build/pdfmake.js');
+const pdfFontsX = require('pdfmake-unicode/dist/pdfmake-unicode.js');
+pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
 @Component({
   selector: 'app-desktop-main-tabel-layout',
   templateUrl: './desktop-main-tabel-layout.component.html',
@@ -19,56 +23,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   existingNumbersList: string[] = [];
   submitForm: FormGroup;
   noteForm: FormGroup;
-  charArray: string[] = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    'AA',
-    'AB',
-    'AC',
-    'AD',
-    'AE',
-    'AF',
-    'AG',
-    'AH',
-    'AJ',
-    'AK',
-    'AL',
-    'AM',
-    'AN',
-    'AP',
-    'AQ',
-    'AR',
-    'AS',
-    'AT',
-    'AU',
-    'AV',
-    'AW',
-    'AX',
-    'AY',
-    'AZ',
-  ];
+
   deletionHint: string = '';
   loadOrErrorText: string = 'Seite lädt';
   loadOrErrorNumber: number;
@@ -143,7 +98,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   }
 
   getRow(index: number) {
-    return this.charArray[index];
+    return this.changeableVariablesService.charArray[index];
   }
 
   editRow(good: Good, index: number) {
@@ -243,5 +198,30 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   navTo(event: any) {
     this.router.navigate(['auth/main-desktop/' + event.target.value]);
     event.target.value = '';
+  }
+
+  createPdf() {
+    const docDefinition = {
+      content: [
+        {
+          table: {
+            headerRows: 1,
+            //widths: ['*', 'auto', 100, '*'],
+            body: this.createTableBody(),
+          },
+        },
+      ],
+    };
+    pdfMake.createPdf(docDefinition).download('skibasar-2023-Nr-' + this.goodsList.number + '.pdf');
+  }
+
+  createTableBody() {
+    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis[€]', 'VB[€]', 'Kasse[€]']];
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+      row.shift();
+      body.push(row);
+    }
+    return body;
   }
 }

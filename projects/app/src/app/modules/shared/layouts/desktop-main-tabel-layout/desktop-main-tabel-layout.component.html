@@ -116,7 +116,10 @@
             </td>
           </tr>
           <tr
-            *ngIf="goodsList?.archivedTableItems && goodsList?.archivedTableItems?.length !== charArray.length"
+            *ngIf="
+              goodsList?.archivedTableItems &&
+              goodsList?.archivedTableItems?.length !== changeableVariablesService.charArray.length
+            "
             class="input-row">
             <th>{{ goodsList.number }}-{{ getRow(goodsList.archivedTableItems.length) }}</th>
             <td class="classification-td">
@@ -249,7 +252,10 @@
               <div class="icon-container">
                 <button
                   type="submit"
-                  [disabled]="goodsList.archivedTableItems.length === charArray.length || !submitForm.valid"
+                  [disabled]="
+                    goodsList.archivedTableItems.length === changeableVariablesService.charArray.length ||
+                    !submitForm.valid
+                  "
                   class="btn btn-primary align-middle text-center">
                   <i class="bi bi-check-lg"></i>
                 </button>
@@ -264,7 +270,14 @@
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
                 <div class="pay-field me-2 text-center p-1">{{ goodsList.fee }} €</div>
                 <div>
-                  <button type="button" class="submitButton btn btn-primary me-2">Abschicken</button>
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdf()">
+                    PDF erstellen
+                  </button>
+                </div>
+                <div>
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createTableBody()">
+                    Abschicken
+                  </button>
                 </div>
               </div>
             </td>

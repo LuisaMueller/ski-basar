@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { StorageService } from '@lenne.tech/ng-base/shared';
 import { Customer } from '../../../core/models/customer.model';
 import { ApiService } from '../../../core/services/api.service';
-
 @Component({
   selector: 'app-login-smartphone-page3',
   templateUrl: './login-smartphone-page3.component.html',
