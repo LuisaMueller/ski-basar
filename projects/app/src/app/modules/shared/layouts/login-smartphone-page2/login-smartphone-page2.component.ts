@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
 
 @Component({
   selector: 'app-login-smartphone-page2',
@@ -9,11 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginSmartphonePage2Component implements OnInit {
   acceptForm: FormGroup;
-  starttime: string = '16:30';
-  endtime: string = '17:30';
-  pickupdate: string = '04.12.2022';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, protected changeableVariablesService: ChangeableVariablesService) {}
 
   ngOnInit() {
     this.acceptForm = new FormGroup({

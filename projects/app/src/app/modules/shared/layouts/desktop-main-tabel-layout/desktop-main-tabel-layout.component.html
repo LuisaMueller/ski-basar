@@ -1,4 +1,4 @@
-<div class="body-main">
+<div class="body-main" *ngIf="goodsList">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container d-flex justify-content-between">
       <div class="img-container">
@@ -25,21 +25,27 @@
     <div class="numberslider-container">
       <div class="numberarrow-container">
         <div>
-          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr - 1)">
+          <button
+            class="btn btn-primary align-middle text-center"
+            type="button"
+            (click)="navPrevNext(goodsList.number - 1)">
             <i class="bi bi-caret-left-fill"></i>
           </button>
         </div>
         <div>
-          <p class="text-center number-label">{{ defaultNr }}</p>
+          <p class="text-center number-label">{{ goodsList.number }}</p>
         </div>
         <div>
-          <button class="btn btn-primary align-middle text-center" type="button" (click)="navPrevNext(defaultNr + 1)">
+          <button
+            class="btn btn-primary align-middle text-center"
+            type="button"
+            (click)="navPrevNext(goodsList.number + 1)">
             <i class="bi bi-caret-right-fill"></i>
           </button>
         </div>
       </div>
       <div class="name-label-container">
-        <p class="text-center name-label">{{ customerName }}</p>
+        <p class="text-center name-label">{{ goodsList.customer!.firstName + ' ' + goodsList.customer!.lastName }}</p>
       </div>
       <div class="search-number-container">
         <form action="">
@@ -52,10 +58,21 @@
       </div>
     </div>
     <div class="comment-container">
-      <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="noteField"></textarea>
-        <label for="noteField">Notiz zur Nummer:</label>
-      </div>
+      <form (ngSubmit)="saveNote()" [formGroup]="noteForm">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="noteField"
+            name="noteField"
+            formControlName="note"></textarea>
+          <label for="noteField">Notiz zur Nummer:</label>
+
+          <button class="btn btn-primary align-middle text-center mt-2 note-button" type="submit">
+            Notiz speichern
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="section-2 mt-4">
@@ -70,23 +87,21 @@
             <th scope="col" class="text-center">Farbe<span class="text-danger">*</span></th>
             <th scope="col" class="text-center">Sonstiges</th>
             <th scope="col" class="text-center">Preis[€]<span class="text-danger">*</span></th>
-            <!--is namend as "max", but has the label "Preis"-->
             <th scope="col" class="text-center">VB[€]</th>
-            <!--is namend as "min", but has the label "VB"-->
             <th scope="col" class="text-center">Kasse[€]</th>
             <th></th>
           </tr>
         </thead>
         <tbody class="table">
-          <tr class="align-middle" *ngFor="let good of goodList; index as i">
+          <tr class="align-middle" *ngFor="let good of goodsList?.tableItems; index as i">
             <th scope="row">{{ good.number }}</th>
             <td class="fw-semibold text-center">{{ good.classification }}</td>
             <td class="fw-semibold text-center">{{ good.brand }}</td>
             <td class="fw-semibold text-center">{{ good.size }}</td>
             <td class="fw-semibold text-center">{{ good.color }}</td>
             <td class="fw-semibold text-center">{{ good.other }}</td>
-            <td class="fw-semibold text-center">{{ good.max }}</td>
-            <td class="fw-semibold text-center">{{ good.min }}</td>
+            <td class="fw-semibold text-center">{{ good.prize }}</td>
+            <td class="fw-semibold text-center">{{ good.vb }}</td>
             <td class="fw-semibold text-center">{{ good.cash }}</td>
             <td>
               <div class="icon-container-pencil-trash">
@@ -100,13 +115,16 @@
               </div>
             </td>
           </tr>
-          <tr *ngIf="archivedGoods.length !== charArray.length" class="input-row">
-            <th>{{ defaultNr }}-{{ getRow(archivedGoods.length) }}</th>
+          <tr
+            *ngIf="goodsList?.archivedTableItems && goodsList?.archivedTableItems?.length !== charArray.length"
+            class="input-row">
+            <th>{{ goodsList.number }}-{{ getRow(goodsList.archivedTableItems.length) }}</th>
             <td class="classification-td">
               <input
                 type="text"
                 id="classification-col"
                 class="form-control"
+                list="classification-list"
                 formControlName="classification"
                 [ngClass]="{
                   'border-danger': !submitForm.get('classification')?.valid,
@@ -114,9 +132,12 @@
                   'is-valid': submitForm.get('classification')?.valid && submitForm.get('classification')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
+
               <label for="classification-col" class="visually-hidden">Art</label>
-              <datalist id="classification-col">
-                <option [value]="classification" *ngFor="let classification of classificationList"></option>
+              <datalist id="classification-list">
+                <option
+                  [value]="classification"
+                  *ngFor="let classification of changeableVariablesService.classificationList"></option>
               </datalist>
             </td>
             <td class="brand-td">
@@ -124,6 +145,7 @@
                 type="text"
                 id="brand-col"
                 class="form-control"
+                list="brand-list"
                 formControlName="brand"
                 [ngClass]="{
                   'border-danger': !submitForm.get('brand')?.valid,
@@ -132,8 +154,8 @@
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
               <label for="brand-col" class="visually-hidden">Marke</label>
-              <datalist id="brand-col">
-                <option [value]="brand" *ngFor="let brand of brandList"></option>
+              <datalist id="brand-list">
+                <option [value]="brand" *ngFor="let brand of changeableVariablesService.brandList"></option>
               </datalist>
             </td>
             <td class="size-td">
@@ -141,6 +163,7 @@
                 type="text"
                 id="size-col"
                 class="form-control"
+                list="size-list"
                 formControlName="size"
                 [ngClass]="{
                   'border-danger': !submitForm.get('size')?.valid,
@@ -149,8 +172,8 @@
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
               <label for="size-col" class="visually-hidden">Größe</label>
-              <datalist id="data-size">
-                <option [value]="size" *ngFor="let size of sizeList"></option>
+              <datalist id="size-list">
+                <option [value]="size" *ngFor="let size of changeableVariablesService.sizeList"></option>
               </datalist>
             </td>
             <td class="color-td">
@@ -180,34 +203,34 @@
                 }" />
               <label for="other-col" class="visually-hidden">Sonstiges</label>
             </td>
-            <td class="max-td">
+            <td class="prize-td">
               <input
                 type="text"
-                id="max-col"
+                id="prize-col"
                 min="0"
                 class="form-control"
-                formControlName="max"
+                formControlName="prize"
                 [ngClass]="{
-                  'border-danger': !submitForm.get('max')?.valid,
-                  'is-invalid': !submitForm.get('max')?.valid && submitForm.get('max')?.touched,
-                  'is-valid': submitForm.get('max')?.valid && submitForm.get('max')?.touched
+                  'border-danger': !submitForm.get('prize')?.valid,
+                  'is-invalid': !submitForm.get('prize')?.valid && submitForm.get('prize')?.touched,
+                  'is-valid': submitForm.get('prize')?.valid && submitForm.get('prize')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf.<br />2 Nachkommastellen)</div>
-              <label for="max-col" class="visually-hidden">Preis</label>
+              <label for="prize-col" class="visually-hidden">Preis</label>
             </td>
-            <td class="min-td">
+            <td class="vb-td">
               <input
                 type="text"
-                id="min-col"
+                id="vb-col"
                 min="0"
                 class="form-control"
-                formControlName="min"
+                formControlName="vb"
                 [ngClass]="{
-                  'is-invalid': !submitForm.get('min')?.valid && submitForm.get('min')?.touched,
-                  'is-valid': submitForm.get('min')?.valid && submitForm.get('min')?.touched
+                  'is-invalid': !submitForm.get('vb')?.valid && submitForm.get('vb')?.touched,
+                  'is-valid': submitForm.get('vb')?.valid && submitForm.get('vb')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf.<br />2 Nachkommastellen)</div>
-              <label for="min-col" class="visually-hidden">VB</label>
+              <label for="vb-col" class="visually-hidden">VB</label>
             </td>
             <td class="cash-td">
               <input
@@ -226,7 +249,7 @@
               <div class="icon-container">
                 <button
                   type="submit"
-                  [disabled]="archivedGoods.length === charArray.length || !submitForm.valid"
+                  [disabled]="goodsList.archivedTableItems.length === charArray.length || !submitForm.valid"
                   class="btn btn-primary align-middle text-center">
                   <i class="bi bi-check-lg"></i>
                 </button>
@@ -239,7 +262,7 @@
             <td colspan="9" class="pt-5">
               <div class="d-flex justify-content-end align-items-center">
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
-                <div class="pay-field me-2 text-center p-1">{{ fee }} €</div>
+                <div class="pay-field me-2 text-center p-1">{{ goodsList.fee }} €</div>
                 <div>
                   <button type="button" class="submitButton btn btn-primary me-2">Abschicken</button>
                 </div>
@@ -257,6 +280,44 @@
         </tfoot>
       </table>
     </form>
+  </div>
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>
+<div *ngIf="!goodsList">
+  <div class="alternative-site">
+    <h1 class="text-primary mb-5">{{ loadOrErrorText }}</h1>
+    <!-- history.back() -->
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary m-5"
+        [hidden]="loadOrErrorText === 'Seite lädt' || +loadOrErrorNumber - 1 < 1"
+        (click)="navPrevNext(+loadOrErrorNumber - 1)">
+        Zu Nummer<br />
+        <span class="fw-semibold display-6">{{ +loadOrErrorNumber - 1 }}</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary m-5"
+        [hidden]="loadOrErrorText === 'Seite lädt'"
+        (click)="navPrevNext(+loadOrErrorNumber + 1)">
+        Zu Nummer<br />
+        <span class="fw-semibold display-6">{{ +loadOrErrorNumber + 1 }}</span>
+      </button>
+    </div>
+    <h4 class="text-primary my-5" [hidden]="loadOrErrorText === 'Seite lädt'">{{ existingNumbersText }}</h4>
+    <!-- <h6 class="text-primary" [hidden]="loadOrErrorText === 'Seite lädt'">{{ numberHint }}</h6> -->
+    <div class="m-3">
+      <button
+        *ngFor="let existingNumber of existingNumbersList"
+        type="button"
+        class="btn btn-primary m-1 other-numbers-button"
+        [hidden]="loadOrErrorText === 'Seite lädt'"
+        (click)="navPrevNext(+existingNumber)">
+        {{ existingNumber }}
+      </button>
+    </div>
   </div>
   <div class="mountain-left"></div>
   <div class="mountain-right"></div>

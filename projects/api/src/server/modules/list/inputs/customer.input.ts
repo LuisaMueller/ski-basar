@@ -1,11 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { CustomerInput } from './customer.input';
+import { IsOptional } from 'class-validator';
 
 /**
- * Customer create input
+ * Customer input
  */
-@InputType({ description: 'Input data to create a new Customer' })
-export class CustomerCreateInput extends CustomerInput {
+@InputType({ description: 'Input data to update an existing Customer' })
+export class CustomerInput {
   // ===================================================================================================================
   // Properties
   // ===================================================================================================================
@@ -15,61 +15,68 @@ export class CustomerCreateInput extends CustomerInput {
    */
   @Field(() => String, {
     description: 'FirstName of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override firstName: string = undefined;
+  @IsOptional()
+  firstName?: string = undefined;
 
   /**
    * LastName of Customer
    */
   @Field(() => String, {
     description: 'LastName of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override lastName: string = undefined;
+  @IsOptional()
+  lastName?: string = undefined;
 
   /**
    * Street of Customer
    */
   @Field(() => String, {
     description: 'Street of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override street: string = undefined;
+  @IsOptional()
+  street?: string = undefined;
 
   /**
    * Postcode of Customer
    */
   @Field(() => String, {
     description: 'Postcode of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override postcode: string = undefined;
+  @IsOptional()
+  postcode?: string = undefined;
 
   /**
    * Phonenumber of Customer
    */
   @Field(() => String, {
     description: 'Phonenumber of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override phonenumber: string = undefined;
+  @IsOptional()
+  phonenumber?: string = undefined;
 
   /**
    * Email of Customer
    */
   @Field(() => String, {
     description: 'Email of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override email: string = undefined;
+  @IsOptional()
+  email?: string = undefined;
 
   /**
    * IsHelper of Customer
    */
   @Field(() => Boolean, {
     description: 'IsHelper of Customer',
-    nullable: false,
+    nullable: true,
   })
-  override isHelper: boolean = undefined;
+  @IsOptional()
+  isHelper?: boolean = undefined;
 }

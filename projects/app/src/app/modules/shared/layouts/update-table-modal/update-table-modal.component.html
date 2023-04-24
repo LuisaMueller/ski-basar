@@ -2,7 +2,7 @@
   <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">
     Artikel mit Nr. <span class="fw-bold">{{ content.number }}</span> bearbeiten
   </h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
 </div>
 <div class="modal-body">
   <form (ngSubmit)="saveEdit()" [formGroup]="editForm">
@@ -88,33 +88,33 @@
       <input
         type="text"
         class="form-control rounded-4 border-primary"
-        id="maxInput"
+        id="prizeInput"
         placeholder="Max-Preis"
-        [value]="content.max"
-        formControlName="max"
+        [value]="content.prize"
+        formControlName="prize"
         [ngClass]="{
-          'border-danger': !editForm.get('max')?.valid,
-          'is-invalid': !editForm.get('max')?.valid && editForm.get('max')?.touched,
-          'is-valid': editForm.get('max')?.valid && editForm.get('max')?.touched
+          'border-danger': !editForm.get('prize')?.valid,
+          'is-invalid': !editForm.get('prize')?.valid && editForm.get('prize')?.touched,
+          'is-valid': editForm.get('prize')?.valid && editForm.get('prize')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
 
-      <label for="maxInput">Max-Preis</label>
+      <label for="prizeInput">Preis[€]</label>
     </div>
     <div class="form-floating mb-3">
       <input
         type="text"
         class="form-control rounded-4 border-primary"
-        id="minInput"
-        formControlName="min"
+        id="vbInput"
+        formControlName="vb"
         placeholder="Min-Preis"
-        [value]="content.min"
+        [value]="content.vb"
         [ngClass]="{
-          'is-invalid': !editForm.get('min')?.valid && editForm.get('min')?.touched,
-          'is-valid': editForm.get('min')?.valid && editForm.get('min')?.touched
+          'is-invalid': !editForm.get('vb')?.valid && editForm.get('vb')?.touched,
+          'is-valid': editForm.get('vb')?.valid && editForm.get('vb')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
-      <label for="minInput">Min-Preis</label>
+      <label for="vbInput">VB[€]</label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -129,7 +129,7 @@
           'is-valid': editForm.get('cash')?.valid && editForm.get('cash')?.touched
         }" />
       <div class="invalid-feedback m-0 mx-1 p-0">Zahl eingeben (ggf. 2 Nachkommastellen)</div>
-      <label for="cashInput">Kasse</label>
+      <label for="cashInput">Kasse[€]</label>
     </div>
     <div class="modal-footer">
       <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary align-middle text-center">

@@ -91,7 +91,6 @@ export class ListResolver {
   /**
    * Update existing List
    */
-  @Roles(RoleEnum.S_USER)
   @Mutation(() => List, { description: 'Update existing List' })
   async updateList(
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
@@ -101,7 +100,7 @@ export class ListResolver {
     return await this.listService.update(id, input, {
       serviceOptions,
       inputType: ListInput,
-      roles: [RoleEnum.ADMIN, RoleEnum.S_CREATOR],
+      //roles: [RoleEnum.ADMIN, RoleEnum.S_CREATOR],
     });
   }
 

@@ -16,8 +16,11 @@
           Der Ski-Club Olpe übernimmt keine Haftung für Verlust, Beschädigung oder Diebstahl der angebotenen Artikel.
         </li>
         <li>
-          Die nicht verkauften Artikel müssen am {{ pickupdate }} zwischen {{ starttime }} und {{ endtime }} Uhr
-          abgeholt werden. Nicht abgeholte Artikel werden auf Kosten des Verkäufers entsorgt.
+          Die nicht verkauften Artikel müssen am
+          <span class="fw-semibold">{{ changeableVariablesService.pickUpDate }}</span> zwischen
+          <span class="fw-semibold">{{ changeableVariablesService.startTime }}</span> und
+          <span class="fw-semibold">{{ changeableVariablesService.endTime }} Uhr</span> abgeholt werden. Nicht abgeholte
+          Artikel werden auf Kosten des Verkäufers entsorgt.
         </li>
       </ul>
       <h5 class="mt-4">Datenschutzhinweis</h5>
