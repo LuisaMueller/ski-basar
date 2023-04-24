@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
@@ -8,7 +8,7 @@ import { Good } from '../../../core/models/good.model';
   templateUrl: './delete-table-modal.component.html',
   styleUrls: ['./delete-table-modal.component.scss'],
 })
-export class DeleteTableModalComponent {
+export class DeleteTableModalComponent implements OnInit {
   @Input() content: Good;
   deleteForm: FormGroup;
   isCollapsed: boolean = true;
