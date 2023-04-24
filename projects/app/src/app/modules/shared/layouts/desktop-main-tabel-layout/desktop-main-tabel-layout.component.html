@@ -124,6 +124,7 @@
                 type="text"
                 id="classification-col"
                 class="form-control"
+                list="classification-list"
                 formControlName="classification"
                 [ngClass]="{
                   'border-danger': !submitForm.get('classification')?.valid,
@@ -131,9 +132,12 @@
                   'is-valid': submitForm.get('classification')?.valid && submitForm.get('classification')?.touched
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
+
               <label for="classification-col" class="visually-hidden">Art</label>
-              <datalist id="classification-col">
-                <option [value]="classification" *ngFor="let classification of classificationList"></option>
+              <datalist id="classification-list">
+                <option
+                  [value]="classification"
+                  *ngFor="let classification of changeableVariablesService.classificationList"></option>
               </datalist>
             </td>
             <td class="brand-td">
@@ -141,6 +145,7 @@
                 type="text"
                 id="brand-col"
                 class="form-control"
+                list="brand-list"
                 formControlName="brand"
                 [ngClass]="{
                   'border-danger': !submitForm.get('brand')?.valid,
@@ -149,8 +154,8 @@
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
               <label for="brand-col" class="visually-hidden">Marke</label>
-              <datalist id="brand-col">
-                <option [value]="brand" *ngFor="let brand of brandList"></option>
+              <datalist id="brand-list">
+                <option [value]="brand" *ngFor="let brand of changeableVariablesService.brandList"></option>
               </datalist>
             </td>
             <td class="size-td">
@@ -158,6 +163,7 @@
                 type="text"
                 id="size-col"
                 class="form-control"
+                list="size-list"
                 formControlName="size"
                 [ngClass]="{
                   'border-danger': !submitForm.get('size')?.valid,
@@ -166,8 +172,8 @@
                 }" />
               <div class="invalid-feedback m-0 mx-1 p-0">Bitte ausfüllen.</div>
               <label for="size-col" class="visually-hidden">Größe</label>
-              <datalist id="data-size">
-                <option [value]="size" *ngFor="let size of sizeList"></option>
+              <datalist id="size-list">
+                <option [value]="size" *ngFor="let size of changeableVariablesService.sizeList"></option>
               </datalist>
             </td>
             <td class="color-td">

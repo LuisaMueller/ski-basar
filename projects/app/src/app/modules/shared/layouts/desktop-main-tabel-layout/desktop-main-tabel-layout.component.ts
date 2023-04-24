@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Good } from '../../../core/models/good.model';
 import { GoodsList } from '../../../core/models/goods-list.model';
 import { ApiService } from '../../../core/services/api.service';
+import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 @Component({
@@ -72,15 +73,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   loadOrErrorText: string = 'Seite lädt';
   loadOrErrorNumber: number;
   existingNumbersText: string = 'Hinweis: Bisher wurde noch keine Nummer vergeben.';
-  classificationList: string[] = ['Ski', 'Skitasche', 'Skischuhe', 'Schal/Neckwarmer', 'Weste'];
-  brandList: string[] = ['Areco', 'Dynastar', 'Fischer', 'K2', 'Ziener'];
-  sizeList: string[] = ['MP15.0/EU24.5', 'MP21.0/EU33.5', 'MP31.5/EU49.0'];
 
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
+    protected changeableVariablesService: ChangeableVariablesService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
