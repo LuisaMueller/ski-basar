@@ -15,13 +15,11 @@ export class DeleteTableModalComponent {
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
   ngOnInit() {
     this.deleteForm = new FormGroup({
-      delete: new FormControl('no', Validators.required),
+      delete: new FormControl(null, Validators.required),
       reason: new FormControl(null, Validators.required),
     });
   }
   saveDelete() {
-    console.log(this.deleteForm.value);
-    //this.activeModal.close('delete');
     this.activeModal.close(this.deleteForm.value);
   }
 }

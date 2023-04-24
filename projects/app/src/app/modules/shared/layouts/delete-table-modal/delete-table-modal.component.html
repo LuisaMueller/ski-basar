@@ -30,7 +30,7 @@
         (change)="isCollapsed = false" />
       <label class="form-check-label" for="flexRadioDefault2"> Ja </label>
     </div>
-    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="bg-light">
       <div class="form-check ms-5">
         <input
           class="form-check-input"
@@ -53,19 +53,20 @@
           formControlName="reason"
           value="customerError" />
         <label class="form-check-label" for="flexRadioDefault4">
-          Grund: Kunde möchte diesen Artikel doch nicht mehr verkaufen
+          Grund: Kunde möchte diesen Artikel im Laufe des Basars doch nicht mehr verkaufen
         </label>
       </div>
     </div>
     <div class="modal-footer">
-      <!-- <button
-      type="button"
-      class="btn btn-light align-middle text-center"
-      aria-label="Close"
-      (click)="activeModal.dismiss()">
-      Abbrechen
-    </button> -->
-      <button type="submit" class="btn btn-primary align-middle text-center">Auswahl bestätigen</button>
+      <button
+        type="submit"
+        class="btn btn-primary align-middle text-center"
+        [disabled]="
+          !deleteForm.get('delete')?.valid ||
+          (deleteForm.get('delete')?.value === 'yes' && !deleteForm.get('reason')?.valid)
+        ">
+        Auswahl bestätigen
+      </button>
     </div>
   </form>
 </div>

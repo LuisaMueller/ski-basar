@@ -135,12 +135,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       note: new FormControl(null),
     });
   }
-  // find() {
-  //   this.apiService.findGoodsLists().subscribe(value => {
-  //     console.log(value);
-  //     this.goodList = value;
-  //   });
-  // }
 
   saveNote() {
     const input = { ...this.noteForm.value };
@@ -211,20 +205,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       }
     });
   }
-
-  // onSubmit() {
-  //   const input = { ...this.submitForm.value, number: '170' };
-  //   this.apiService.createGoodsList(input).subscribe(
-  //     value => {
-  //       console.log(value);
-  //       this.goodList = [...this.goodList, value];
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   );
-  //   this.submitForm.reset();
-  // }
 
   add() {
     const input = {
