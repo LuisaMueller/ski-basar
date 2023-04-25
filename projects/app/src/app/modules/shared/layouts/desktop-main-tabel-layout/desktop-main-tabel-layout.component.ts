@@ -3,11 +3,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as pdfMake from 'pdfmake/build/pdfmake';
 import { Good } from '../../../core/models/good.model';
 import { GoodsList } from '../../../core/models/goods-list.model';
 import { ApiService } from '../../../core/services/api.service';
 import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
+import { PdfService } from '../../../core/services/pdf.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 const pdfMakeX = require('pdfmake/build/pdfmake.js');
@@ -20,6 +20,7 @@ pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
 })
 export class DesktopMainTabelLayoutComponent implements OnInit {
   goodsList: GoodsList;
+  customerText: string = '';
   existingNumbersList: string[] = [];
   submitForm: FormGroup;
   noteForm: FormGroup;
@@ -34,6 +35,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
+    private pdfService: PdfService,
     protected changeableVariablesService: ChangeableVariablesService,
     @Inject(DOCUMENT) private document: Document
   ) {}
@@ -70,6 +72,22 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
           this.loadOrErrorText = 'Nummer ' + value.id + ' nicht vorhanden';
         }
       );
+      this.apiService.findCustomer(+value.id).subscribe(value2 => {
+        this.customerText =
+          value2[0].customer.firstName +
+          ' ' +
+          value2[0].customer.lastName +
+          '\n' +
+          value2[0].customer.street +
+          '\n' +
+          value2[0].customer.postcode +
+          '\n' +
+          'Tel.: ' +
+          value2[0].customer.phonenumber +
+          '\n' +
+          'Mail: ' +
+          value2[0].customer.email;
+      });
     });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
@@ -200,28 +218,43 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     event.target.value = '';
   }
 
-  createPdf() {
-    const docDefinition = {
-      content: [
-        {
-          table: {
-            headerRows: 1,
-            //widths: ['*', 'auto', 100, '*'],
-            body: this.createTableBody(),
-          },
-        },
-      ],
-    };
-    pdfMake.createPdf(docDefinition).download('skibasar-2023-Nr-' + this.goodsList.number + '.pdf');
-  }
-
-  createTableBody() {
-    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis[€]', 'VB[€]', 'Kasse[€]']];
+  createPdfStart() {
+    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
       const row = Object.values(this.goodsList.tableItems[i]);
       row.shift();
+      row.pop();
       body.push(row);
     }
-    return body;
+
+    this.pdfService.createPdfStart(this.customerText, body, this.goodsList);
+  }
+
+  createPdfEnd() {
+    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
+    let cashValue: number = 0;
+    let cashValueString: string = '';
+    let provisionValueString: string = '';
+    let payoutValueString: string = '';
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+      if (row[9] !== null) {
+        cashValue = cashValue + parseFloat(row[9].replace(',', '.'));
+      }
+
+      row.shift();
+      body.push(row);
+    }
+    cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
+    provisionValueString = (cashValue * 0.1).toFixed(2).toString().replace('.', ',');
+    payoutValueString = (cashValue * 0.9).toFixed(2).toString().replace('.', ',');
+    this.pdfService.createPdfEnd(
+      this.customerText,
+      body,
+      this.goodsList,
+      cashValueString,
+      provisionValueString,
+      payoutValueString
+    );
   }
 }

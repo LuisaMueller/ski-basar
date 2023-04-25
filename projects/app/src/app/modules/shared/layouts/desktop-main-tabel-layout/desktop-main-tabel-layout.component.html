@@ -270,12 +270,12 @@
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
                 <div class="pay-field me-2 text-center p-1">{{ goodsList.fee }} €</div>
                 <div>
-                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdf()">
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfStart()">
                     PDF erstellen
                   </button>
                 </div>
                 <div>
-                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createTableBody()">
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfEnd()">
                     Abschicken
                   </button>
                 </div>

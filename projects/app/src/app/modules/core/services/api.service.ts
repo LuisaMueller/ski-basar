@@ -59,6 +59,23 @@ export class ApiService extends GraphQLPlusService {
     });
   }
 
+  findCustomer(number: number) {
+    const filter: FindArgs = {
+      filter: {
+        singleFilter: {
+          field: 'number',
+          operator: ComparisonOperatorEnum.EQ,
+          value: number,
+        },
+      },
+    };
+    return this.graphQl('findLists', {
+      arguments: filter,
+      fields: [{ customer: ['firstName', 'lastName', 'street', 'postcode', 'phonenumber', 'email', 'isHelper'] }],
+      type: GraphQLRequestType.QUERY,
+    });
+  }
+
   updateList(id: string, input: any): Observable<any> {
     return this.graphQl('updateList', {
       arguments: { id, input },

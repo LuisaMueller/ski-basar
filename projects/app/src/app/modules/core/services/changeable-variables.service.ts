@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ChangeableVariablesService {
-  startTime = '16:30';
-  endTime = '17:30';
-  pickUpDate = '10.12.2023';
+  saturdayDate = '09.12.2023';
+  sundayDate = '10.12.2023';
+  startTimePickUp = '16:30';
+  endTimePickUp = '17:30';
 
   classificationList: string[] = [
     'Ski',
