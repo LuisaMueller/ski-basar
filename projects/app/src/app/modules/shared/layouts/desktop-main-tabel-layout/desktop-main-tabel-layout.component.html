@@ -22,7 +22,7 @@
     </div>
   </nav>
   <div class="section-1">
-    <div class="numberslider-container">
+    <div class="numberslider-container ms-5">
       <div class="numberarrow-container">
         <div>
           <button
@@ -45,7 +45,9 @@
         </div>
       </div>
       <div class="name-label-container">
-        <p class="text-center name-label">{{ currentCustomer.firstName + ' ' + currentCustomer.lastName }}</p>
+        <p class="text-center name-label">
+          {{ currentCustomer.firstName + ' ' + currentCustomer.lastName }} <i class="bi bi-arrow-right"></i>
+        </p>
       </div>
       <div class="search-number-container">
         <form action="">
@@ -57,7 +59,17 @@
         </form>
       </div>
     </div>
-    <div class="comment-container">
+    <div class="customer-container">
+      <p class="text-center text-customer-container">
+        <br />{{ currentCustomer.firstName + ' ' + currentCustomer.lastName }}<br />{{ currentCustomer.street }}<br />{{
+          currentCustomer.postcode
+        }}<br />{{ currentCustomer.phonenumber }}<br />{{ currentCustomer.email }}
+      </p>
+      <p class="text-center text-customer-container" [hidden]="currentCustomer.isHelper === false">
+        Helfer des Skibasars
+      </p>
+    </div>
+    <div class="comment-container me-5">
       <form (ngSubmit)="saveNote()" [formGroup]="noteForm">
         <div class="form-floating">
           <textarea

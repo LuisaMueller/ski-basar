@@ -6,8 +6,17 @@ import { Injectable } from '@angular/core';
 export class ChangeableVariablesService {
   saturdayDate = '09.12.2023';
   sundayDate = '10.12.2023';
-  startTimePickUp = '16:30';
-  endTimePickUp = '17:30';
+  startTimePickUp = '16:30'; //Warenabholung am Sonntag
+  endTimePickUp = '17:30'; //Warenabholung am Sonntag
+  timeslot1saturday = 'Nur Annahme: 11:00 - 12:00 Uhr';
+  timeslot2saturday = 'Annahme und Verkauf: 13:00 - 18:00 Uhr';
+  timeslot1sunday = 'Annahme und Verkauf: 11:00 - 15:00 Uhr';
+  timeslot2sunday =
+    'Rückgabe der nicht verkauften Waren / des Verkaufserlöses: ' +
+    this.startTimePickUp +
+    ' - ' +
+    this.endTimePickUp +
+    ' Uhr';
 
   helperPassword = '1234';
 
