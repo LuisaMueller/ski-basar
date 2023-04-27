@@ -1,4 +1,4 @@
-<div class="body-main" *ngIf="goodsList">
+<div class="body-main" *ngIf="goodsList && currentCustomer">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container d-flex justify-content-between">
       <div class="img-container">
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="name-label-container">
-        <p class="text-center name-label">{{ goodsList.customer!.firstName + ' ' + goodsList.customer!.lastName }}</p>
+        <p class="text-center name-label">{{ currentCustomer.firstName + ' ' + currentCustomer.lastName }}</p>
       </div>
       <div class="search-number-container">
         <form action="">
@@ -269,14 +269,15 @@
               <div class="d-flex justify-content-end align-items-center">
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
                 <div class="pay-field me-2 text-center p-1">{{ goodsList.fee }} €</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-end align-items-center">
                 <div>
-                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfStart()">
-                    PDF erstellen
-                  </button>
-                </div>
-                <div>
-                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfEnd()">
-                    Abschicken
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="sendMailStart()">
+                    Annahmebeleg abschicken
                   </button>
                 </div>
               </div>
@@ -290,6 +291,91 @@
               </div>
             </td>
           </tr>
+
+          <tr>
+            <div>
+              <!-- Soll einfach nur für etwas Abstand sorgen -->
+            </div>
+            <div>
+              <!-- Soll einfach nur für etwas Abstand sorgen -->
+            </div>
+          </tr>
+          <tr class="table-group-divider">
+            <td colspan="9" class="pt-5">
+              <div class="d-flex justify-content-center align-items-center">
+                <h5 class="me-2 mb-2 text-primary">Waren- / Geldausgabe</h5>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-center align-items-center">
+                <p class="me-2 mb-2 text-dark text-center">
+                  Dieser Abschnitt ist erst am Sonntag ({{ changeableVariablesService.sundayDate }}) zwischen
+                  {{ changeableVariablesService.startTimePickUp }} und
+                  {{ changeableVariablesService.endTimePickUp }} Uhr relevant.<br />Daher erst auf "Auszahlung" klicken,
+                  sobald der Kunde/die Kundin zum Abholen der Sachen/des Geldes kommt.
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="submitButton btn btn-primary me-2" (click)="openPayoutAmountModal()">
+                  Auszahlung
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-center align-items-center">
+                <p class="me-2 mb-0 text-primary" [hidden]="payoutHint === ''">Hinweis:</p>
+                {{ payoutHint }}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <div>
+              <!-- Soll einfach nur für etwas Abstand sorgen -->
+            </div>
+            <div>
+              <!-- Soll einfach nur für etwas Abstand sorgen -->
+            </div>
+          </tr>
+          <tr class="table-group-divider">
+            <td colspan="9" class="pt-5">
+              <div class="d-flex justify-content-center align-items-center">
+                <h5 class="me-2 mb-2 text-primary">PDF erstellen</h5>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-center align-items-center">
+                <p class="me-2 mb-2 text-dark text-center">
+                  Optional können hier zwei PDFs der Nr. {{ goodsList.number }} erstellt werden. <br />
+                  PDF ohne Kasse: Hierbei handelt es sich um das PDF ohne eingetragene Kassen-Werte und ohne
+                  Auszahlungsbetrag etc. <br />
+                  PDF mit Kasse: Hierbei handelt es sich um das PDF mit eingetragenen Kassen-Werten und mit, Provision,
+                  Auszahlungsbetrag etc.
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfStart()">
+                  PDF ohne Kasse
+                </button>
+                <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfEnd()">
+                  PDF mit Kasse
+                </button>
+              </div>
+            </td>
+          </tr>
         </tfoot>
       </table>
     </form>
@@ -300,7 +386,6 @@
 <div *ngIf="!goodsList">
   <div class="alternative-site">
     <h1 class="text-primary mb-5">{{ loadOrErrorText }}</h1>
-    <!-- history.back() -->
     <div>
       <button
         type="button"
@@ -320,7 +405,6 @@
       </button>
     </div>
     <h4 class="text-primary my-5" [hidden]="loadOrErrorText === 'Seite lädt'">{{ existingNumbersText }}</h4>
-    <!-- <h6 class="text-primary" [hidden]="loadOrErrorText === 'Seite lädt'">{{ numberHint }}</h6> -->
     <div class="m-3">
       <button
         *ngFor="let existingNumber of existingNumbersList"

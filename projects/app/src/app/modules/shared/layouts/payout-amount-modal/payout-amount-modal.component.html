@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary text-center fw-semibold" id="modal-basic-title ">Auszahlung</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="d-flex justify-content-center align-items-center">
+    <p class="text-center">Bitte den rot-markierten Geldbetrag bei "Auszahlung" an den Kunden/die Kundin auszahlen.</p>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <table class="table table-borderless table-style w-50">
+      <tr>
+        <td>Verkaufswert:</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <span class="fw-bold">{{ payoutArray[0] }} €</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>-10% Provision:</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <span class="fw-bold">{{ payoutArray[1] }} €</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="text-danger">
+        <td>Auszahlung:</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <span class="fw-bold">{{ payoutArray[2] }} €</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <p class="text-center">
+      Mit Klick auf "Verkaufsbeleg schicken" wird dem Kunden/der Kundin per Mail ein Beleg zugesendet und gleichzeitig
+      die Warenausgabe des Skibasars informiert.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary align-middle text-center" (click)="sendSalesDocument()">
+      Verkaufsbeleg abschicken
+    </button>
+  </div>
+</div>

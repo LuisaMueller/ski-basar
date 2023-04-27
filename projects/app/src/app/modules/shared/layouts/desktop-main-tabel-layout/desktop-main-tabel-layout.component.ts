@@ -3,12 +3,14 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Customer } from '../../../core/models/customer.model';
 import { Good } from '../../../core/models/good.model';
 import { GoodsList } from '../../../core/models/goods-list.model';
 import { ApiService } from '../../../core/services/api.service';
 import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
 import { PdfService } from '../../../core/services/pdf.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
+import { PayoutAmountModalComponent } from '../payout-amount-modal/payout-amount-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
 const pdfMakeX = require('pdfmake/build/pdfmake.js');
 const pdfFontsX = require('pdfmake-unicode/dist/pdfmake-unicode.js');
@@ -20,12 +22,13 @@ pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
 })
 export class DesktopMainTabelLayoutComponent implements OnInit {
   goodsList: GoodsList;
-  customerText: string = '';
+  currentCustomer: Customer;
   existingNumbersList: string[] = [];
   submitForm: FormGroup;
   noteForm: FormGroup;
 
   deletionHint: string = '';
+  payoutHint: string = '';
   loadOrErrorText: string = 'Seite lädt';
   loadOrErrorNumber: number;
   existingNumbersText: string = 'Hinweis: Bisher wurde noch keine Nummer vergeben.';
@@ -67,27 +70,16 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
           }
         },
         error => {
-          console.log('sind im error');
           this.loadOrErrorNumber = value.id;
           this.loadOrErrorText = 'Nummer ' + value.id + ' nicht vorhanden';
         }
       );
-      this.apiService.findCustomer(+value.id).subscribe(value2 => {
-        this.customerText =
-          value2[0].customer.firstName +
-          ' ' +
-          value2[0].customer.lastName +
-          '\n' +
-          value2[0].customer.street +
-          '\n' +
-          value2[0].customer.postcode +
-          '\n' +
-          'Tel.: ' +
-          value2[0].customer.phonenumber +
-          '\n' +
-          'Mail: ' +
-          value2[0].customer.email;
-      });
+      this.apiService.findCustomer(+value.id).subscribe(
+        value2 => {
+          this.currentCustomer = value2[0].customer;
+        },
+        error => {}
+      );
     });
     this.submitForm = new FormGroup({
       classification: new FormControl(null, Validators.required),
@@ -217,9 +209,27 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     this.router.navigate(['auth/main-desktop/' + event.target.value]);
     event.target.value = '';
   }
-
+  createCustomerText() {
+    return (
+      this.currentCustomer.firstName +
+      ' ' +
+      this.currentCustomer.lastName +
+      '\n' +
+      this.currentCustomer.street +
+      '\n' +
+      this.currentCustomer.postcode +
+      '\n' +
+      'Tel.: ' +
+      this.currentCustomer.phonenumber +
+      '\n' +
+      'Mail: ' +
+      this.currentCustomer.email
+    );
+  }
   createPdfStart() {
     const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
+    const customerText = this.createCustomerText();
+
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
       const row = Object.values(this.goodsList.tableItems[i]);
       row.shift();
@@ -227,34 +237,80 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       body.push(row);
     }
 
-    this.pdfService.createPdfStart(this.customerText, body, this.goodsList);
+    this.pdfService.createPdfStart(customerText, body, this.goodsList);
   }
-
+  sendMailStart() {
+    this.createPdfStart();
+    //dann Mail senden
+  }
   createPdfEnd() {
     const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
+    let payoutArray: string[] = [];
+    const customerText = this.createCustomerText();
+
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+
+      row.shift();
+      body.push(row);
+    }
+    if (this.currentCustomer.isHelper === true) {
+      payoutArray = this.calculatePayoutValueForHelper();
+    } else payoutArray = this.calculatePayoutValue();
+    this.pdfService.createPdfEnd(customerText, body, this.goodsList, payoutArray[0], payoutArray[1], payoutArray[2]);
+  }
+
+  calculatePayoutValue() {
     let cashValue: number = 0;
-    let cashValueString: string = '';
-    let provisionValueString: string = '';
-    let payoutValueString: string = '';
+    let payoutArray: string[] = ['', '', ''];
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
       const row = Object.values(this.goodsList.tableItems[i]);
       if (row[9] !== null) {
         cashValue = cashValue + parseFloat(row[9].replace(',', '.'));
       }
-
-      row.shift();
-      body.push(row);
     }
-    cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
-    provisionValueString = (cashValue * 0.1).toFixed(2).toString().replace('.', ',');
-    payoutValueString = (cashValue * 0.9).toFixed(2).toString().replace('.', ',');
-    this.pdfService.createPdfEnd(
-      this.customerText,
-      body,
-      this.goodsList,
-      cashValueString,
-      provisionValueString,
-      payoutValueString
-    );
+    const cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
+    const provisionValueString = (cashValue * 0.1).toFixed(2).toString().replace('.', ',');
+    const payoutValueString = (cashValue * 0.9).toFixed(2).toString().replace('.', ',');
+    payoutArray[0] = cashValueString;
+    payoutArray[1] = provisionValueString;
+    payoutArray[2] = payoutValueString;
+    return payoutArray;
+  }
+
+  calculatePayoutValueForHelper() {
+    let cashValue: number = 0;
+    let payoutArray: string[] = ['', '', ''];
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+      if (row[9] !== null) {
+        cashValue = cashValue + parseFloat(row[9].replace(',', '.'));
+      }
+    }
+    const cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
+    const provisionValueString = '0,00';
+    const payoutValueString = cashValueString;
+    payoutArray[0] = cashValueString;
+    payoutArray[1] = provisionValueString;
+    payoutArray[2] = payoutValueString;
+    return payoutArray;
+  }
+
+  openPayoutAmountModal() {
+    let payoutArray: string[] = [];
+    if (this.currentCustomer.isHelper === true) {
+      payoutArray = this.calculatePayoutValueForHelper();
+    } else payoutArray = this.calculatePayoutValue();
+    const modalRef = this.modalService.open(PayoutAmountModalComponent, { backdrop: 'static' });
+    modalRef.componentInstance.payoutArray = payoutArray;
+    modalRef.result
+      .then(result => {
+        if (result === 'verschickt') {
+          this.createPdfEnd();
+          //Mail senden
+          this.payoutHint = 'Der Beleg wurde erfolgreich verschickt.';
+        }
+      })
+      .catch(error => {});
   }
 }
