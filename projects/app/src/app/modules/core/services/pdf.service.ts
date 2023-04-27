@@ -73,7 +73,7 @@ export class PdfService {
               '\n',
               {
                 width: 170,
-                text: 'Evtl. hinterlegte Notiz:',
+                text: goodsList.note ? 'Hinterlegte Notiz:' : '',
                 style: 'textBold',
               },
             ],
@@ -248,7 +248,7 @@ export class PdfService {
               '\n',
               {
                 width: 170,
-                text: 'Evtl. hinterlegte Notiz:',
+                text: goodsList.note ? 'Hinterlegte Notiz:' : '',
                 style: 'textBold',
               },
               '\n',

@@ -122,13 +122,15 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       updatedArchivedTableItems[index] = result;
 
       let updatedFee = this.goodsList.fee!;
-      const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
-      if (!regex.test(prizeBeforeChange) && regex.test(result.prize)) {
-        updatedFee = updatedFee + 1;
-      }
-      if (regex.test(prizeBeforeChange) && !regex.test(result.prize)) {
-        updatedFee = updatedFee - 1;
-      }
+      if (this.currentCustomer.isHelper === false) {
+        const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
+        if (!regex.test(prizeBeforeChange) && regex.test(result.prize)) {
+          updatedFee = updatedFee + 1;
+        }
+        if (regex.test(prizeBeforeChange) && !regex.test(result.prize)) {
+          updatedFee = updatedFee - 1;
+        }
+      } else updatedFee = 0;
 
       this.apiService
         .updateList(this.goodsList.id, {
@@ -150,9 +152,11 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
         let updatedTableItems = this.goodsList.tableItems.slice();
         updatedTableItems.splice(index, 1);
         let updatedFee = this.goodsList.fee!;
-        if (result.reason === 'editingError') {
-          updatedFee = updatedFee - 1;
-        }
+        if (this.currentCustomer.isHelper === false) {
+          if (result.reason === 'editingError') {
+            updatedFee = updatedFee - 1;
+          }
+        } else updatedFee = 0;
 
         this.apiService
           .updateList(this.goodsList.id, {
@@ -181,10 +185,12 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     updatedArchivedTableItems = [...this.goodsList.archivedTableItems, input];
 
     let updatedFee = this.goodsList.fee!;
-    const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
-    if (regex.test(input.prize)) {
-      updatedFee = updatedFee + 1;
-    }
+    if (this.currentCustomer.isHelper === false) {
+      const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
+      if (regex.test(input.prize)) {
+        updatedFee = updatedFee + 1;
+      }
+    } else updatedFee = 0;
 
     this.apiService
       .updateList(this.goodsList.id, {
@@ -227,8 +233,12 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     );
   }
   createPdfStart() {
-    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
+    const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
     const customerText = this.createCustomerText();
+
+    if (this.goodsList.tableItems.length === 0) {
+      body.push(['-', '-', '-', '-', '-', '-', '-', '-']);
+    }
 
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
       const row = Object.values(this.goodsList.tableItems[i]);
@@ -244,9 +254,13 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     //dann Mail senden
   }
   createPdfEnd() {
-    const body = [['Nr', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
+    const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
     let payoutArray: string[] = [];
     const customerText = this.createCustomerText();
+
+    if (this.goodsList.tableItems.length === 0) {
+      body.push(['-', '-', '-', '-', '-', '-', '-', '-', '-']);
+    }
 
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
       const row = Object.values(this.goodsList.tableItems[i]);

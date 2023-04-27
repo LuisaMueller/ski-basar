@@ -9,6 +9,8 @@ export class ChangeableVariablesService {
   startTimePickUp = '16:30';
   endTimePickUp = '17:30';
 
+  helperPassword = '1234';
+
   classificationList: string[] = [
     'Ski',
     'Skitasche',
