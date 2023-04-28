@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Good } from '../../../core/models/good.model';
+import { Good } from '../../../../modules/core/models/good.model';
 
 @Component({
   selector: 'app-update-table-modal',

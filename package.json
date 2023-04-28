@@ -24,9 +24,12 @@
     "release:major": "standard-version --release-as major"
   },
   "devDependencies": {
+    "husky": "8.0.3",
     "lerna": "6.5.1",
     "prettier": "2.8.4",
-    "husky": "8.0.3",
     "standard-version": "9.5.0"
+  },
+  "dependencies": {
+    "node-mailjet": "5.1.1"
   }
 }

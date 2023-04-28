@@ -3,12 +3,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Customer } from '../../../core/models/customer.model';
-import { Good } from '../../../core/models/good.model';
-import { GoodsList } from '../../../core/models/goods-list.model';
-import { ApiService } from '../../../core/services/api.service';
-import { ChangeableVariablesService } from '../../../core/services/changeable-variables.service';
-import { PdfService } from '../../../core/services/pdf.service';
+import { Customer } from '../../../../modules/core/models/customer.model';
+import { Good } from '../../../../modules/core/models/good.model';
+import { GoodsList } from '../../../../modules/core/models/goods-list.model';
+import { ApiService } from '../../../../modules/core/services/api.service';
+import { ChangeableVariablesService } from '../../../../modules/core/services/changeable-variables.service';
+import { PdfService } from '../../../../modules/core/services/pdf.service';
 import { DeleteTableModalComponent } from '../delete-table-modal/delete-table-modal.component';
 import { PayoutAmountModalComponent } from '../payout-amount-modal/payout-amount-modal.component';
 import { UpdateTableModalComponent } from '../update-table-modal/update-table-modal.component';
@@ -249,8 +249,30 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
 
     this.pdfService.createPdfStart(customerText, body, this.goodsList);
   }
+  createPdfStartForMail() {
+    const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
+    const customerText = this.createCustomerText();
+
+    if (this.goodsList.tableItems.length === 0) {
+      body.push(['-', '-', '-', '-', '-', '-', '-', '-']);
+    }
+
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+      row.shift();
+      row.pop();
+      body.push(row);
+    }
+
+    this.pdfService.createPdfStartForMail(customerText, body, this.goodsList);
+  }
   sendMailStart() {
-    this.createPdfStart();
+    this.createPdfStartForMail();
+    console.log('Mail senden');
+
+    // this.apiService.sendMail(this.goodsList.id).subscribe(value => {
+    //   console.log('value ', value);
+    // });
     //dann Mail senden
   }
   createPdfEnd() {

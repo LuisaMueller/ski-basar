@@ -93,4 +93,12 @@ export class ApiService extends GraphQLPlusService {
       type: GraphQLRequestType.MUTATION,
     });
   }
+
+  sendMail(id: string, input: string) {
+    return this.graphQl('sendMail', {
+      arguments: { id, input },
+      fields: ['id', 'number'],
+      type: GraphQLRequestType.QUERY,
+    });
+  }
 }

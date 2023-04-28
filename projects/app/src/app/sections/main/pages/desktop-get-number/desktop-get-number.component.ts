@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '@lenne.tech/ng-base/shared';
-import { Customer } from '../../../core/models/customer.model';
+import { Customer } from '../../../../modules/core/models/customer.model';
 
 @Component({
   selector: 'app-desktop-get-number',
