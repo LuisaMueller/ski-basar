@@ -55,7 +55,7 @@ export const config: { [env: string]: Partial<IServerOptions> } = {
         introspection: true,
         playground: true,
       },
-      maxComplexity: 20,
+      maxComplexity: 80,
     },
     ignoreSelectionsForPopulate: true,
     jwt: {
