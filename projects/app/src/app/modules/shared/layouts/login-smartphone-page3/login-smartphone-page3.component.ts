@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { StorageService } from '@lenne.tech/ng-base/shared';
 import { Customer } from '../../../core/models/customer.model';
 import { ApiService } from '../../../core/services/api.service';
-
 @Component({
   selector: 'app-login-smartphone-page3',
   templateUrl: './login-smartphone-page3.component.html',
@@ -27,10 +26,18 @@ export class LoginSmartphonePage3Component implements OnInit {
     const input = { ...this.customer, ...this.changeForm.value };
 
     //Warenzettel erstellen
-    this.apiService.createList({ note: '', fee: 0, customer: input }).subscribe(value => {
-      //Nummer zurückgeben
-      this.storageService.save({ customer: { ...input, number: value.number } });
-      this.router.navigate(['auth/login-smartphone-4/']);
-    });
+    this.apiService
+      .createList({
+        note: '',
+        fee: 0,
+        isMailStartSend: false,
+        isMailEndSend: false,
+        customer: input,
+      })
+      .subscribe(value => {
+        //Nummer zurückgeben
+        this.storageService.save({ customer: { ...input, number: value.number } });
+        this.router.navigate(['auth/login-smartphone-4/']);
+      });
   }
 }

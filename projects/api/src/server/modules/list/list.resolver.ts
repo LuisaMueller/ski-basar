@@ -52,10 +52,33 @@ export class ListResolver {
   /**
    * Get List via ID
    */
-  @Roles(RoleEnum.S_USER)
   @Query(() => List, { description: 'Get List with specified ID' })
   async getList(@GraphQLServiceOptions() serviceOptions: ServiceOptions, @Args('id') id: string): Promise<List> {
     return await this.listService.get(id, serviceOptions);
+  }
+
+  /**
+   * Send Mail Warenannahme zu Beginn
+   */
+  @Query(() => List, { description: 'Send Mail Start' })
+  async sendMailStart(
+    @GraphQLServiceOptions() serviceOptions: ServiceOptions,
+    @Args('id') id: string,
+    @Args('input') input: string
+  ): Promise<List> {
+    return await this.listService.sendMailStart(id, input, serviceOptions);
+  }
+
+  /**
+   * Send Mail Warenausgabe am Ende
+   */
+  @Query(() => List, { description: 'Send Mail End' })
+  async sendMailEnd(
+    @GraphQLServiceOptions() serviceOptions: ServiceOptions,
+    @Args('id') id: string,
+    @Args('input') input: string
+  ): Promise<List> {
+    return await this.listService.sendMailEnd(id, input, serviceOptions);
   }
 
   // ===========================================================================

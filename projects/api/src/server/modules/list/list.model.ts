@@ -51,6 +51,16 @@ export class List extends PersistenceModel {
   archivedTableItems: TableItem[] = undefined;
 
   /**
+   * DeletedTableItems of List
+   */
+  @Field(() => [TableItem], {
+    description: 'DeletedTableItems of List',
+    nullable: true,
+  })
+  @Prop()
+  deletedTableItems: TableItem[] = undefined;
+
+  /**
    * Editor of List
    */
   @Field(() => User, {
@@ -89,6 +99,26 @@ export class List extends PersistenceModel {
   })
   @Prop()
   customer: Customer = undefined;
+
+  /**
+   * isMailStartSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailStartSend of List',
+    nullable: true,
+  })
+  @Prop()
+  isMailStartSend: boolean = undefined;
+
+  /**
+   * isMailEndSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailEndSend of List',
+    nullable: true,
+  })
+  @Prop()
+  isMailEndSend: boolean = undefined;
 
   // ===================================================================================================================
   // Methods

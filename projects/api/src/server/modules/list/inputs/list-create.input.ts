@@ -45,6 +45,16 @@ export class ListCreateInput extends ListInput {
   override archivedTableItems?: TableItemInput[] = undefined;
 
   /**
+   * DeletedTableItems of List
+   */
+  @Field(() => [TableItemInput], {
+    description: 'DeletedTableItems of List',
+    nullable: true,
+  })
+  @IsOptional()
+  override deletedTableItems?: TableItemInput[] = undefined;
+
+  /**
    * EditorId of List
    */
   @Field(() => String, {
@@ -83,4 +93,24 @@ export class ListCreateInput extends ListInput {
   })
   @IsOptional()
   override customer?: CustomerInput = undefined;
+
+  /**
+   * isMailStartSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailStartSend of List',
+    nullable: false,
+  })
+  @IsOptional()
+  override isMailStartSend?: boolean = undefined;
+
+  /**
+   * isMailEndSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailEndSend of List',
+    nullable: false,
+  })
+  @IsOptional()
+  override isMailEndSend?: boolean = undefined;
 }
