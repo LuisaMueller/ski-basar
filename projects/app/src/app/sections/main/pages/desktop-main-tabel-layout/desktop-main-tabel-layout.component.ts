@@ -26,7 +26,6 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   existingNumbersList: string[] = [];
   submitForm: FormGroup;
   noteForm: FormGroup;
-
   deletionHint: string = '';
   payoutHint: string = '';
   loadOrErrorText: string = 'Seite lädt';
@@ -48,6 +47,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       this.apiService.findList(+value.id).subscribe(
         value1 => {
           this.goodsList = value1[0];
+
+          this.createDeletionHint();
+
           if (!this.goodsList) {
             this.loadOrErrorNumber = value.id;
             this.loadOrErrorText = 'Nummer ' + value.id + ' ist nicht vorhanden';
@@ -128,7 +130,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
           updatedFee = updatedFee + 1;
         }
         if (regex.test(prizeBeforeChange) && !regex.test(result.prize)) {
-          updatedFee = updatedFee - 1;
+          if (updatedFee >= 1) {
+            updatedFee = updatedFee - 1;
+          } else updatedFee = 0;
         }
       } else updatedFee = 0;
 
@@ -149,29 +153,46 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.componentInstance.content = good;
     modalRef.result.then(result => {
       if (result.delete === 'yes') {
+        let updatedDeletedTableItems = this.goodsList.deletedTableItems?.slice();
+        updatedDeletedTableItems?.push(good);
+
         let updatedTableItems = this.goodsList.tableItems.slice();
         updatedTableItems.splice(index, 1);
         let updatedFee = this.goodsList.fee!;
         if (this.currentCustomer.isHelper === false) {
-          if (result.reason === 'editingError') {
-            updatedFee = updatedFee - 1;
+          const regex = new RegExp('^(?:[5-9]{1}|[1-9]{1}[0-9]+)(?:,[0-9]{1,2})?$');
+          if (regex.test(good.prize)) {
+            if (result.reason === 'editingError') {
+              if (updatedFee >= 1) {
+                updatedFee = updatedFee - 1;
+              } else updatedFee = 0;
+            }
           }
         } else updatedFee = 0;
 
         this.apiService
           .updateList(this.goodsList.id, {
             tableItems: updatedTableItems,
+            deletedTableItems: updatedDeletedTableItems,
             fee: updatedFee,
           })
           .subscribe(value => {
             this.goodsList = value;
+            this.createDeletionHint();
           });
-        //deletionhint:
-        if (this.deletionHint === '') {
-          this.deletionHint = good.number;
-        } else this.deletionHint = this.deletionHint + ', ' + good.number;
       }
     });
+  }
+
+  createDeletionHint() {
+    this.deletionHint = '';
+    if (this.goodsList.deletedTableItems) {
+      for (let i = 0; i < this.goodsList.deletedTableItems!.length; i++) {
+        if (this.deletionHint === '') {
+          this.deletionHint = this.goodsList.deletedTableItems[i].number;
+        } else this.deletionHint = this.deletionHint + ', ' + this.goodsList.deletedTableItems[i].number;
+      }
+    }
   }
 
   add() {
@@ -208,11 +229,11 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
   }
 
   navPrevNext(goodListNr: number) {
-    this.router.navigate(['auth/main-desktop/' + goodListNr]);
+    this.router.navigate(['/main-desktop/' + goodListNr]);
   }
 
   navTo(event: any) {
-    this.router.navigate(['auth/main-desktop/' + event.target.value]);
+    this.router.navigate(['/main-desktop/' + event.target.value]);
     event.target.value = '';
   }
   createCustomerText() {
@@ -249,6 +270,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
 
     this.pdfService.createPdfStart(customerText, body, this.goodsList);
   }
+
   createPdfStartForMail() {
     const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]']];
     const customerText = this.createCustomerText();
@@ -264,17 +286,12 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       body.push(row);
     }
 
-    this.pdfService.createPdfStartForMail(customerText, body, this.goodsList);
+    this.apiService.updateList(this.goodsList.id, { isMailStartSend: true }).subscribe(value => {
+      this.goodsList = value;
+      this.pdfService.createPdfStartForMail(customerText, body, this.goodsList);
+    });
   }
-  sendMailStart() {
-    this.createPdfStartForMail();
-    console.log('Mail senden');
 
-    // this.apiService.sendMail(this.goodsList.id).subscribe(value => {
-    //   console.log('value ', value);
-    // });
-    //dann Mail senden
-  }
   createPdfEnd() {
     const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
     let payoutArray: string[] = [];
@@ -293,7 +310,41 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     if (this.currentCustomer.isHelper === true) {
       payoutArray = this.calculatePayoutValueForHelper();
     } else payoutArray = this.calculatePayoutValue();
+
     this.pdfService.createPdfEnd(customerText, body, this.goodsList, payoutArray[0], payoutArray[1], payoutArray[2]);
+  }
+
+  createPdfEndForMail() {
+    const body = [['Nr.', 'Art', 'Marke', 'Größe', 'Farbe', 'Sonstiges', 'Preis [€]', 'VB [€]', 'Verkauft für [€]']];
+    let payoutArray: string[] = [];
+    const customerText = this.createCustomerText();
+
+    if (this.goodsList.tableItems.length === 0) {
+      body.push(['-', '-', '-', '-', '-', '-', '-', '-', '-']);
+    }
+
+    for (let i = 0; i < this.goodsList.tableItems.length; i++) {
+      const row = Object.values(this.goodsList.tableItems[i]);
+
+      row.shift();
+      body.push(row);
+    }
+    if (this.currentCustomer.isHelper === true) {
+      payoutArray = this.calculatePayoutValueForHelper();
+    } else payoutArray = this.calculatePayoutValue();
+
+    this.apiService.updateList(this.goodsList.id, { isMailEndSend: true }).subscribe(value => {
+      this.goodsList = value;
+
+      this.pdfService.createPdfEndForMail(
+        customerText,
+        body,
+        this.goodsList,
+        payoutArray[0],
+        payoutArray[1],
+        payoutArray[2]
+      );
+    });
   }
 
   calculatePayoutValue() {
@@ -342,8 +393,7 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     modalRef.result
       .then(result => {
         if (result === 'verschickt') {
-          this.createPdfEnd();
-          //Mail senden
+          this.createPdfEndForMail();
           this.payoutHint = 'Der Beleg wurde erfolgreich verschickt.';
         }
       })
