@@ -45,6 +45,16 @@ export class ListInput extends CoreInput {
   archivedTableItems?: TableItemInput[] = undefined;
 
   /**
+   * DeletededTableItems of List
+   */
+  @Field(() => [TableItemInput], {
+    description: 'DeletedTableItems of List',
+    nullable: true,
+  })
+  @IsOptional()
+  deletedTableItems?: TableItemInput[] = undefined;
+
+  /**
    * EditorId of List
    */
   @Field(() => String, {
@@ -83,4 +93,24 @@ export class ListInput extends CoreInput {
   })
   @IsOptional()
   customer?: CustomerInput = undefined;
+
+  /**
+   * isMailStartSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailStartSend of List',
+    nullable: true,
+  })
+  @IsOptional()
+  isMailStartSend?: boolean = undefined;
+
+  /**
+   * isMailEndSend of List
+   */
+  @Field(() => Boolean, {
+    description: 'isMailEndSend of List',
+    nullable: true,
+  })
+  @IsOptional()
+  isMailEndSend?: boolean = undefined;
 }
