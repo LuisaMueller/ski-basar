@@ -277,6 +277,14 @@
         </tbody>
         <tfoot id="footer">
           <tr>
+            <td colspan="9">
+              <div class="d-flex justify-content-end align-items-center">
+                <span class="me-2 mb-0 text-primary" [hidden]="deletionHint === ''">Gelöschte Artikel: </span
+                ><span>{{ deletionHint }}</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <td colspan="9" class="pt-5">
               <div class="d-flex justify-content-end align-items-center">
                 <p class="me-2 mb-0 text-primary">Zu zahlende Gebühr:</p>
@@ -288,7 +296,7 @@
             <td colspan="9">
               <div class="d-flex justify-content-end align-items-center">
                 <div>
-                  <button type="button" class="submitButton btn btn-primary me-2" (click)="sendMailStart()">
+                  <button type="button" class="submitButton btn btn-primary me-2" (click)="createPdfStartForMail()">
                     Annahmebeleg abschicken
                   </button>
                 </div>
@@ -298,8 +306,9 @@
           <tr>
             <td colspan="9">
               <div class="d-flex justify-content-end align-items-center">
-                <p class="me-2 mb-0 text-primary" [hidden]="deletionHint === ''">Gelöschte Artikel:</p>
-                {{ deletionHint }}
+                <p [hidden]="goodsList.isMailStartSend === false">
+                  <span class="me-2 mb-0 text-primary">Hinweis: </span>Der Beleg wurde erfolgreich verschickt.
+                </p>
               </div>
             </td>
           </tr>
@@ -343,8 +352,9 @@
           <tr>
             <td colspan="9">
               <div class="d-flex justify-content-center align-items-center">
-                <p class="me-2 mb-0 text-primary" [hidden]="payoutHint === ''">Hinweis:</p>
-                {{ payoutHint }}
+                <p [hidden]="goodsList.isMailEndSend === false">
+                  <span class="me-2 mb-0 text-primary">Hinweis: </span>Der Beleg wurde erfolgreich verschickt.
+                </p>
               </div>
             </td>
           </tr>
@@ -370,8 +380,8 @@
                   Optional können hier zwei PDFs der Nr. {{ goodsList.number }} erstellt werden. <br />
                   PDF ohne Kasse: Hierbei handelt es sich um das PDF ohne eingetragene Kassen-Werte und ohne
                   Auszahlungsbetrag etc. <br />
-                  PDF mit Kasse: Hierbei handelt es sich um das PDF mit eingetragenen Kassen-Werten und mit, Provision,
-                  Auszahlungsbetrag etc.
+                  PDF mit Kasse: Hierbei handelt es sich um das PDF mit eingetragenen Kassen-Werten und mit
+                  Verkaufswert, Provision, Auszahlungsbetrag etc.
                 </p>
               </div>
             </td>
@@ -398,7 +408,8 @@
 <div *ngIf="!goodsList">
   <div class="alternative-site">
     <h1 class="text-primary mb-5">{{ loadOrErrorText }}</h1>
-    <div>
+    <!-- bei Bedarf die folgenden Zeilen wieder einkommentieren:
+       <div>
       <button
         type="button"
         class="btn btn-primary m-5"
@@ -415,7 +426,7 @@
         Zu Nummer<br />
         <span class="fw-semibold display-6">{{ +loadOrErrorNumber + 1 }}</span>
       </button>
-    </div>
+    </div> -->
     <h4 class="text-primary my-5" [hidden]="loadOrErrorText === 'Seite lädt'">{{ existingNumbersText }}</h4>
     <div class="m-3">
       <button
