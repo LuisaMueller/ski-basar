@@ -30,12 +30,13 @@ export class ApiService extends GraphQLPlusService {
         'id',
         'number',
         { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
-        //FIXME: Kai fragen warum die archivedTableItems nur max. 4 Subitems returnen können
-        //--> brauchen wir überhaupt alle 9 zurück? Evtl. reichen ja sogar 4, der Rest ist ja trotzdem in der Datenbank?!
-        { archivedTableItems: ['number'] },
+        { archivedTableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        { deletedTableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
         'note',
         'fee',
-        { customer: ['firstName', 'lastName'] },
+        // { customer: ['firstName', 'lastName'] },
+        'isMailStartSend',
+        'isMailEndSend',
       ],
       type: GraphQLRequestType.QUERY,
     });
@@ -83,19 +84,28 @@ export class ApiService extends GraphQLPlusService {
         'id',
         'number',
         { tableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
-        //FIXME: Kai fragen warum die archivedTableItems nur max. 4 Subitems returnen können
-        //--> brauchen wir überhaupt alle 9 zurück? Evtl. reichen ja sogar 4, der Rest ist ja trotzdem in der Datenbank?!
-        { archivedTableItems: ['number'] },
+        { archivedTableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
+        { deletedTableItems: ['number', 'classification', 'brand', 'size', 'color', 'other', 'prize', 'vb', 'cash'] },
         'note',
         'fee',
-        { customer: ['firstName', 'lastName'] },
+        // { customer: ['firstName', 'lastName'] },
+        'isMailStartSend',
+        'isMailEndSend',
       ],
       type: GraphQLRequestType.MUTATION,
     });
   }
 
-  sendMail(id: string, input: string) {
-    return this.graphQl('sendMail', {
+  sendMailStart(id: string, input: string) {
+    return this.graphQl('sendMailStart', {
+      arguments: { id, input },
+      fields: ['id', 'number'],
+      type: GraphQLRequestType.QUERY,
+    });
+  }
+
+  sendMailEnd(id: string, input: string) {
+    return this.graphQl('sendMailEnd', {
       arguments: { id, input },
       fields: ['id', 'number'],
       type: GraphQLRequestType.QUERY,

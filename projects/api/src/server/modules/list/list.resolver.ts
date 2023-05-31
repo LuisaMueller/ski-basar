@@ -58,15 +58,27 @@ export class ListResolver {
   }
 
   /**
-   * Send Mail
+   * Send Mail Warenannahme zu Beginn
    */
-  @Query(() => List, { description: 'Send Mail' })
-  async sendMail(
+  @Query(() => List, { description: 'Send Mail Start' })
+  async sendMailStart(
     @GraphQLServiceOptions() serviceOptions: ServiceOptions,
     @Args('id') id: string,
     @Args('input') input: string
   ): Promise<List> {
-    return await this.listService.sendMail(id, input, serviceOptions);
+    return await this.listService.sendMailStart(id, input, serviceOptions);
+  }
+
+  /**
+   * Send Mail Warenausgabe am Ende
+   */
+  @Query(() => List, { description: 'Send Mail End' })
+  async sendMailEnd(
+    @GraphQLServiceOptions() serviceOptions: ServiceOptions,
+    @Args('id') id: string,
+    @Args('input') input: string
+  ): Promise<List> {
+    return await this.listService.sendMailEnd(id, input, serviceOptions);
   }
 
   // ===========================================================================
