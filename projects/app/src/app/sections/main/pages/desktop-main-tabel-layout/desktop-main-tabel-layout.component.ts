@@ -351,9 +351,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     let cashValue: number = 0;
     let payoutArray: string[] = ['', '', ''];
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
-      const row = Object.values(this.goodsList.tableItems[i]);
-      if (row[9] !== null) {
-        cashValue = cashValue + parseFloat(row[9].replace(',', '.'));
+      const cash = this.goodsList.tableItems[i].cash;
+      if (cash !== null) {
+        cashValue = cashValue + parseFloat(cash!.replace(',', '.'));
       }
     }
     const cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
@@ -369,9 +369,9 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     let cashValue: number = 0;
     let payoutArray: string[] = ['', '', ''];
     for (let i = 0; i < this.goodsList.tableItems.length; i++) {
-      const row = Object.values(this.goodsList.tableItems[i]);
-      if (row[9] !== null) {
-        cashValue = cashValue + parseFloat(row[9].replace(',', '.'));
+      const cash = this.goodsList.tableItems[i].cash;
+      if (cash !== null) {
+        cashValue = cashValue + parseFloat(cash!.replace(',', '.'));
       }
     }
     const cashValueString = cashValue.toFixed(2).toString().replace('.', ',');
@@ -380,14 +380,17 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
     payoutArray[0] = cashValueString;
     payoutArray[1] = provisionValueString;
     payoutArray[2] = payoutValueString;
+
     return payoutArray;
   }
 
   openPayoutAmountModal() {
     let payoutArray: string[] = [];
-    if (this.currentCustomer.isHelper === true) {
+    if (this.currentCustomer.isHelper) {
       payoutArray = this.calculatePayoutValueForHelper();
-    } else payoutArray = this.calculatePayoutValue();
+    } else {
+      payoutArray = this.calculatePayoutValue();
+    }
     const modalRef = this.modalService.open(PayoutAmountModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.payoutArray = payoutArray;
     modalRef.result

@@ -7,6 +7,6 @@ import { LoginConfig } from '@lenne.tech/ng-base/shared';
   styleUrls: ['./desktop-main-login-layout.component.scss'],
 })
 export class DesktopMainLoginLayoutComponent {
-  config: LoginConfig = { redirectUrl: '/auth/main-desktop/1', showPasswordForget: false, showRegister: false };
+  config: LoginConfig = { redirectUrl: '../main-desktop/1', showPasswordForget: false, showRegister: false };
   constructor() {}
 }
