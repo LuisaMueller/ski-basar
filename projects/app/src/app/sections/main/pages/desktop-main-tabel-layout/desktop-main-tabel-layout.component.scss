@@ -27,12 +27,35 @@
           }
         }
       }
-
-      .profil {
-        background-color: $secondary;
-        width: 48px;
-        height: 48px;
+      .profil-background {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: $primary;
+        width: 200px;
+        height: 50px;
+        border: none;
         border-radius: 50%;
+      }
+      .logout-button {
+        background-color: $secondary;
+        color: $primary;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        font-size: 11px;
+      }
+      .profil-flexbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .profil {
+        font-size: 11px;
+        color: white;
       }
     }
   }

@@ -7,8 +7,6 @@ import {
   SetPasswordComponent,
 } from '@lenne.tech/ng-base/base-prototype';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
-import { DesktopGetNumberComponent } from 'src/app/sections/main/pages/desktop-get-number/desktop-get-number.component';
-import { DesktopNumberLayoutComponent } from 'src/app/sections/main/pages/desktop-number-layout/desktop-number-layout.component';
 import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
 import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
 import { LoginSmartphonePage4Component } from '../../modules/shared/layouts/login-smartphone-page4/login-smartphone-page4.component';
@@ -25,7 +23,7 @@ const routes: Routes = [
         component: LoginComponent,
         data: {
           config: {
-            redirectUrl: '/auth/main-desktop/1',
+            redirectUrl: '../main-desktop/1',
             showPasswordForget: false,
             showRegister: false,
             logoUrl: '',
