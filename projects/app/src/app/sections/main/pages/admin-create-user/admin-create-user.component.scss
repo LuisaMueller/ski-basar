@@ -1,0 +1,110 @@
+@import '../../../../../assets/scss/utils';
+
+.body-main {
+  width: 100%;
+  height: 100%;
+
+  .navbar {
+    border-bottom: 1px solid $primary;
+    .img-container {
+      img {
+        width: 135px;
+        height: 53px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    }
+    .nav-items-container {
+      ul {
+        .active-2 {
+          color: $primary;
+        }
+        .not-active {
+          color: $secondary;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+      .profil-background {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: $primary;
+        width: 200px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+      }
+      .logout-button {
+        background-color: $secondary;
+        color: $primary;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        font-size: 11px;
+      }
+      .profil-flexbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .profil {
+        font-size: 11px;
+        color: white;
+      }
+    }
+  }
+  .section-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    width: 100%;
+    height: 87%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    .section-input {
+      width: 30%;
+      height: 80%;
+      background-color: white transparent;
+
+      .mandatory-field {
+        font-size: 10px;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .mountain-left {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
+    clip-path: polygon(0 0, 20% 26%, 35% 54%, 47% 46%, 85% 100%, 0 100%);
+    background-color: #d9d9d9;
+    z-index: -1;
+  }
+
+  .mountain-right {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 200px;
+    width: 200px;
+    clip-path: polygon(71% 78%, 80% 53%, 100% 60%, 100% 100%, 0 100%, 13% 70%, 44% 86%);
+    background-color: #d9d9d9;
+    right: 0;
+    z-index: -1;
+  }
+}

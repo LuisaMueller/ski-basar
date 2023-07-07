@@ -15,6 +15,8 @@ import { DeleteTableModalComponent } from './pages/delete-table-modal/delete-tab
 import { PayoutAmountModalComponent } from './pages/payout-amount-modal/payout-amount-modal.component';
 import { DesktopGetNumberComponent } from './pages/desktop-get-number/desktop-get-number.component';
 import { DesktopNumberLayoutComponent } from './pages/desktop-number-layout/desktop-number-layout.component';
+import { AdminCreateUserComponent } from './pages/admin-create-user/admin-create-user.component';
+import { AdminCheckCashComponent } from './pages/admin-check-cash/admin-check-cash.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { DesktopNumberLayoutComponent } from './pages/desktop-number-layout/desk
     PayoutAmountModalComponent,
     DesktopGetNumberComponent,
     DesktopNumberLayoutComponent,
+    AdminCreateUserComponent,
+    AdminCheckCashComponent,
   ],
   imports: [
     CommonModule,
