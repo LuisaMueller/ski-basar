@@ -84,6 +84,12 @@
       }
     }
   }
+  .section-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
 
   .mountain-left {
     position: fixed;

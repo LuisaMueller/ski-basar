@@ -43,7 +43,42 @@
   <div class="section-title pt-3">
     <h1 class="text-primary mt-3">Kassenprüfung</h1>
   </div>
-  <div class="section-main mt-5"></div>
+  <div class="section-main mt-5">
+    <div class="first-column">
+      <h3 class="text-primary text-center">Samstag</h3>
+
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeSaturdayString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsSaturdayString }}</p>
+      <div class="d-flex justify-content-center align-items-center my-5">
+        <button type="button" class="submitButton btn btn-primary me-2" (click)="calculateFeeAndProceedsSaturday()">
+          Werte berechnen<br />
+          & PDF erstellen
+        </button>
+      </div>
+    </div>
+    <div class="second-column">
+      <h3 class="text-primary text-center">Sonntag</h3>
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeSundayString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsSundayString }}</p>
+    </div>
+    <div class="third-column">
+      <h3 class="text-primary text-center">Gesamt</h3>
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeTotalString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsTotalString }}</p>
+      <div class="d-flex justify-content-center align-items-center my-5">
+        <button type="button" class="submitButton btn btn-primary me-2" (click)="calculateFeeAndProceedsTotal()">
+          Werte berechnen<br />
+          & PDF erstellen
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="mountain-left"></div>
   <div class="mountain-right"></div>
