@@ -31,7 +31,7 @@ export class DesktopNumberLayoutComponent implements OnInit {
       email: new FormControl(null, Validators.required),
       helper: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.pattern(this.changeableVariablesService.helperPassword)),
-      accept: new FormControl(null, Validators.required),
+      accept: new FormControl(null, Validators.requiredTrue),
     });
   }
   navToGetNumber() {

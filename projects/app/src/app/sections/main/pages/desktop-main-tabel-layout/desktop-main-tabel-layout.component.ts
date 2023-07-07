@@ -15,6 +15,7 @@ import { UpdateTableModalComponent } from '../update-table-modal/update-table-mo
 const pdfMakeX = require('pdfmake/build/pdfmake.js');
 const pdfFontsX = require('pdfmake-unicode/dist/pdfmake-unicode.js');
 pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
+
 @Component({
   selector: 'app-desktop-main-tabel-layout',
   templateUrl: './desktop-main-tabel-layout.component.html',
@@ -91,11 +92,15 @@ export class DesktopMainTabelLayoutComponent implements OnInit {
       other: new FormControl(null),
       prize: new FormControl(null, [
         Validators.required,
-        Validators.min(1),
-        Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$'),
+        Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$|^(?:[0]{1})(?:,[1-9]{1}[0-9]{0,1})$'), //so für Zahlen ab 0,10€
+      ]), //für Zahlen ab 1: '^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$'
+      vb: new FormControl(null, [
+        Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$|^(?:[0]{1})(?:,[1-9]{1}[0-9]{0,1})$'),
       ]),
-      vb: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
-      cash: new FormControl(null, [Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$')]),
+      cash: new FormControl(null, [
+        // Validators.max(this.submitForm.value.prize),
+        Validators.pattern('^(?:[1-9]{1}[0-9]*)(?:,[0-9]{1,2})?$|^(?:[0]{1})(?:,[1-9]{1}[0-9]{0,1})$'),
+      ]),
     });
     this.noteForm = new FormGroup({
       note: new FormControl(null),
