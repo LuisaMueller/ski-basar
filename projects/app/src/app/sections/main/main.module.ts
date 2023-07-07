@@ -17,6 +17,9 @@ import { DesktopNumberLayoutComponent } from './pages/desktop-number-layout/desk
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { PayoutAmountModalComponent } from './pages/payout-amount-modal/payout-amount-modal.component';
 import { UpdateTableModalComponent } from './pages/update-table-modal/update-table-modal.component';
+import { AdminSeeListsComponent } from './pages/admin-see-lists/admin-see-lists.component';
+import { AdminSeeArchiveComponent } from './pages/admin-see-archive/admin-see-archive.component';
+import { AdminShowStatisticsComponent } from './pages/admin-show-statistics/admin-show-statistics.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { UpdateTableModalComponent } from './pages/update-table-modal/update-tab
     DesktopNumberLayoutComponent,
     AdminCreateUserComponent,
     AdminCheckCashComponent,
+    AdminSeeListsComponent,
+    AdminSeeArchiveComponent,
+    AdminShowStatisticsComponent,
   ],
   imports: [
     CommonModule,

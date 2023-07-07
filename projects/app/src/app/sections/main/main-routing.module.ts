@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@lenne.tech/ng-base';
 import { MainComponent } from './main.component';
 import { AdminCheckCashComponent } from './pages/admin-check-cash/admin-check-cash.component';
+import { AdminSeeArchiveComponent } from './pages/admin-see-archive/admin-see-archive.component';
+import { AdminSeeListsComponent } from './pages/admin-see-lists/admin-see-lists.component';
+import { AdminShowStatisticsComponent } from './pages/admin-show-statistics/admin-show-statistics.component';
 import { DesktopGetNumberComponent } from './pages/desktop-get-number/desktop-get-number.component';
 import { DesktopMainTabelLayoutComponent } from './pages/desktop-main-tabel-layout/desktop-main-tabel-layout.component';
 import { DesktopNumberLayoutComponent } from './pages/desktop-number-layout/desktop-number-layout.component';
@@ -38,6 +41,18 @@ const routes: Routes = [
       {
         path: 'admin-check-cash',
         component: AdminCheckCashComponent,
+      },
+      {
+        path: 'admin-see-lists',
+        component: AdminSeeListsComponent,
+      },
+      {
+        path: 'admin-see-archive',
+        component: AdminSeeArchiveComponent,
+      },
+      {
+        path: 'admin-show-statistics',
+        component: AdminShowStatisticsComponent,
       },
     ],
   },
