@@ -17,6 +17,6 @@ export class DesktopGetNumberComponent implements OnInit {
     this.customer = this.storageService.load('customer');
   }
   navToGoodList() {
-    this.router.navigate(['auth/main-desktop/' + this.customer.number]);
+    this.router.navigate(['/main-desktop/' + this.customer.number]);
   }
 }

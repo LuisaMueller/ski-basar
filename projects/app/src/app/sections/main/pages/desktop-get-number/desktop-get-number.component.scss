@@ -3,6 +3,89 @@
 .body-main-getNumber {
   width: 100%;
   height: 100%;
+
+  .navbar {
+    border-bottom: 1px solid $primary;
+    .img-container {
+      img {
+        width: 135px;
+        height: 53px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    }
+    .nav-items-container {
+      ul {
+        .active-2 {
+          color: $primary;
+        }
+        .not-active {
+          color: $secondary;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+      .profil-background {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: $primary;
+        width: 200px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+      }
+      .logout-button {
+        background-color: $secondary;
+        color: $primary;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        font-size: 11px;
+      }
+      .profil-flexbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .profil {
+        font-size: 11px;
+        color: white;
+      }
+    }
+  }
+  .section-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .section-number {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-weight: 400;
+      font-size: 128px;
+      color: $primary;
+    }
+  }
+  .section-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .btn {
+      width: 20%;
+    }
+  }
+
   .mountain-left {
     position: fixed;
     left: 0;
@@ -23,74 +106,5 @@
     background-color: #d9d9d9;
     right: 0;
     z-index: -1;
-  }
-
-  .navbar {
-    border-bottom: 1px solid $primary;
-    .img-container {
-      img {
-        width: 135px;
-        height: 53px;
-
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-      }
-    }
-    .nav-items-container {
-      ul {
-        padding-left: 0%;
-        margin-right: 0px;
-        .active-2 {
-          color: $primary;
-        }
-        .not-active {
-          color: $secondary;
-
-          &:hover {
-            color: $primary;
-          }
-        }
-      }
-
-      .profi {
-        background-color: $secondary;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-      }
-    }
-  }
-  .section-header {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    h3 {
-      color: $primary;
-      font-size: 30px;
-    }
-  }
-  .section-number {
-    width: 100%;
-    height: 25%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    p {
-      font-weight: 400;
-      font-size: 128px;
-      color: $primary;
-    }
-  }
-  .section-button {
-    width: 100%;
-    height: 25%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    .btn {
-      width: 20%;
-    }
   }
 }

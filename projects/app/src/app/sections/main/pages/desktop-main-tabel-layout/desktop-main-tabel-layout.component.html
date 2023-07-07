@@ -9,10 +9,10 @@
       <div class="nav-items-container" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active-2" aria-current="page" href="#">Warenzettel ausfüllen</a>
+            <a class="nav-link active-2" aria-current="page" href="/main-desktop/1">Warenzettel ausfüllen</a>
           </li>
           <li class="nav-item me-5">
-            <a class="nav-link not-active" href="#">Kundennummer anlegen</a>
+            <a class="nav-link not-active" href="/number-layout">Kundennummer anlegen</a>
           </li>
           <div class="profil-background ms-5">
             <li class="nav-item profil-flexbox mx-3">
@@ -30,7 +30,7 @@
       </div>
     </div>
   </nav>
-  <div class="section-1">
+  <div class="section-1 my-5">
     <div class="numberslider-container ms-5">
       <div class="numberarrow-container">
         <div>
@@ -96,7 +96,9 @@
       </form>
     </div>
   </div>
-  <div class="section-2 mt-4">
+  <p class="text-center text-white">_</p>
+  <!--p-Tag ist nur für etwas Abstand-->
+  <div class="section-2 mt-3">
     <form (ngSubmit)="add()" [formGroup]="submitForm" class="w-100">
       <table class="table table-striped">
         <thead>
