@@ -34,14 +34,16 @@ const routes: Routes = [
       {
         path: 'registrieren',
         component: RegisterComponent,
-        data: {
-          config: {
-            redirectUrl: '../main-desktop/1',
-            showPasswordForget: false,
-            showLogin: false,
-            logoUrl: '',
-          },
-        },
+
+        //  { redirectUrl: '/auth/admin-create-user'},
+        // data: {
+        //   config: {
+        //     redirectUrl: '../main-desktop/1',
+        //     showPasswordForget: false,
+        //     showLogin: false,
+        //     logoUrl: '',
+        //   },
+        // },
       },
       {
         path: 'passwort-vergessen',
