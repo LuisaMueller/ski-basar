@@ -7,6 +7,7 @@ import {
   SetPasswordComponent,
 } from '@lenne.tech/ng-base/base-prototype';
 import { DesktopMainLoginLayoutComponent } from 'src/app/modules/shared/layouts/desktop-main-login-layout/desktop-main-login-layout.component';
+import { AdminCreateUserComponent } from '../../modules/shared/layouts/admin-create-user/admin-create-user.component';
 import { LoginSmartphonePage2Component } from '../../modules/shared/layouts/login-smartphone-page2/login-smartphone-page2.component';
 import { LoginSmartphonePage3Component } from '../../modules/shared/layouts/login-smartphone-page3/login-smartphone-page3.component';
 import { LoginSmartphonePage4Component } from '../../modules/shared/layouts/login-smartphone-page4/login-smartphone-page4.component';
@@ -33,6 +34,16 @@ const routes: Routes = [
       {
         path: 'registrieren',
         component: RegisterComponent,
+
+        //  { redirectUrl: '/auth/admin-create-user'},
+        // data: {
+        //   config: {
+        //     redirectUrl: '../main-desktop/1',
+        //     showPasswordForget: false,
+        //     showLogin: false,
+        //     logoUrl: '',
+        //   },
+        // },
       },
       {
         path: 'passwort-vergessen',
@@ -61,6 +72,10 @@ const routes: Routes = [
       {
         path: 'login-smartphone-4',
         component: LoginSmartphonePage4Component,
+      },
+      {
+        path: 'admin-create-user',
+        component: AdminCreateUserComponent,
       },
       {
         path: '',

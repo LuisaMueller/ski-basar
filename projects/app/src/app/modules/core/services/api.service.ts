@@ -55,7 +55,7 @@ export class ApiService extends GraphQLPlusService {
     };
     return this.graphQl('findLists', {
       arguments: filter,
-      fields: ['id', 'number'],
+      fields: ['id', 'number', 'fee', { tableItems: ['number', 'prize', 'vb', 'cash'] }],
       type: GraphQLRequestType.QUERY,
     });
   }

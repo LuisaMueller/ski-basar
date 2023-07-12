@@ -9,23 +9,32 @@
       <div class="nav-items-container" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link not-active" aria-current="page" href="#">Warenzettel ausfüllen</a>
+            <a class="nav-link not-active" href="/main-desktop/1">Warenzettel ausfüllen</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active-2">Kundennummer anlegen</a>
+          <li class="nav-item me-5">
+            <a class="nav-link active-2" aria-current="page" href="/number-layout">Kundennummer anlegen</a>
           </li>
-          <li class="nav-item">
-            <div class="profi"></div>
-          </li>
+          <div class="profil-background ms-5">
+            <li class="nav-item profil-flexbox mx-3">
+              <div class="profil text-center">
+                Luisa Müller
+                <!--TODO: Hier noch den Namen aus der Datenbank nehmen-->
+              </div>
+            </li>
+            <li class="nav-item me-3">
+              <button class="logout-button">Logout</button>
+              <!--TODO: Hier noch eine Funktion einfügen-->
+            </li>
+          </div>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="section-title pt-3 container">
-    <h1 class="head">Manuell Kundennummer anlegen</h1>
+  <div class="section-title pt-3">
+    <h1 class="text-primary mt-3">Manuell Kundennummer anlegen</h1>
   </div>
-  <div class="section-main container mt-5">
+  <div class="section-main mt-5">
     <form (ngSubmit)="navToGetNumber()" [formGroup]="customerForm" class="form-input">
       <div class="section-input">
         <div class="form-floating mb-3">
@@ -34,10 +43,10 @@
             class="form-control rounded-4 border-primary"
             id="firstName"
             placeholder="Max"
-            formControlName="firstname"
+            formControlName="firstName"
             [ngClass]="{
-              'is-invalid': !customerForm.get('firstname')?.valid && customerForm.get('firstname')?.touched,
-              'is-valid': customerForm.get('firstname')?.valid && customerForm.get('firstname')?.touched
+              'is-invalid': !customerForm.get('firstName')?.valid && customerForm.get('firstName')?.touched,
+              'is-valid': customerForm.get('firstName')?.valid && customerForm.get('firstName')?.touched
             }" />
           <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="firstName">Vorname <span class="text-danger">*</span></label>
@@ -48,10 +57,10 @@
             class="form-control rounded-4 border-primary"
             id="lastName"
             placeholder="Mustermann"
-            formControlName="lastname"
+            formControlName="lastName"
             [ngClass]="{
-              'is-invalid': !customerForm.get('lastname')?.valid && customerForm.get('lastname')?.touched,
-              'is-valid': customerForm.get('lastname')?.valid && customerForm.get('lastname')?.touched
+              'is-invalid': !customerForm.get('lastName')?.valid && customerForm.get('lastName')?.touched,
+              'is-valid': customerForm.get('lastName')?.valid && customerForm.get('lastName')?.touched
             }" />
           <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="lastName">Nachname <span class="text-danger">*</span></label>
@@ -104,15 +113,16 @@
             class="form-control rounded-4 border-primary"
             id="email"
             placeholder="name@example.com"
-            formControlName="mail"
+            formControlName="email"
             [ngClass]="{
-              'is-invalid': !customerForm.get('mail')?.valid && customerForm.get('mail')?.touched,
-              'is-valid': customerForm.get('mail')?.valid && customerForm.get('mail')?.touched
+              'is-invalid': !customerForm.get('email')?.valid && customerForm.get('email')?.touched,
+              'is-valid': customerForm.get('email')?.valid && customerForm.get('email')?.touched
             }" />
           <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="email">E-Mail <span class="text-danger">*</span></label>
         </div>
-        <div class="form-floating mb-2 ml-4">
+        <p class="mandatory-field"><span class="text-danger">*</span> Pflichtfeld</p>
+        <!-- <div class="form-floating mb-2 ml-4">
           <input
             type="password"
             class="form-control rounded-4 border-primary"
@@ -125,8 +135,42 @@
             }" />
           <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
           <label for="password">Passwort (nur für Helfer)</label>
+        </div> -->
+        <p class="mt-4">Handelt es sich um einen Helfer des Skibasars?</p>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="helper"
+            formControlName="helper"
+            value="no"
+            id="flexRadioDefault1"
+            (change)="isCollapsed = true"
+            checked />
+          <label class="form-check-label" for="flexRadioDefault1"> Nein </label>
         </div>
-        <p><span class="text-danger">*</span> Pflichtfeld</p>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="helper"
+            formControlName="helper"
+            value="yes"
+            id="flexRadioDefault2"
+            (change)="isCollapsed = false" />
+          <label class="form-check-label" for="flexRadioDefault2"> Ja </label>
+        </div>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <div class="form-floating mt-2 mb-3">
+            <input
+              type="password"
+              class="form-control rounded-4 border-primary"
+              id="password"
+              placeholder="Passwort123"
+              formControlName="password" />
+            <label for="password">Zugangskennung (nur für Helfer)</label>
+          </div>
+        </div>
       </div>
       <div class="section-accept">
         <div class="data-area">
@@ -166,7 +210,20 @@
             formControlName="accept" />
           <label class="form-check-label" for="flexCheckAccept">Ich akzeptiere die oben stehenden Hinweise.</label>
         </div>
-        <button type="submit" class="btn btn-primary w-100 py-3 rounded-4" [disabled]="!customerForm.valid">
+        <button
+          type="submit"
+          class="btn btn-primary w-100 py-3 rounded-4"
+          [disabled]="
+            !customerForm.get('firstName')?.valid ||
+            !customerForm.get('lastName')?.valid ||
+            !customerForm.get('street')?.valid ||
+            !customerForm.get('postcode')?.valid ||
+            !customerForm.get('phonenumber')?.valid ||
+            !customerForm.get('email')?.valid ||
+            !customerForm.get('accept')?.valid ||
+            !customerForm.get('helper')?.valid ||
+            (customerForm.get('helper')?.value === 'yes' && !customerForm.get('password')?.valid)
+          ">
           Anmelden
         </button>
       </div>

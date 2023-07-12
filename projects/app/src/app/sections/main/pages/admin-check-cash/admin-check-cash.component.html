@@ -1,0 +1,85 @@
+<div class="body-main">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container d-flex justify-content-between">
+      <div class="img-container">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/images/SkiClubOlpeLogo11-_2_.png" alt="Logo" class="d-inline-block align-text-top" />
+        </a>
+      </div>
+      <div class="nav-items-container" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/auth/admin-create-user">User erstellen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active-2" aria-current="page" href="/admin-check-cash">Kassenprüfung</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-see-lists">Listen einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-see-archive">Archiv einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-show-statistics">Statistiken</a>
+          </li>
+          <div class="profil-background ms-5">
+            <li class="nav-item profil-flexbox mx-3">
+              <div class="profil text-center">
+                Luisa Müller
+                <!--TODO: Hier noch den Namen aus der Datenbank nehmen-->
+              </div>
+            </li>
+            <li class="nav-item me-3">
+              <button class="logout-button">Logout</button>
+              <!--TODO: Hier noch eine Funktion einfügen-->
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section-title pt-3">
+    <h1 class="text-primary mt-3">Kassenprüfung</h1>
+  </div>
+  <div class="section-main mt-5">
+    <div class="first-column">
+      <h3 class="text-primary text-center">Samstag</h3>
+
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeSaturdayString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsSaturdayString }}</p>
+      <div class="d-flex justify-content-center align-items-center my-5">
+        <button type="button" class="submitButton btn btn-primary me-2" (click)="calculateFeeAndProceedsSaturday()">
+          Werte berechnen<br />
+          & PDF erstellen
+        </button>
+      </div>
+    </div>
+    <div class="second-column">
+      <h3 class="text-primary text-center">Sonntag</h3>
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeSundayString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsSundayString }}</p>
+    </div>
+    <div class="third-column">
+      <h3 class="text-primary text-center">Gesamt</h3>
+      <p class="text-center mt-5">Summe aller Annahmegebühren:</p>
+      <p class="text-center">{{ this.feeTotalString }}</p>
+      <p class="text-center mt-4">Summe aller Verkaufserlöse:</p>
+      <p class="text-center">{{ this.proceedsTotalString }}</p>
+      <div class="d-flex justify-content-center align-items-center my-5">
+        <button type="button" class="submitButton btn btn-primary me-2" (click)="calculateFeeAndProceedsTotal()">
+          Werte berechnen<br />
+          & PDF erstellen
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>

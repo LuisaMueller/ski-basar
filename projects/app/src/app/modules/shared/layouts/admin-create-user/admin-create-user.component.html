@@ -1,0 +1,104 @@
+<div class="body-main">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container d-flex justify-content-between">
+      <div class="img-container">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/images/SkiClubOlpeLogo11-_2_.png" alt="Logo" class="d-inline-block align-text-top" />
+        </a>
+      </div>
+      <div class="nav-items-container" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active-2" aria-current="page" href="/auth/admin-create-user">User erstellen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-check-cash">Kassenprüfung</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-see-lists">Listen einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-see-archive">Archiv einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-show-statistics">Statistiken</a>
+          </li>
+          <div class="profil-background ms-5">
+            <li class="nav-item profil-flexbox mx-3">
+              <div class="profil text-center">
+                Luisa Müller
+                <!--TODO: Hier noch den Namen aus der Datenbank nehmen-->
+              </div>
+            </li>
+            <li class="nav-item me-3">
+              <button class="logout-button">Logout</button>
+              <!--TODO: Hier noch eine Funktion einfügen-->
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section-title pt-3">
+    <h1 class="text-primary mt-3">User erstellen</h1>
+  </div>
+  <!--<div class="section-main mt-5">
+    <form (ngSubmit)="createUser()" [formGroup]="userForm" class="form-input">
+      <div class="section-input">
+        <div class="form-floating mb-3">
+          <input
+            type="firstName"
+            class="form-control rounded-4 border-primary"
+            id="firstName"
+            placeholder="Max"
+            formControlName="firstName"
+            [ngClass]="{
+              'is-invalid': !userForm.get('firstName')?.valid && userForm.get('firstName')?.touched,
+              'is-valid': userForm.get('firstName')?.valid && userForm.get('firstName')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
+          <label for="firstName">Vorname <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="lastName"
+            class="form-control rounded-4 border-primary"
+            id="lastName"
+            placeholder="Mustermann"
+            formControlName="lastName"
+            [ngClass]="{
+              'is-invalid': !userForm.get('lastName')?.valid && userForm.get('lastName')?.touched,
+              'is-valid': userForm.get('lastName')?.valid && userForm.get('lastName')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
+          <label for="lastName">Nachname <span class="text-danger">*</span></label>
+        </div>
+        <div class="form-floating mb-3 ml-4">
+          <input
+            type="email"
+            class="form-control rounded-4 border-primary"
+            id="email"
+            placeholder="name@example.com"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid': !userForm.get('email')?.valid && userForm.get('email')?.touched,
+              'is-valid': userForm.get('email')?.valid && userForm.get('email')?.touched
+            }" />
+          <div class="invalid-feedback m-0 mx-2 p-0">Bitte ausfüllen.</div>
+          <label for="email">E-Mail <span class="text-danger">*</span></label>
+        </div>
+        <p class="mandatory-field"><span class="text-danger">*</span> Pflichtfeld</p>
+
+        <div class="text-center mt-4">
+          <p>Anmerkung:</p>
+          <p>Das Passwort wird automatisch generiert und an die Mail-Adresse geschickt.</p>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 py-3 rounded-4" [disabled]="!userForm.valid">Anlegen</button>
+      </div>
+    </form>
+  </div> -->
+  <base-register></base-register>
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>

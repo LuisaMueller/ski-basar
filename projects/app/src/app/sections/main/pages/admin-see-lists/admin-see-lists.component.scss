@@ -1,6 +1,6 @@
 @import '../../../../../assets/scss/utils';
 
-.body-main-getNumber {
+.body-main {
   width: 100%;
   height: 100%;
 
@@ -65,24 +65,40 @@
     justify-content: center;
     align-items: center;
   }
-  .section-number {
+  form {
     width: 100%;
+    height: 87%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    p {
-      font-weight: 400;
-      font-size: 128px;
-      color: $primary;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    .section-input {
+      width: 30%;
+      height: 80%;
+      background-color: white transparent;
+
+      .mandatory-field {
+        font-size: 10px;
+        padding-left: 10px;
+      }
     }
   }
-  .section-button {
+  .section-main {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    .btn {
-      width: 20%;
+    padding-left: 5%;
+    padding-right: 5%;
+    .table {
+      thead {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-bottom-width: 0px;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: white;
+      }
     }
   }
 
@@ -96,6 +112,7 @@
     background-color: #d9d9d9;
     z-index: -1;
   }
+
   .mountain-right {
     position: fixed;
     right: 0;

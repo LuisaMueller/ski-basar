@@ -1,0 +1,67 @@
+<div class="body-main">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container d-flex justify-content-between">
+      <div class="img-container">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/images/SkiClubOlpeLogo11-_2_.png" alt="Logo" class="d-inline-block align-text-top" />
+        </a>
+      </div>
+      <div class="nav-items-container" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/auth/admin-create-user">User erstellen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-check-cash">Kassenprüfung</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active-2" aria-current="page" href="/admin-see-lists">Listen einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-see-archive">Archiv einsehen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link not-active" href="/admin-show-statistics">Statistiken</a>
+          </li>
+          <div class="profil-background ms-5">
+            <li class="nav-item profil-flexbox mx-3">
+              <div class="profil text-center">
+                Luisa Müller
+                <!--TODO: Hier noch den Namen aus der Datenbank nehmen-->
+              </div>
+            </li>
+            <li class="nav-item me-3">
+              <button class="logout-button">Logout</button>
+              <!--TODO: Hier noch eine Funktion einfügen-->
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section-title pt-3">
+    <h1 class="text-primary mt-3">Listen einsehen</h1>
+  </div>
+  <div class="section-main mt-5">
+    <table class="table table-striped" id="list-table">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Nr</th>
+          <th scope="col" class="text-center">Art</th>
+          <th scope="col" class="text-center">Marke</th>
+          <th scope="col" class="text-center">Größe</th>
+          <th scope="col" class="text-center">Farbe</th>
+          <th scope="col" class="text-center">Sonstiges</th>
+          <th scope="col" class="text-center">Preis[€]</th>
+          <th scope="col" class="text-center">VB[€]</th>
+          <th scope="col" class="text-center">Kasse[€]</th>
+        </tr>
+      </thead>
+      <tbody class="fw-semibold text-center tbody-class"></tbody>
+    </table>
+  </div>
+
+  <div class="mountain-left"></div>
+  <div class="mountain-right"></div>
+</div>
